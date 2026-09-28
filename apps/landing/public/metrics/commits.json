@@ -1,5 +1,17 @@
 [
   {
+    "sha": "c03abaca6df48502528fe6dcba78941c2a426a4d",
+    "commit": {
+      "message": "chore: update mission-control snapshot data [skip ci]",
+      "author": {
+        "date": "2026-09-27T09:13:35Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
     "sha": "dbc911bbc27fb514fa38e751cf309f6d3a5c2575",
     "commit": {
       "message": "chore: update export benchmark data [skip ci]",
@@ -1185,18 +1197,6 @@
     },
     "author": {
       "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "c9c93848a2489844323ed6e7427072072854645a",
-    "commit": {
-      "message": "ui(extension): notebook redesign shell — launcher popup, tabbed panel, settings page (#1201)",
-      "author": {
-        "date": "2026-09-11T04:34:33Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
     }
   }
 ]

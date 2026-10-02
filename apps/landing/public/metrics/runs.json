@@ -2,14 +2,66 @@
   "total_count": 2500,
   "workflow_runs": [
     {
-      "id": 36846919187,
+      "id": 36991408896,
       "name": "📸 Mission Control Snapshot",
       "path": ".github/workflows/metrics-snapshot.yml",
       "head_branch": "main",
       "status": "in_progress",
       "conclusion": null,
+      "created_at": "2026-10-02T09:43:21Z",
+      "updated_at": "2026-10-02T09:43:26Z",
+      "run_started_at": "2026-10-02T09:43:21Z",
+      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36991408896",
+      "event": "schedule"
+    },
+    {
+      "id": 36852545809,
+      "name": "🌐 Deploy Landing Page",
+      "path": ".github/workflows/pages.yml",
+      "head_branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-01T10:59:34Z",
+      "updated_at": "2026-10-01T11:00:38Z",
+      "run_started_at": "2026-10-01T10:59:34Z",
+      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36852545809",
+      "event": "workflow_dispatch"
+    },
+    {
+      "id": 36852464294,
+      "name": "📈 Repo Charts",
+      "path": ".github/workflows/repo-charts.yml",
+      "head_branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-01T10:58:46Z",
+      "updated_at": "2026-10-01T10:59:37Z",
+      "run_started_at": "2026-10-01T10:58:46Z",
+      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36852464294",
+      "event": "schedule"
+    },
+    {
+      "id": 36846971082,
+      "name": "🌐 Deploy Landing Page",
+      "path": ".github/workflows/pages.yml",
+      "head_branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-01T10:05:58Z",
+      "updated_at": "2026-10-01T10:07:32Z",
+      "run_started_at": "2026-10-01T10:05:58Z",
+      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36846971082",
+      "event": "workflow_dispatch"
+    },
+    {
+      "id": 36846919187,
+      "name": "📸 Mission Control Snapshot",
+      "path": ".github/workflows/metrics-snapshot.yml",
+      "head_branch": "main",
+      "status": "completed",
+      "conclusion": "success",
       "created_at": "2026-10-01T10:05:29Z",
-      "updated_at": "2026-10-01T10:05:34Z",
+      "updated_at": "2026-10-01T10:06:04Z",
       "run_started_at": "2026-10-01T10:05:29Z",
       "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36846919187",
       "event": "schedule"
@@ -598,58 +650,6 @@
       "run_started_at": "2026-09-28T23:42:01Z",
       "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36499364340",
       "event": "workflow_dispatch"
-    },
-    {
-      "id": 36498431592,
-      "name": "🔎 Quality",
-      "path": ".github/workflows/quality.yml",
-      "head_branch": "main",
-      "status": "completed",
-      "conclusion": "cancelled",
-      "created_at": "2026-09-28T23:31:10Z",
-      "updated_at": "2026-09-28T23:43:41Z",
-      "run_started_at": "2026-09-28T23:31:10Z",
-      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36498431592",
-      "event": "push"
-    },
-    {
-      "id": 36498431583,
-      "name": "🎨 Format Guard",
-      "path": ".github/workflows/format-guard.yml",
-      "head_branch": "main",
-      "status": "completed",
-      "conclusion": "success",
-      "created_at": "2026-09-28T23:31:10Z",
-      "updated_at": "2026-09-28T23:32:19Z",
-      "run_started_at": "2026-09-28T23:31:10Z",
-      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36498431583",
-      "event": "push"
-    },
-    {
-      "id": 36498431602,
-      "name": "🔒 Security",
-      "path": ".github/workflows/security.yml",
-      "head_branch": "main",
-      "status": "completed",
-      "conclusion": "success",
-      "created_at": "2026-09-28T23:31:10Z",
-      "updated_at": "2026-09-28T23:35:40Z",
-      "run_started_at": "2026-09-28T23:31:10Z",
-      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36498431602",
-      "event": "push"
-    },
-    {
-      "id": 36498408469,
-      "name": "🔎 Quality",
-      "path": ".github/workflows/quality.yml",
-      "head_branch": "main",
-      "status": "completed",
-      "conclusion": "cancelled",
-      "created_at": "2026-09-28T23:30:54Z",
-      "updated_at": "2026-09-28T23:31:13Z",
-      "run_started_at": "2026-09-28T23:30:54Z",
-      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36498408469",
-      "event": "push"
     }
   ]
 }

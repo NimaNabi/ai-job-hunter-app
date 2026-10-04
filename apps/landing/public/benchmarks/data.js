@@ -1,50 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791146396927,
+  "lastUpdate": 1791151051490,
   "repoUrl": "https://github.com/saeedkolivand/ai-job-hunter-app",
   "entries": {
     "Export render": [
-      {
-        "commit": {
-          "author": {
-            "email": "51081940+saeedkolivand@users.noreply.github.com",
-            "name": "Saeed Kolivand",
-            "username": "saeedkolivand"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "950b08829629d4d3388863952fbbd5086e4b22b1",
-          "message": "build: pin the rust toolchain across local, ci, and release (#994)\n\n* build: pin rust toolchain to 1.96.1 across local, ci, and release\n\nLocal dev, PR CI, and release builds each resolved whatever \"stable\" meant\non the day, so they could silently disagree (a bare cargo fmt --all mass-\nreformatted files that pass cargo fmt --check under the pinned rustfmt).\n\nAdd apps/desktop/src-tauri/rust-toolchain.toml pinning channel 1.96.1 (the\nalready-installed toolchain, frozen in place — not an upgrade) plus the\nrustfmt/clippy/llvm-tools-preview components every gate needs. Add\nrust-version = \"1.95\" to Cargo.toml, the real MSRV floor re-derived from\n`cargo metadata`'s per-package rust_version fields (sysinfo 0.39.6 is the\nhighest at 1.95; serial_test 4.0.1 is next at 1.93.1).\n\ndtolnay/rust-toolchain doesn't read toolchain files -- its @rev IS the\nversion selector -- so .github/actions/setup-rust (consumed by ci-pipeline,\nquality, and security workflows) and release.yml's inline setup step both\nmove from the @stable branch to the repo's own \"1.96.1\" branch SHA.\n\nVerified locally: rustup auto-installs and activates 1.96.1 with the pinned\ncomponents via the toolchain-file override, and cargo fmt --check/test/\nclippy and pnpm typecheck all pass under it -- no reformat commit needed.\n\n* fix: correct the rust pin to 1.97.1 and drop unused components\n\nTwo review findings on the toolchain pin (9d72b134):\n\n1. It was a silent CI downgrade, not a freeze. dtolnay/rust-toolchain@stable\n   tracks rustup's live \"stable\" channel at whatever version is current when\n   the job runs -- it does not hardcode a version on the @stable branch. As\n   of this pin that resolves to 1.97.1 (released 2026-07-16), not the 1.96.1\n   this machine happened to have installed already. Re-verified both\n   directly: rust-lang/rust's release list has no stable release after\n   1.97.1, and dtolnay/rust-toolchain's own \"1.97.1\" branch hardcodes\n   `toolchain: 1.97.1`. Pin to 1.97.1 -- the version CI has actually been\n   validated against -- and fix rust-toolchain.toml's comment, which\n   described only the dev-machine situation.\n\n2. The toml's `components` list made rustup auto-install rustfmt/clippy/\n   llvm-tools-preview for every CI job via the toolchain-file override, even\n   jobs that request none of them (the plain `cargo check` jobs). Drop\n   `components` from the file; each job's own dtolnay/rust-toolchain step\n   already declares what it needs. Verified locally that rustfmt/clippy\n   still resolve without it -- rustup's default install profile includes\n   both already; only llvm-tools-preview (CI-only, for cargo-llvm-cov) is\n   not part of that default and stays job-scoped in CI.\n\nrust-version in Cargo.toml is unaffected (unchanged Cargo.lock, --locked\neverywhere) -- confirmed by an identical cargo test --workspace result\n(4175 passed) under 1.97.1.\n\nRe-ran the full gate: cargo fmt --check / test --workspace --locked /\nclippy -D warnings / pnpm typecheck / pnpm gen:workflows:check all green\nunder the corrected pin; rustup show resolves to 1.97.1 via the toolchain\nfile.",
-          "timestamp": "2026-08-15T12:02:18+02:00",
-          "tree_id": "1c87684cfdab4b2d297ebc02cef8169cdf6d2b6e",
-          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/950b08829629d4d3388863952fbbd5086e4b22b1"
-        },
-        "date": 1786789610325,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "pdf/classic",
-            "value": 2166433,
-            "range": "± 49658",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "pdf/atelier_two_column",
-            "value": 2544884,
-            "range": "± 20416",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "docx_classic",
-            "value": 296975,
-            "range": "± 4122",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -4193,6 +4151,48 @@ window.BENCHMARK_DATA = {
             "name": "docx_classic",
             "value": 191064,
             "range": "± 4252",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a4ae94a0511af7e7969e1538539205d3cdb4aa82",
+          "message": "chore: bump the desktop-rust group (#1300)\n\nBumps the desktop-rust group in /apps/desktop/src-tauri with 22 updates:\n\n| Package | From | To |\n| --- | --- | --- |\n| [tauri](https://github.com/tauri-apps/tauri) | `2.11.6` | `2.12.0` |\n| [tauri-plugin-opener](https://github.com/tauri-apps/plugins-workspace) | `2.5.5` | `2.6.0` |\n| [tauri-plugin-dialog](https://github.com/tauri-apps/plugins-workspace) | `2.7.3` | `2.8.0` |\n| [tauri-plugin-updater](https://github.com/tauri-apps/plugins-workspace) | `2.12.0` | `2.13.0` |\n| [tauri-plugin-clipboard-manager](https://github.com/tauri-apps/plugins-workspace) | `2.3.3` | `2.4.0` |\n| [tauri-plugin-shell](https://github.com/tauri-apps/plugins-workspace) | `2.3.6` | `2.4.0` |\n| [tauri-plugin-log](https://github.com/tauri-apps/plugins-workspace) | `2.9.2` | `2.10.0` |\n| [tauri-plugin-window-state](https://github.com/tauri-apps/plugins-workspace) | `2.4.1` | `2.5.0` |\n| [tauri-plugin-single-instance](https://github.com/tauri-apps/plugins-workspace) | `2.4.5` | `2.5.0` |\n| [tauri-plugin-notification](https://github.com/tauri-apps/plugins-workspace) | `2.4.0` | `2.5.0` |\n| [tauri-plugin-deep-link](https://github.com/tauri-apps/plugins-workspace) | `2.4.10` | `2.5.0` |\n| [tauri-plugin-autostart](https://github.com/tauri-apps/plugins-workspace) | `2.5.1` | `2.6.0` |\n| [tauri-plugin-os](https://github.com/tauri-apps/plugins-workspace) | `2.3.2` | `2.4.0` |\n| [tauri-plugin-process](https://github.com/tauri-apps/plugins-workspace) | `2.3.1` | `2.4.0` |\n| [tauri-plugin-positioner](https://github.com/tauri-apps/plugins-workspace) | `2.3.4` | `2.4.0` |\n| [tauri-plugin-global-shortcut](https://github.com/tauri-apps/plugins-workspace) | `2.3.2` | `2.4.0` |\n| [tauri-plugin-store](https://github.com/tauri-apps/plugins-workspace) | `2.4.5` | `2.5.0` |\n| [tauri-plugin-websocket](https://github.com/tauri-apps/plugins-workspace) | `2.4.3` | `2.5.0` |\n| [encoding_rs](https://github.com/hsivonen/encoding_rs) | `0.8.41` | `0.8.42` |\n| [thiserror](https://github.com/dtolnay/thiserror) | `2.0.20` | `2.0.21` |\n| [notify-rust](https://github.com/hoodie/notify-rust) | `4.18.0` | `4.18.1` |\n| [tauri-build](https://github.com/tauri-apps/tauri) | `2.6.3` | `2.7.0` |\n\n\nUpdates `tauri` from 2.11.6 to 2.12.0\n- [Release notes](https://github.com/tauri-apps/tauri/releases)\n- [Commits](https://github.com/tauri-apps/tauri/compare/tauri-v2.11.6...tauri-v2.12.0)\n\nUpdates `tauri-plugin-opener` from 2.5.5 to 2.6.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/http-v2.5.5...fs-v2.6.0)\n\nUpdates `tauri-plugin-dialog` from 2.7.3 to 2.8.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/dialog-v2.7.3...log-v2.8.0)\n\nUpdates `tauri-plugin-updater` from 2.12.0 to 2.13.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/updater-v2.12.0...updater-v2.13.0)\n\nUpdates `tauri-plugin-clipboard-manager` from 2.3.3 to 2.4.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/nfc-v2.3.3...os-v2.4.0)\n\nUpdates `tauri-plugin-shell` from 2.3.6 to 2.4.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/nfc-v2.3.6...os-v2.4.0)\n\nUpdates `tauri-plugin-log` from 2.9.2 to 2.10.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/log-v2.9.2...log-v2.10.0)\n\nUpdates `tauri-plugin-window-state` from 2.4.1 to 2.5.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/fs-v2.4.1...fs-v2.5.0)\n\nUpdates `tauri-plugin-single-instance` from 2.4.5 to 2.5.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/fs-v2.4.5...fs-v2.5.0)\n\nUpdates `tauri-plugin-notification` from 2.4.0 to 2.5.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/os-v2.4.0...fs-v2.5.0)\n\nUpdates `tauri-plugin-deep-link` from 2.4.10 to 2.5.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/deep-link-v2.4.10...fs-v2.5.0)\n\nUpdates `tauri-plugin-autostart` from 2.5.1 to 2.6.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/fs-v2.5.1...fs-v2.6.0)\n\nUpdates `tauri-plugin-os` from 2.3.2 to 2.4.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/os-v2.3.2...os-v2.4.0)\n\nUpdates `tauri-plugin-process` from 2.3.1 to 2.4.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/os-v2.3.1...os-v2.4.0)\n\nUpdates `tauri-plugin-positioner` from 2.3.4 to 2.4.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/nfc-v2.3.4...os-v2.4.0)\n\nUpdates `tauri-plugin-global-shortcut` from 2.3.2 to 2.4.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/os-v2.3.2...os-v2.4.0)\n\nUpdates `tauri-plugin-store` from 2.4.5 to 2.5.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/fs-v2.4.5...fs-v2.5.0)\n\nUpdates `tauri-plugin-websocket` from 2.4.3 to 2.5.0\n- [Release notes](https://github.com/tauri-apps/plugins-workspace/releases)\n- [Commits](https://github.com/tauri-apps/plugins-workspace/compare/fs-v2.4.3...fs-v2.5.0)\n\nUpdates `encoding_rs` from 0.8.41 to 0.8.42\n- [Commits](https://github.com/hsivonen/encoding_rs/compare/v0.8.41...v0.8.42)\n\nUpdates `thiserror` from 2.0.20 to 2.0.21\n- [Release notes](https://github.com/dtolnay/thiserror/releases)\n- [Commits](https://github.com/dtolnay/thiserror/compare/2.0.20...2.0.21)\n\nUpdates `notify-rust` from 4.18.0 to 4.18.1\n- [Release notes](https://github.com/hoodie/notify-rust/releases)\n- [Changelog](https://github.com/hoodie/notify-rust/blob/main/CHANGELOG.md)\n- [Commits](https://github.com/hoodie/notify-rust/compare/v4.18.0...v4.18.1)\n\nUpdates `tauri-build` from 2.6.3 to 2.7.0\n- [Release notes](https://github.com/tauri-apps/tauri/releases)\n- [Commits](https://github.com/tauri-apps/tauri/compare/tauri-build-v2.6.3...tauri-build-v2.7.0)\n\n---\nupdated-dependencies:\n- dependency-name: tauri\n  dependency-version: 2.12.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-opener\n  dependency-version: 2.6.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-dialog\n  dependency-version: 2.8.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-updater\n  dependency-version: 2.13.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-clipboard-manager\n  dependency-version: 2.4.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-shell\n  dependency-version: 2.4.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-log\n  dependency-version: 2.10.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-window-state\n  dependency-version: 2.5.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-single-instance\n  dependency-version: 2.5.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-notification\n  dependency-version: 2.5.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-deep-link\n  dependency-version: 2.5.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-autostart\n  dependency-version: 2.6.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-os\n  dependency-version: 2.4.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-process\n  dependency-version: 2.4.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-positioner\n  dependency-version: 2.4.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-global-shortcut\n  dependency-version: 2.4.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-store\n  dependency-version: 2.5.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: tauri-plugin-websocket\n  dependency-version: 2.5.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n- dependency-name: encoding_rs\n  dependency-version: 0.8.42\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n  dependency-group: desktop-rust\n- dependency-name: thiserror\n  dependency-version: 2.0.21\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n  dependency-group: desktop-rust\n- dependency-name: notify-rust\n  dependency-version: 4.18.1\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n  dependency-group: desktop-rust\n- dependency-name: tauri-build\n  dependency-version: 2.7.0\n  dependency-type: direct:production\n  update-type: version-update:semver-minor\n  dependency-group: desktop-rust\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-10-04T21:32:20Z",
+          "tree_id": "f72fcab8e20e43c820b252e002d0d50915d25453",
+          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/a4ae94a0511af7e7969e1538539205d3cdb4aa82"
+        },
+        "date": 1791151050141,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "pdf/classic",
+            "value": 2369978,
+            "range": "± 91111",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "pdf/atelier_two_column",
+            "value": 2900767,
+            "range": "± 165117",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "docx_classic",
+            "value": 358021,
+            "range": "± 9923",
             "unit": "ns/iter"
           }
         ]

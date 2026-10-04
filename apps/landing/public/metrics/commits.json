@@ -1,5 +1,29 @@
 [
   {
+    "sha": "ccfc91f423e3495e899c17315fa72544ae40932f",
+    "commit": {
+      "message": "refactor(export): split docx, parser, templates, pdf and model_docx under 300 code lines (#1310)",
+      "author": {
+        "date": "2026-10-04T09:30:45Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "57822f7867e2bce5b7b6ff1acbac2fea233c3685",
+    "commit": {
+      "message": "chore: update mission-control snapshot data [skip ci]",
+      "author": {
+        "date": "2026-10-03T09:07:04Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
     "sha": "eb066c0c540c7d3b5ebea3e83e89a43e4392faff",
     "commit": {
       "message": "chore: update mission-control snapshot data [skip ci]",
@@ -1169,30 +1193,6 @@
       "message": "chore: retire the automatic ai review gate on pull requests (#1240)",
       "author": {
         "date": "2026-09-22T20:32:32Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "4f9e58ede92d025a9f3be2cd2114230d18737ac4",
-    "commit": {
-      "message": "chore: update mission-control snapshot data [skip ci]",
-      "author": {
-        "date": "2026-09-22T08:30:43Z"
-      }
-    },
-    "author": {
-      "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "f09d55a1e9121887899a62ab6dc7d09764a67f4d",
-    "commit": {
-      "message": "docs(extension): record the prep tab and answer capture on submit",
-      "author": {
-        "date": "2026-09-21T18:49:55Z"
       }
     },
     "author": {

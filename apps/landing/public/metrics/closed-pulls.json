@@ -1,5 +1,19 @@
 [
   {
+    "number": 1310,
+    "title": "refactor(export): split docx, parser, templates, pdf and model_docx under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1310",
+    "draft": false,
+    "created_at": "2026-10-04T09:01:36Z",
+    "updated_at": "2026-10-04T09:30:50Z",
+    "merged_at": "2026-10-04T09:30:46Z",
+    "closed_at": "2026-10-04T09:30:46Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
     "number": 1309,
     "title": "refactor(export): split the typst engine into modules under 300 code lines",
     "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1309",
@@ -683,20 +697,6 @@
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1259,
-    "title": "chore: bump web-ext from 10.6.0 to 10.7.0 in /apps/extension/tools/amo",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1259",
-    "draft": false,
-    "created_at": "2026-09-23T16:07:45Z",
-    "updated_at": "2026-09-23T16:55:10Z",
-    "merged_at": "2026-09-23T16:29:35Z",
-    "closed_at": "2026-09-23T16:29:35Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "dependabot[bot]"
     }
   }
 ]

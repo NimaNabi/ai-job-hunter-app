@@ -1,5 +1,317 @@
 [
   {
+    "sha": "8aa8e2fb1cd07a01dd6877d63d57fa9d56b1dcb7",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-04T21:57:31Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "a4ae94a0511af7e7969e1538539205d3cdb4aa82",
+    "commit": {
+      "message": "chore: bump the desktop-rust group (#1300)",
+      "author": {
+        "date": "2026-10-04T21:32:20Z"
+      }
+    },
+    "author": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "sha": "d2a037f44759836e599a4b0ef5726fa17e5585d8",
+    "commit": {
+      "message": "chore: bump the codeql-action group with 3 updates (#1299)",
+      "author": {
+        "date": "2026-10-04T21:09:52Z"
+      }
+    },
+    "author": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "sha": "89acf9b8874eb8f6e66cf46d3756b5c25f5dcf1d",
+    "commit": {
+      "message": "chore: bump feed-rs from 2.4.0 to 3.0.0 in /apps/desktop/src-tauri (#1302)",
+      "author": {
+        "date": "2026-10-04T21:01:26Z"
+      }
+    },
+    "author": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "sha": "607f5a384097524b1ca78646b4eb9eda3c3f9cf5",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-04T20:39:56Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "3ff408e52b6d1147a9618beb09bb1f73b36859e9",
+    "commit": {
+      "message": "chore: bump the ci-actions group with 2 updates (#1303)",
+      "author": {
+        "date": "2026-10-04T20:29:03Z"
+      }
+    },
+    "author": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "sha": "9127cbf0e07ada422c6b24808510359f44d8dad1",
+    "commit": {
+      "message": "chore: bump the vitest group with 3 updates (#1298)",
+      "author": {
+        "date": "2026-10-04T20:27:53Z"
+      }
+    },
+    "author": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "sha": "d9557b017bfb8f3296863f2ffbf36e53249df3b5",
+    "commit": {
+      "message": "refactor(platform): split platform and shell infra, emptying the r8 baselines (#1320)",
+      "author": {
+        "date": "2026-10-04T20:24:00Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "a8c6ebc9dad2a84808b045b9857406c57e84f197",
+    "commit": {
+      "message": "refactor(commands): split the remaining command modules under 300 code lines (#1319)",
+      "author": {
+        "date": "2026-10-04T19:59:54Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "721944effac5daa164d943d41edb287799902103",
+    "commit": {
+      "message": "refactor(model): split the document model, locale and text modules under 300 code lines (#1318)",
+      "author": {
+        "date": "2026-10-04T19:43:37Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "58d1eae6e92cdf5ae0f677962b0f233919189a93",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-04T19:01:15Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "b85791312fce94ec15fd78f2ee4351761862cc09",
+    "commit": {
+      "message": "refactor(stores): split the user data stores under 300 code lines (#1317)",
+      "author": {
+        "date": "2026-10-04T18:37:10Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "ee5d83d3a66ebc06edcc8d8297a5787cb9276de3",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-04T17:36:45Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "2eb3b06ff5fad3983913ac427e7b69f7e12c9fc1",
+    "commit": {
+      "message": "refactor(commands): split match_resume, ai, applications, scrape and lib.rs under 300 code lines (#1316)",
+      "author": {
+        "date": "2026-10-04T17:23:07Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "9e742efdbf8edb3b6aad47c281bb1f5dd90e6d48",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-04T16:57:59Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "89af8b5c6e1e682c16b67ed89598430b5deef136",
+    "commit": {
+      "message": "refactor(autopilot): split the autopilot family under 300 code lines (#1315)",
+      "author": {
+        "date": "2026-10-04T16:37:07Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "b155454023ddea8bd212999d69aa852a088d1494",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-04T15:42:56Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "de5ce7cdebbb4857f63a2bb2bfc050d649492b64",
+    "commit": {
+      "message": "refactor(applications): split applications/ and ai_generations/ under 300 code lines (#1314)",
+      "author": {
+        "date": "2026-10-04T15:21:40Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "33fe400d3e2596cd1312d8dee95155eb957a655e",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-04T14:13:02Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "7a7386f85443f7d14aeaa993e9094a7a8b5f3bd9",
+    "commit": {
+      "message": "refactor(documents): split documents/ into modules under 300 code lines (#1313)",
+      "author": {
+        "date": "2026-10-04T13:49:11Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "c71de7b11240509cffd6e3a102a9bff7207bc6d9",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-04T12:57:19Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "7da82191fbbe21ba7785b143784fd27e2dcb939c",
+    "commit": {
+      "message": "refactor(email-watch): split email_watch/ and extraction/ under 300 code lines (#1312)",
+      "author": {
+        "date": "2026-10-04T12:33:02Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "317011360d850ee8cd22da04591b2084be8470ab",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-04T11:12:20Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "54dee32722b5d93968d590040ae5d83afe4621c0",
+    "commit": {
+      "message": "refactor(validate): split validate/ into modules under 300 code lines (#1311)",
+      "author": {
+        "date": "2026-10-04T11:02:30Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "977f94201f063e6091cfad9bb787b1a1e77ab551",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-04T09:51:35Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "7e142207857ee1f5b8677f0fdaebc827b111f701",
+    "commit": {
+      "message": "chore: update mission-control snapshot data [skip ci]",
+      "author": {
+        "date": "2026-10-04T09:45:17Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
     "sha": "ccfc91f423e3495e899c17315fa72544ae40932f",
     "commit": {
       "message": "refactor(export): split docx, parser, templates, pdf and model_docx under 300 code lines (#1310)",
@@ -881,318 +1193,6 @@
       "message": "fix(settings): stop reporting a sleeping extension as not connected (#1264)",
       "author": {
         "date": "2026-09-23T16:25:16Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "45e294d0f2ad592f261d7d6615c988191d4324c4",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-23T16:15:42Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "d59cd036d0a601ca68889b9a1b4ef63b35842d09",
-    "commit": {
-      "message": "fix(extension): abandon a cancelled grounding step instead of paying for it (#1257)",
-      "author": {
-        "date": "2026-09-23T16:03:49Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "9cc8a0c25f46bbd7a5cbfb4a2f3cc4d840ea3c71",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-23T15:05:06Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "5bd90be1510f1c236850728fb495747c41afac43",
-    "commit": {
-      "message": "fix(extension): recognise the embedded board, not just any third-party frame (#1256)",
-      "author": {
-        "date": "2026-09-23T14:43:59Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "5e27be3c4880a923147e9736d5e32836740fb049",
-    "commit": {
-      "message": "fix(extension): never treat an unnamed page as consent to fill (#1255)",
-      "author": {
-        "date": "2026-09-23T12:21:56Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "04a9af89b8c714c7a332f29e2348a7b97d1e7097",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-23T12:19:13Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "fce24632a740741f5a9d90722d082b1a6f17652c",
-    "commit": {
-      "message": "feat(settings): give the browser extension its own nav section (#1253)",
-      "author": {
-        "date": "2026-09-23T11:54:16Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "fed7297549a24047d0afbf6ed9e7b5d88e83ac61",
-    "commit": {
-      "message": "fix(extension): attach to the résumé field when a cover letter sits beside it (#1254)",
-      "author": {
-        "date": "2026-09-23T11:41:55Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "c52d367a38464766bc64a3e753e1464c6b0905ad",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-23T11:20:15Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "4d3244b3c1770e8855b50651893548a4da914aa5",
-    "commit": {
-      "message": "fix(extension): stop import claiming success it did not earn (#1252)",
-      "author": {
-        "date": "2026-09-23T11:08:58Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "ea199ccf8bae74b93658af1f8efbadfbf6db1426",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-23T11:06:07Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "9bd91fefa972b854cd187e0db19b1b1fd16055ec",
-    "commit": {
-      "message": "fix(extension): keep accepted answers writable, honour instructions, stop cancelled spend (#1251)",
-      "author": {
-        "date": "2026-09-23T10:42:35Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "07406959124beea3c5c61fbb3fac53777924807f",
-    "commit": {
-      "message": "chore: update mission-control snapshot data [skip ci]",
-      "author": {
-        "date": "2026-09-23T08:32:40Z"
-      }
-    },
-    "author": {
-      "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "51830a78f4bb48997d166236d7428342edd38c96",
-    "commit": {
-      "message": "fix(extension): stop stale stamps, fences and settings reaching the user (#1250)",
-      "author": {
-        "date": "2026-09-23T08:25:23Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "27a679358ee722b1dd80d17c7e7874cb2d9126c7",
-    "commit": {
-      "message": "fix(extension): make the panel's trust and confirmation states honest (#1248)",
-      "author": {
-        "date": "2026-09-23T06:51:20Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "0853d18ef414f6c548e1413ffaa9d310420bd422",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-23T05:52:09Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "9aa17ab1b86bba99865965b5d6240740d26416b5",
-    "commit": {
-      "message": "fix(extension): clear a stale fit badge, read trailing-currency salaries, drop junk chips (#1247)",
-      "author": {
-        "date": "2026-09-23T05:34:53Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "626baca27eecab17b5f9dfbdf6f1e7dca9a75784",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-23T05:02:55Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "c92785b43daae7293043e38db952ff50efb36e20",
-    "commit": {
-      "message": "fix(extension): tell a dead api key apart from a retriable draft failure (#1246)",
-      "author": {
-        "date": "2026-09-23T04:38:11Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "cc05ec0d414bc581f7985edcfdc0ea001aea3b84",
-    "commit": {
-      "message": "fix(extension): escalate bridge backoff after a failed handshake (#1245)",
-      "author": {
-        "date": "2026-09-23T03:59:04Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "c4c268a78e68efc6f7c23314349f67626ab53d72",
-    "commit": {
-      "message": "fix(extension): act on the requesting window's tab, not the last-focused one (#1244)",
-      "author": {
-        "date": "2026-09-22T22:48:37Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "0516a4dc81fa4231229ec10bdad37406081cf429",
-    "commit": {
-      "message": "fix(extension): stop offering x/twitter fields as questions, correct two misleading messages (#1243)",
-      "author": {
-        "date": "2026-09-22T22:07:21Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "2099efd88d938150791c0ba78285610414a0d9a8",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-22T21:45:20Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "c8722079dbf926289b24e48dc733b3a9b093ec82",
-    "commit": {
-      "message": "fix(bridge): match a tracked job by posting identity when applied.check misses (#1242)",
-      "author": {
-        "date": "2026-09-22T21:28:11Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "ba0f8b5795e3b2a1baf9c42a771cccba7667aa0d",
-    "commit": {
-      "message": "fix(deeplink): accept the trailing slash windows adds to job deep links (#1241)",
-      "author": {
-        "date": "2026-09-22T21:05:45Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "0b42b28219baa0d3edf8bf10cac3a7acbfbe3e56",
-    "commit": {
-      "message": "chore: retire the automatic ai review gate on pull requests (#1240)",
-      "author": {
-        "date": "2026-09-22T20:32:32Z"
       }
     },
     "author": {

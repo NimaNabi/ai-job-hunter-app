@@ -1,5 +1,161 @@
 [
   {
+    "sha": "f931e4c107711c8eaee1e3f12c4418b136df12af",
+    "commit": {
+      "message": "refactor(extension): bring the remaining extension files under 300 code lines (#1330)",
+      "author": {
+        "date": "2026-10-06T05:49:16Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "ca6d073c20829088d196995aa224590d93fe0561",
+    "commit": {
+      "message": "refactor(extension): split the background worker into per-gesture modules under 300 lines (#1328)",
+      "author": {
+        "date": "2026-10-06T05:29:04Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "85482e8cef810cac0b8b611deb9b40e5faa2d11d",
+    "commit": {
+      "message": "refactor(extension): split the bridge client into per-concern modules under 300 lines (#1329)",
+      "author": {
+        "date": "2026-10-06T05:28:54Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "a02adc5edc8868b42689c6917bd5027a5bc9b289",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-05T17:24:42Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "03f6a47ea2b0de0a4cadca873ef8518a235a7895",
+    "commit": {
+      "message": "build(deps): move to tauri-plugin-sentry 0.7 and sentry's minidump integration (#1327)",
+      "author": {
+        "date": "2026-10-05T16:59:57Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "a5090a08eb41f8250231bf897b9b8adb0ead8ef7",
+    "commit": {
+      "message": "ci: harden the ts size guard after review (#1326)",
+      "author": {
+        "date": "2026-10-05T16:51:34Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "24503e20ed2913da46e5929a9f0c4757c0c15545",
+    "commit": {
+      "message": "ci: cap ts and tsx files at 300 code lines with a ratchet baseline (#1325)",
+      "author": {
+        "date": "2026-10-05T16:15:45Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "59709e24c7f1d515a38e3c36777df708ca8dc377",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-05T15:23:58Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "1102f91dcd2024e7741feb8a13c5c3015bf1a476",
+    "commit": {
+      "message": "fix: unbreak the build and ship an appimage any user can start (#1324)",
+      "author": {
+        "date": "2026-10-05T15:10:17Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "b93121fe2b41b8291ae877ea4d2a97db0cb2a548",
+    "commit": {
+      "message": "docs: sync file and module pointers after the #1280 split (#1322)",
+      "author": {
+        "date": "2026-10-05T14:56:55Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "369b1be6fa1812367d5c3a9f1be6ef4fcdd4c252",
+    "commit": {
+      "message": "chore: bump tauri-plugin-sentry in /apps/desktop/src-tauri (#1301)",
+      "author": {
+        "date": "2026-10-05T14:42:29Z"
+      }
+    },
+    "author": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "sha": "a7fd5ed2733815daa4138735f571dcaa49973b61",
+    "commit": {
+      "message": "chore: bump the javascript group across 1 directory with 42 updates (#1321)",
+      "author": {
+        "date": "2026-10-05T11:56:39Z"
+      }
+    },
+    "author": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "sha": "1495858983631b274f75f501ad6ac92217759042",
+    "commit": {
+      "message": "chore: update mission-control snapshot data [skip ci]",
+      "author": {
+        "date": "2026-10-05T10:23:15Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
     "sha": "8aa8e2fb1cd07a01dd6877d63d57fa9d56b1dcb7",
     "commit": {
       "message": "chore: update export benchmark data [skip ci]",
@@ -1041,162 +1197,6 @@
     },
     "author": {
       "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "726a8305744ce3b2518fd8087fe458b8081e47a4",
-    "commit": {
-      "message": "chore(release): 0.155.1 [skip ci]",
-      "author": {
-        "date": "2026-09-23T19:12:13Z"
-      }
-    },
-    "author": {
-      "login": "semantic-release-bot"
-    }
-  },
-  {
-    "sha": "fe942ffab4f4ef53eaef0ebf684bb2c38098d431",
-    "commit": {
-      "message": "fix(extension): run the pairing handshake when a token is saved on an open socket (#1268)",
-      "author": {
-        "date": "2026-09-23T19:05:16Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "3d7a8b2f3eb7fb6328d2bb8c1be623e6623f481f",
-    "commit": {
-      "message": "chore: sync landing download version to v0.155.0",
-      "author": {
-        "date": "2026-09-23T17:48:31Z"
-      }
-    },
-    "author": {
-      "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "138b89c3e3d08006f5909e4e555087d48013dc03",
-    "commit": {
-      "message": "chore: sync homebrew cask to v0.155.0 [skip ci]",
-      "author": {
-        "date": "2026-09-23T17:48:08Z"
-      }
-    },
-    "author": {
-      "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "35937f2dac0386af8ffe2df9dde50eca9ca2c47c",
-    "commit": {
-      "message": "ci(charts): summarise the repo-charts run as a table (#1266)",
-      "author": {
-        "date": "2026-09-23T17:06:36Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "14cbdd919e7403232bed00260fb4a534536da099",
-    "commit": {
-      "message": "chore(release): 0.155.0 [skip ci]",
-      "author": {
-        "date": "2026-09-23T16:54:01Z"
-      }
-    },
-    "author": {
-      "login": "semantic-release-bot"
-    }
-  },
-  {
-    "sha": "5172e385f13606a2d25df428e7669c72e0d4b39c",
-    "commit": {
-      "message": "chore: bump the vitest group across 1 directory with 3 updates (#1261)",
-      "author": {
-        "date": "2026-09-23T16:40:11Z"
-      }
-    },
-    "author": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "sha": "b27f9cf29ba564f441d9c99c4c22df9a173e8e5b",
-    "commit": {
-      "message": "chore: bump the ci-actions group with 2 updates (#1263)",
-      "author": {
-        "date": "2026-09-23T16:33:57Z"
-      }
-    },
-    "author": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "sha": "fe3a8a06c5b98d9ca58308f8829f1bf80f2cbb8a",
-    "commit": {
-      "message": "chore: bump the codeql-action group with 3 updates (#1260)",
-      "author": {
-        "date": "2026-09-23T16:33:49Z"
-      }
-    },
-    "author": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "sha": "528f756942fac314281bd27296406eabac4efe30",
-    "commit": {
-      "message": "chore: bump the javascript group with 20 updates (#1265)",
-      "author": {
-        "date": "2026-09-23T16:31:58Z"
-      }
-    },
-    "author": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "sha": "ecddd4d0284e5f378a4b030a1ed800c2dc5155c4",
-    "commit": {
-      "message": "chore: bump the desktop-rust group (#1262)",
-      "author": {
-        "date": "2026-09-23T16:30:21Z"
-      }
-    },
-    "author": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "sha": "d77db576025f32dfad3ef8dc0a0a9c29201d14d6",
-    "commit": {
-      "message": "chore: bump web-ext from 10.6.0 to 10.7.0 in /apps/extension/tools/amo (#1259)",
-      "author": {
-        "date": "2026-09-23T16:29:34Z"
-      }
-    },
-    "author": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "sha": "5068d1eefaec09ff7bda641fff74e9f0c8fd0601",
-    "commit": {
-      "message": "fix(settings): stop reporting a sleeping extension as not connected (#1264)",
-      "author": {
-        "date": "2026-09-23T16:25:16Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
     }
   }
 ]

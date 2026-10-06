@@ -1,50 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791301424368,
+  "lastUpdate": 1791309275864,
   "repoUrl": "https://github.com/saeedkolivand/ai-job-hunter-app",
   "entries": {
     "Export render": [
-      {
-        "commit": {
-          "author": {
-            "email": "51081940+saeedkolivand@users.noreply.github.com",
-            "name": "Saeed Kolivand",
-            "username": "saeedkolivand"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "65ea4188c14390b96372d055663d55f8bccd7af4",
-          "message": "docs: fold the second adr tree into the knowledge base (#1000)\n\n* docs: fold the second adr tree into the knowledge base\n\nThe repo had two ADR directories with colliding numbers: docs/adr/0013 was\nemail watching while adr-013 was the resume builder, and both got cited as\n\"ADR-13\". It already caused a wrong citation.\n\ndocs/knowledge/decision-records/ is the canonical one - created 2026-05-31\nwith the knowledge base, indexed in its README, owned by project-steward, and\nthe only one the docs-standards skill points at. docs/adr/ appeared twelve\ndays later, carried no index and no owner, and grew to 23 records because\nnothing stopped it.\n\nThe files are moved but deliberately NOT renumbered. An ADR is a dated record\nand its number is cited from commit messages, merged PR bodies, code comments\nand the published tech radar; the landing benchmark and metrics snapshots are\ngenerated captures of commit text that must not be rewritten. Renumbering\nwould falsify all of it, so the series is folded in as-is and marked closed -\nnew ADRs continue the adr-NNN sequence.\n\nEvery reference follows: 24 live files, the tech radar's ADR_DIR and its\npublic GitHub blob links, and the relative links inside the moved files, which\ngained a directory level. Generated landing snapshots under public/ are left\nuntouched as the historical records they are. check:tech-radar,\ncheck:agent-system and check:landing-drift all pass, and the knowledge README\nnow indexes all 57 ADRs.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\n\n* test: repoint the tech-radar fixture at the unified adr directory\n\ncheck-tech-radar.test.mjs builds a synthetic repo and writes its fixture ADR\nto docs/adr/, which no longer exists after the trees were folded together, so\nthe real-adrSlug case resolved against nothing and the check exited 1 where the\ntest expected 0.\n\nThe test was right to fail - it is asserting that a valid slug resolves, and\nthe directory it resolves against moved. Fixture repointed at\ndocs/knowledge/decision-records/; the assertions are unchanged.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\n\n* docs: correct accuracy drift the adr move surfaced\n\nMoving 23 ADRs made git read them as new files, so review examined content\nnobody had re-read since it was written. Ten inaccuracies came back, none\nintroduced by the move. Kept separate from the move commit so those 2211\nrelocated lines stay verifiable as byte-identical.\n\nTwo mattered. ADR-0005's privacy guarantee allowed egress only for services\nthe user configures or invokes plus crash reports, while its own body\ndocuments an on-launch updater check - README.md already discloses that, so\nthe ADR was the wrong one; the guarantee now names both classes of automatic\napp-initiated egress. ADR-0009 still described profile.get as authenticated by\na per-frame pairing token, a contract ADR-0010 retired in favour of the mutual\nHMAC handshake, so anyone reading it would have implemented the wrong auth\nmodel; it now points at ADR-0010.\n\nThe rest: ADR-0005 counted seven egress classes where it lists eight; ADR-0008's\ntitle claimed three surfaces where its body describes four and conflated the\nremoved pre-push LLM lane with the deterministic pre-push gates that remain;\nADR-0011 used a field name the bridge does not have and presented snapshot\nsymbols ADR-0012 superseded as current; ADR-0013 claimed email content never\nleaves the device, which conflated IMAP ingress with egress; ADR-0019\nprescribed a prohibited cat command and overstated portability for a file that\nis now ESM-only; ADR-0022 opened two lines with #936 and #937, which Markdown\nparses as malformed headings.\n\nDecisions and rationale are untouched - only claims that no longer match the\ncode.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5 <noreply@anthropic.com>",
-          "timestamp": "2026-08-16T17:41:41+02:00",
-          "tree_id": "b943e5968f2a08b49a22d93a39a4e1d3b96eccba",
-          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/65ea4188c14390b96372d055663d55f8bccd7af4"
-        },
-        "date": 1786896318787,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "pdf/classic",
-            "value": 2246203,
-            "range": "± 44646",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "pdf/atelier_two_column",
-            "value": 2668273,
-            "range": "± 20418",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "docx_classic",
-            "value": 296856,
-            "range": "± 8800",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -4193,6 +4151,48 @@ window.BENCHMARK_DATA = {
             "name": "docx_classic",
             "value": 256011,
             "range": "± 6124",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "51081940+saeedkolivand@users.noreply.github.com",
+            "name": "Saeed Kolivand",
+            "username": "saeedkolivand"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "2bd3c21182a96712d673beb5d74600a595eab7ea",
+          "message": "fix(ai): redact upstream provider error text where it is built, and on the regenerate and embed edges (#1349)\n\n* fix(ai): redact upstream provider error text where it is built, and on the regenerate and embed edges\n\nfriendly_api_error now bounds the upstream detail to 8 KiB and shape-redacts it at the source,\nwithout the 200-char cap so the embedding context-length retry still reads its wording. The\nregenerate-section and ai_embed commands strip the stored key and base-url secrets verbatim\nlike the model-list fix, and raw upstream bodies in logs and Ollama errors are bounded and\nredacted.\n\nCloses #1346\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01RwZFadYd3YUadtn2ik5TmT\n\n* fix(ai): cover the ollama search and pull error bodies, use the embedding base url, resolve the regenerate provider once\n\nWraps the two missed raw-body sites, strips the embedding config's own base url in ai_embed,\nbinds the regenerate completer once so the strip uses the provider that actually ran, and pins\nthe no-cap-at-source invariant with a context-length message past 200 chars.\n\nRefs #1346\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01RwZFadYd3YUadtn2ik5TmT\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-06T19:42:08+02:00",
+          "tree_id": "389792237b847c531151f6bc17c0cfb71726ff79",
+          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/2bd3c21182a96712d673beb5d74600a595eab7ea"
+        },
+        "date": 1791309273046,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "pdf/classic",
+            "value": 1805995,
+            "range": "± 37683",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "pdf/atelier_two_column",
+            "value": 2244876,
+            "range": "± 29776",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "docx_classic",
+            "value": 251921,
+            "range": "± 3350",
             "unit": "ns/iter"
           }
         ]

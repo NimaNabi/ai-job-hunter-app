@@ -19,6 +19,23 @@ pub(crate) fn get_provider_key(app: &AppHandle, provider: &str) -> Option<String
         .map(|(_, password)| password)
 }
 
+/// Run a provider-call result through [`finish_provider_result`] with the
+/// secrets `provider` holds (its stored key) plus the `base_url` the call
+/// ACTUALLY used (the caller's own resolved URL, not a re-read of a config that
+/// may differ — embeddings keep theirs separate), for IPC edges that surface a
+/// provider failure to the renderer.
+pub(crate) fn redact_for_provider<T>(
+    app: &AppHandle,
+    provider: &str,
+    base_url: Option<&str>,
+    res: AppResult<T>,
+) -> AppResult<T> {
+    if res.is_ok() {
+        return res;
+    }
+    finish_provider_result(res, get_provider_key(app, provider).as_deref(), base_url)
+}
+
 #[tauri::command]
 pub fn ai_set_provider_key(app: AppHandle, provider: String, api_key: String) -> Value {
     let store = app.state::<Mutex<CredentialStore>>();

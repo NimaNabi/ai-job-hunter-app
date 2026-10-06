@@ -1,50 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791309275864,
+  "lastUpdate": 1791316517875,
   "repoUrl": "https://github.com/saeedkolivand/ai-job-hunter-app",
   "entries": {
     "Export render": [
-      {
-        "commit": {
-          "author": {
-            "email": "51081940+saeedkolivand@users.noreply.github.com",
-            "name": "Saeed Kolivand",
-            "username": "saeedkolivand"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "83a322e6fa2967b952d1aee58f8033a6800a2bfb",
-          "message": "feat(scraping): treat an implausible scraped company name as absent (#1001)\n\n* feat(scraping): treat an implausible scraped company name as absent\n\nPR #960 shipped six cover letters carrying garbage company names - the\nscraper returned things like \"Apply now | LinkedIn\" as the employer. Every\nexisting guard passed, and correctly: validate/content/factual.rs checks\ngenerated text AGAINST the job ad, so reproducing a garbage company faithfully\nis not a factual error. Nothing checked whether the ingested posting was sane\nin the first place.\n\nAdds is_implausible_company to scraping::trust - CTA debris, board names\nstanding in for an employer, separator and HTML wreckage, placeholders, and\nimplausible shapes - plus a TrustFlag::ImplausibleCompany raised by\nassess_trust. That module's contract is flag-only, enrich never drop, so it\ngains signal and blocks nothing.\n\nActing on it happens at two real boundaries rather than by blocking: the\npipeline blanks an implausible company before it can seed company research or\nthe persisted record, and export's filename falls back to the same default an\nabsent name already gets. Passing None rather than garbage means the existing\nprompt contract takes over - it already says to name only the role when no\ncompany is provided - so no prompt text changed.\n\nThe predicate is deliberately conservative: a false positive silently deletes\na real employer from a letter, which is worse than the bug. Johnson & Johnson,\nBen & Jerry's, Yahoo!, Booking.com and 37signals are pinned as accepted. A\nbare single character is rejected, which does reject X - at that length the\noverwhelming cause is scraper truncation, and the cost of being wrong is soft\nbecause the letter simply names the role instead.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\n\n* fix(scraping): stop the sanity gate rejecting real employers, and surface its flag\n\nReview caught the failure mode that matters more than the bug: the predicate\ndeleted real companies. Confirmed by running it - Monster Worldwide, Xing SE,\nIndeed Inc, Glassdoor Inc and Apply On Demand Inc were all judged implausible.\nEvery one hires directly and posts under its own name, so a letter would have\nsilently dropped a real employer.\n\nBoth offending rules matched too loosely. JOB_BOARD_NAMES rejected any name\nCONTAINING a board token as a word; CTA_PHRASES substring-matched, which is\nwhat caught \"Apply On Demand Inc\" via \"apply on \". Both now match only when\nthe entire normalized name IS the board name or CTA phrase, so a bare\n\"LinkedIn\" is still garbage while \"Xing SE\" is not. The originally reported\n\"Apply now | LinkedIn\" is still rejected - by the separator rule, not by\neither loosened list, and a test pins that so the coverage is not accidental.\n\"Apply on Indeed\" becomes an accepted false negative, pinned as a deliberate\nchoice rather than left to be rediscovered as a regression.\n\nThe new TrustFlag variant never reached the frontend. It serializes as\nimplausibleCompany but the hand-maintained TS union and both locale files\nstill listed four flags, and TrustBadge calls t() unconditionally - so the\nbadge would have rendered the literal key on exactly the postings this branch\nexists to fix, in both languages. Adds the union member and both strings.\n\nThe repo's purpose-built i18n key-drift guard stayed green through all of\nthat, because its fixture list derives from the same stale union it guards. A\nguard sourced from the thing it guards is not a guard. Fixed structurally: an\nexhaustive Record<TrustFlag, string> now lives in production code, so a\nmissing variant fails typecheck for the whole app rather than one test file.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\n\n* refactor(scraping): scope the company validator to the crate and bound its scan\n\nReview findings on #1001, both correct.\n\nis_implausible_company was pub with no out-of-crate caller - every use is\ncrate::scraping::trust::is_implausible_company from resume_pipeline and\nexport. Narrowed to pub(crate).\n\nIt also collected every char of the trimmed name before the length check\nrejected anything over MAX_COMPANY_CHARS, so an arbitrarily long scraped value\nallocated proportional to its full size. A scraped company field is untrusted,\narbitrary-length input, so bound the collect at MAX + 1 - the only length\nquestion asked is \"> MAX?\", which MAX + 1 answers, and the char-ratio checks\nfurther down run only on names that already passed that gate, where the cap is\na no-op.\n\nMutation-checked that the length rule is still genuinely reachable after the\nchange rather than assuming it: disabling it turns the absurdly-long fixture\nred.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5 <noreply@anthropic.com>",
-          "timestamp": "2026-08-16T19:51:57+02:00",
-          "tree_id": "b955fefbf29f1ba19dfbae686239d63b54120fca",
-          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/83a322e6fa2967b952d1aee58f8033a6800a2bfb"
-        },
-        "date": 1786903408158,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "pdf/classic",
-            "value": 2263339,
-            "range": "± 61453",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "pdf/atelier_two_column",
-            "value": 2643882,
-            "range": "± 49968",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "docx_classic",
-            "value": 294747,
-            "range": "± 3460",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -4193,6 +4151,48 @@ window.BENCHMARK_DATA = {
             "name": "docx_classic",
             "value": 251921,
             "range": "± 3350",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "51081940+saeedkolivand@users.noreply.github.com",
+            "name": "Saeed Kolivand",
+            "username": "saeedkolivand"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0139d5c7461622cc3a2dece66bec4a443fc6047d",
+          "message": "fix(ai): strip provider keys verbatim at the completer and embed seams, and redact header-style key echoes (#1350)\n\n* fix(ai): strip provider keys verbatim at the completer and embed seams, and redact header-style key echoes\n\nEvery Completer call and embed_adaptive's result now strip the stored key and base-url secrets\nverbatim on the error path, keeping the error variant and full text. The shared redactor learns\nheader and JSON echoes (x-goog-api-key, x-api-key, *-key/*-token headers, any Authorization\nscheme, bare long Bearer tokens) without touching the context-length retry's keywords.\n\nCloses #1348\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01RwZFadYd3YUadtn2ik5TmT\n\n* fix(ai): stop the seam test leaking pooled connections, redact compact json key echoes, scan every pipeline provider call\n\nThe seam test built its errors through real requests on the shared pooled client, which left\nkeep-alive connections that made the ollama timeout tests flaky; it now builds them with\nfriendly_api_error directly. The redactor catches compact JSON and glued header forms. The\nwiring guard now requires every self.provider call under src/pipeline to sit inside\nstrip_secrets unless it is a listed non-io method.\n\nRefs #1348\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01RwZFadYd3YUadtn2ik5TmT\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-06T21:30:35+02:00",
+          "tree_id": "bca2a3cef89e5ff1b8b4b61bd18514cb72f5d848",
+          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/0139d5c7461622cc3a2dece66bec4a443fc6047d"
+        },
+        "date": 1791316516410,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "pdf/classic",
+            "value": 2380560,
+            "range": "± 19788",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "pdf/atelier_two_column",
+            "value": 2852169,
+            "range": "± 42213",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "docx_classic",
+            "value": 258319,
+            "range": "± 9980",
             "unit": "ns/iter"
           }
         ]

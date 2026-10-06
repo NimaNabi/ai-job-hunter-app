@@ -27,8 +27,6 @@ import { TEST_IDS } from '@ajh/test-ids';
 // Shared containers (objects, so hoisted vi.mock factories can reference them)
 // ---------------------------------------------------------------------------
 
-const jobEvents = { handler: null as ((event: unknown) => void) | null };
-
 /** scrapeBoards mutation — the seam the `replace` flag actually crosses. */
 const scrapeSpy = vi.fn<(payload: Record<string, unknown>) => Promise<unknown>>();
 const cancelSpy = vi.fn<(jobId: string) => Promise<unknown>>();
@@ -64,30 +62,14 @@ const scrapeForm = {
 // Module mocks — everything EXCEPT useScraping and the session store.
 // ---------------------------------------------------------------------------
 
-vi.mock('@/services', () => ({
-  usePostings: () => postingsContainer,
-  useClearPostings: () => ({ mutateAsync: vi.fn(), isPending: false }),
-  useInvalidatePostings: () => vi.fn().mockResolvedValue(undefined),
-  useJobPreferences: () => ({ data: undefined }),
-  useGeocodeSuggest: () => vi.fn().mockResolvedValue([]),
-  useJobEvents: (cb: (event: unknown) => void) => {
-    jobEvents.handler = cb;
-  },
-  useScrapeBoards: () => ({ mutateAsync: scrapeSpy }),
-  useCancelJob: () => ({ mutateAsync: cancelSpy }),
-  useScrapeProgress: () => null,
-  fetchJob: (jobId: string) => fetchJobSpy(jobId),
-}));
-
 vi.mock('@/features/jobs/hooks/usePostingsSearch', () => ({
   usePostingsSearch: () => ({
     state: 'idle',
     result: null,
     committedQuery: '',
-    search: vi.fn(),
-    retry: vi.fn(),
-    clear: vi.fn(),
-    enableSemanticRanking: vi.fn(),
+    ...Object.fromEntries(
+      ['search', 'retry', 'clear', 'enableSemanticRanking'].map((k) => [k, vi.fn()])
+    ),
   }),
 }));
 
@@ -103,6 +85,21 @@ vi.mock('@/components/layout/PageTransition', () => ({
 
 vi.mock('@/features/jobs/providers', () => ({
   MatchScoresProvider: ({ children }: { children: ReactNode }) => <>{children}</>,
+}));
+
+vi.mock('@/services', () => ({
+  usePostings: () => postingsContainer,
+  useClearPostings: () => ({ mutateAsync: vi.fn(), isPending: false }),
+  useInvalidatePostings: () => vi.fn().mockResolvedValue(undefined),
+  useJobPreferences: () => ({ data: undefined }),
+  useGeocodeSuggest: () => vi.fn().mockResolvedValue([]),
+  useJobEvents: (cb: (event: unknown) => void) => {
+    jobEvents.handler = cb;
+  },
+  useScrapeBoards: () => ({ mutateAsync: scrapeSpy }),
+  useCancelJob: () => ({ mutateAsync: cancelSpy }),
+  useScrapeProgress: () => null,
+  fetchJob: (jobId: string) => fetchJobSpy(jobId),
 }));
 
 vi.mock('@/components/scrape/BoardSummaryChips', () => ({
@@ -176,7 +173,9 @@ vi.mock('@ajh/ui', () => ({
 // Import AFTER mocks.
 import { makeJobsDefaults, useSessionStore } from '@/store/session-store';
 
+import { makePosting as posting } from './fixtures';
 import { JobsPage } from './index';
+import { fireJobEvent, jobEvents } from './job-events';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -201,26 +200,6 @@ async function search(query: string) {
   await act(async () => {
     scrapeForm.onStart?.();
     await Promise.resolve();
-  });
-}
-
-/** A minimal valid streamed Posting (the handler shape-checks these fields). */
-function posting(id: string) {
-  return {
-    id,
-    source: 'linkedin',
-    externalId: id,
-    url: `https://example.com/${id}`,
-    title: `Role ${id}`,
-    company: 'Acme',
-    description: '',
-    capturedAt: 0,
-  };
-}
-
-function fireJobEvent(event: unknown) {
-  act(() => {
-    jobEvents.handler?.(event);
   });
 }
 

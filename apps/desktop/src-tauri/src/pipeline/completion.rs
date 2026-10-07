@@ -2,12 +2,14 @@
 //! text, and structured JSON (with its one-retry parse/re-ask seam) — plus
 //! the wire-request builder and bound-check they share.
 
+use std::time::Instant;
+
 use serde::de::DeserializeOwned;
 use serde_json::Value;
 use tauri::Manager;
 
 use crate::commands::ai_provider::{
-    AgentTurn, AiGenerateRequest, AiGenerateRequestMessage, ChatMsg, ToolSpec, Usage,
+    call_trace, AgentTurn, AiGenerateRequest, AiGenerateRequestMessage, ChatMsg, ToolSpec, Usage,
 };
 use crate::error::{AppError, AppResult};
 
@@ -42,7 +44,16 @@ impl Completer {
     pub async fn stream(&self, job_id: &str, mut req: AiGenerateRequest) -> AppResult<()> {
         req.model = self.model.clone();
         vet_wire_request(&mut req)?;
-        self.strip_secrets(self.provider.chat_stream(&self.app, job_id, &req).await)
+        // The stream loop records its usage itself; read it back for the trail,
+        // after clearing so a stale value from an earlier call is never read.
+        call_trace::clear_observed_usage();
+        let started = Instant::now();
+        let out = self.strip_secrets(self.provider.chat_stream(&self.app, job_id, &req).await);
+        if out.is_ok() {
+            let usage = call_trace::take_observed_usage().unwrap_or_default();
+            self.note_call(req.effort.as_deref(), started.elapsed(), usage);
+        }
+        self.or_note(req.effort.as_deref(), started, out)
     }
 
     /// Non-streaming completion through the active provider — the single-shot text
@@ -64,12 +75,17 @@ impl Completer {
         user: &str,
         temperature: Option<f64>,
     ) -> AppResult<String> {
-        let (text, usage) = self.strip_secrets(
-            self.provider
-                .complete_with_usage(&self.app, &self.model, system, user, temperature)
-                .await,
+        let started = Instant::now();
+        let (text, usage) = self.or_note(
+            None,
+            started,
+            self.strip_secrets(
+                self.provider
+                    .complete_with_usage(&self.app, &self.model, system, user, temperature)
+                    .await,
+            ),
         )?;
-        self.record_spend(usage);
+        self.record_spend(usage, None, started);
         Ok(text)
     }
 
@@ -95,9 +111,13 @@ impl Completer {
             self.context_window,
             effort,
         );
-        let (text, usage) =
-            self.strip_secrets(self.provider.complete_with_effort(&self.app, &req).await)?;
-        self.record_spend(usage);
+        let started = Instant::now();
+        let (text, usage) = self.or_note(
+            effort,
+            started,
+            self.strip_secrets(self.provider.complete_with_effort(&self.app, &req).await),
+        )?;
+        self.record_spend(usage, effort, started);
         Ok(text)
     }
 
@@ -221,12 +241,17 @@ impl Completer {
         tools: &[ToolSpec],
         temperature: Option<f64>,
     ) -> AppResult<AgentTurn> {
-        let turn = self.strip_secrets(
-            self.provider
-                .chat_with_tools(&self.app, &self.model, messages, tools, temperature)
-                .await,
+        let started = Instant::now();
+        let turn = self.or_note(
+            None,
+            started,
+            self.strip_secrets(
+                self.provider
+                    .chat_with_tools(&self.app, &self.model, messages, tools, temperature)
+                    .await,
+            ),
         )?;
-        self.record_spend(turn.usage);
+        self.record_spend(turn.usage, None, started);
         Ok(turn)
     }
 
@@ -295,13 +320,21 @@ impl Completer {
         schema: Option<&Value>,
         effort: Option<&str>,
     ) -> AppResult<T> {
+        let started = parking_lot::Mutex::new(Instant::now());
         complete_json_with(
             || {
                 guard()?;
                 self.charge_daily()
             },
-            |reask| self.structured_call(system, user, schema_hint, schema, reask, effort),
-            |usage| self.record_spend(usage),
+            |reask| async {
+                let t = Instant::now();
+                *started.lock() = t;
+                let out = self
+                    .structured_call(system, user, schema_hint, schema, reask, effort)
+                    .await;
+                self.or_note(effort, t, out)
+            },
+            |usage| self.record_spend(usage, effort, *started.lock()),
         )
         .await
     }

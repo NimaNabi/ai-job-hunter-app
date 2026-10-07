@@ -1,5 +1,377 @@
 [
   {
+    "sha": "aac372b9d19ee5e5e8f16373dd2fb3b3256807d2",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-07T06:19:51Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "819fa1efd3dc04ff4190a38cf9e48b3df00130e0",
+    "commit": {
+      "message": "perf(ai): humanize with line patches and run the résumé and letter arms together (#1375)",
+      "author": {
+        "date": "2026-10-07T06:04:59Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "2d3c3bf2aa503a5189f4ae60badf7475da55176e",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-07T05:39:23Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "d9c422c4174a95bbb44e023a0acea972f52bfa40",
+    "commit": {
+      "message": "chore(ai): persist content-free provider routing and timing per pipeline stage (#1374)",
+      "author": {
+        "date": "2026-10-07T05:14:55Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "386cb1f1e0acb180a3f1e7e78ec3b4ce65bcebe9",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-07T04:55:19Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "0f54d0145277eecf00a971641f4af04afab10132",
+    "commit": {
+      "message": "perf(ai): key the analyze cache on the job alone and trim unused stage output fields (#1373)",
+      "author": {
+        "date": "2026-10-07T04:43:18Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "ec1867b56834d5ac9a064faf5aa2eef803e54f52",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-07T02:08:47Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "99e825b92ee627b3afbda181e2ef79e7fc3176fc",
+    "commit": {
+      "message": "perf(ai): stream every completion and time out on silence, not wall clock (#1372)",
+      "author": {
+        "date": "2026-10-07T01:44:48Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "dc240e94fbc9aaeb9d2473fc24d6bfc5e2e7119f",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-07T00:42:16Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "387a75ca5bcfd522771bfcd1f3bfbbd4e2fff119",
+    "commit": {
+      "message": "perf(ai): run cover-letter company research alongside strategy and draft (#1371)",
+      "author": {
+        "date": "2026-10-07T00:29:48Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "12af5fc2b75cef6d875f9e9ab308f345c4028034",
+    "commit": {
+      "message": "perf(ai): run the mechanical pipeline stages at the lowest reasoning tier (#1370)",
+      "author": {
+        "date": "2026-10-07T00:21:19Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "93cb4945d1de6e0aa8f1cabc16b2ba2b9c282cd7",
+    "commit": {
+      "message": "chore(release): 0.157.0 [skip ci]",
+      "author": {
+        "date": "2026-10-06T20:40:09Z"
+      }
+    },
+    "author": {
+      "login": "semantic-release-bot"
+    }
+  },
+  {
+    "sha": "f5fbede9eb93ff2297257b3e1edb432137744583",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-06T19:55:17Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "0139d5c7461622cc3a2dece66bec4a443fc6047d",
+    "commit": {
+      "message": "fix(ai): strip provider keys verbatim at the completer and embed seams, and redact header-style key echoes (#1350)",
+      "author": {
+        "date": "2026-10-06T19:30:35Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "651e7368735c5e2b7f8ee7e95ab59730bbb4996a",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-06T17:54:35Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "2bd3c21182a96712d673beb5d74600a595eab7ea",
+    "commit": {
+      "message": "fix(ai): redact upstream provider error text where it is built, and on the regenerate and embed edges (#1349)",
+      "author": {
+        "date": "2026-10-06T17:42:08Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "a68a904851837e1d46f8dbe8cfc77d18da6f102f",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-06T15:43:44Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "062c6c19ce63724d32b3510feec7a4f0827b9096",
+    "commit": {
+      "message": "fix(ai): redact provider errors before they reach the model list and key test in settings (#1347)",
+      "author": {
+        "date": "2026-10-06T15:20:47Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "9cd2fb5bc304ed258498033e61b78517a95b26a5",
+    "commit": {
+      "message": "fix(extension): gate bridge verbs on authentication, pin the handshake transport, accept popup requests only from extension pages (#1345)",
+      "author": {
+        "date": "2026-10-06T15:05:55Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "333c2ad02b0ff65506ef38b4bff6b2e83839ff1d",
+    "commit": {
+      "message": "fix(desktop): log the error class, not the raw error, when header seeding or metadata extraction fails (#1344)",
+      "author": {
+        "date": "2026-10-06T14:45:38Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "2a57841e7ae2cc4186eb09c7b98188e8cd327c99",
+    "commit": {
+      "message": "docs: repoint docs and code comments at the files the ts split moved (#1343)",
+      "author": {
+        "date": "2026-10-06T14:45:30Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "058745e8aabccb3306f0ed6ef7e639844f6b18c9",
+    "commit": {
+      "message": "refactor(ui): bring the design system's over-cap files under 300 code lines (#1338)",
+      "author": {
+        "date": "2026-10-06T14:28:35Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "2ff86def6ba062923330309cbdb73564db187b7b",
+    "commit": {
+      "message": "refactor(prompts): bring locale tables, links and the over-cap prompt suites under 300 code lines (#1340)",
+      "author": {
+        "date": "2026-10-06T14:28:05Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "4c4279deab11ef2c363dd0036f9dfe6b10d7761d",
+    "commit": {
+      "message": "refactor(landing): split the architecture map, agent fleet and tech radar tables under 300 code lines (#1337)",
+      "author": {
+        "date": "2026-10-06T14:27:24Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "15ad9dd0cc20231401419c39d647e0001f9bd97b",
+    "commit": {
+      "message": "refactor(shared): bring the shared contracts and codegen scripts under 300 code lines (#1339)",
+      "author": {
+        "date": "2026-10-06T14:20:53Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "23f8367d799ca2ddac3c54de36f3f0dcd0816d15",
+    "commit": {
+      "message": "refactor(desktop): bring the documents feature under 300 code lines per file (#1336)",
+      "author": {
+        "date": "2026-10-06T13:51:35Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "09c3eae4da0a17b1b78f1af399596ff8453b9c64",
+    "commit": {
+      "message": "refactor(desktop): bring generation, settings and ai-generate under 300 code lines (#1335)",
+      "author": {
+        "date": "2026-10-06T13:31:53Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "83aeeded4c7fb1b4e9e54ebde32f8a27a6ecb3ed",
+    "commit": {
+      "message": "refactor(desktop): bring the applications and autopilot features under 300 code lines (#1334)",
+      "author": {
+        "date": "2026-10-06T13:07:56Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "f22e124f46ab6fdd5963f656e5a0b8fccbfa9bcf",
+    "commit": {
+      "message": "refactor(desktop): bring shared renderer code and small features under 300 code lines (#1333)",
+      "author": {
+        "date": "2026-10-06T13:06:00Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "06de5faaeaf8d40ac88e77889f3a9d9d40ee67e8",
+    "commit": {
+      "message": "refactor(desktop): bring the jobs feature under 300 code lines per file (#1332)",
+      "author": {
+        "date": "2026-10-06T12:36:50Z"
+      }
+    },
+    "author": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "sha": "33e2f5131b202ab1712285632b9cb5b5d8415d49",
+    "commit": {
+      "message": "chore: update mission-control snapshot data [skip ci]",
+      "author": {
+        "date": "2026-10-06T10:15:08Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
     "sha": "f931e4c107711c8eaee1e3f12c4418b136df12af",
     "commit": {
       "message": "refactor(extension): bring the remaining extension files under 300 code lines (#1330)",
@@ -821,378 +1193,6 @@
       "message": "chore: update mission-control snapshot data [skip ci]",
       "author": {
         "date": "2026-09-27T09:13:35Z"
-      }
-    },
-    "author": {
-      "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "dbc911bbc27fb514fa38e751cf309f6d3a5c2575",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-26T11:34:06Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "ec6ea39cf94549a5e796ba36e327c0e94a86a718",
-    "commit": {
-      "message": "refactor(extension-bridge): split and shrink the answer/assist family (#1287)",
-      "author": {
-        "date": "2026-09-26T11:14:10Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "fbd751ad7afa897128f4e4d7643dff84d943f534",
-    "commit": {
-      "message": "chore: update mission-control snapshot data [skip ci]",
-      "author": {
-        "date": "2026-09-26T08:34:07Z"
-      }
-    },
-    "author": {
-      "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "cea335eaf1fbf2f0ea984b0333312717acc0ae63",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-26T06:23:21Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "56972bb1ad7075be90107123a61ce49bb7687963",
-    "commit": {
-      "message": "refactor(agent-call): split agent_call and agent_read into modules under 300 lines (#1286)",
-      "author": {
-        "date": "2026-09-26T05:59:29Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "a53de3c0d3b8d083576609f3ad1b147b93043bcf",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-25T22:03:49Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "177c12e4c039ea42820c204384c483611355dce3",
-    "commit": {
-      "message": "refactor(agent-cli): split agent_cli into modules under 300 lines (#1285)",
-      "author": {
-        "date": "2026-09-25T21:39:12Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "c34728bbd83bb91864a87b449282ccab5a62761a",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-25T17:59:57Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "40b66e90c9dba20eedb0dd90f0757c0e7aff6e4b",
-    "commit": {
-      "message": "chore(arch): cap rust files at 300 lines and require sibling test files (#1284)",
-      "author": {
-        "date": "2026-09-25T17:35:59Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "593219e263ab21e3939ae1967c5ce54fcab9ace0",
-    "commit": {
-      "message": "chore: update mission-control snapshot data [skip ci]",
-      "author": {
-        "date": "2026-09-25T08:47:31Z"
-      }
-    },
-    "author": {
-      "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "f0ece8600ea8566dd7deb1a701caff304477e71f",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-25T03:54:02Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "76986bf37a46734f7214dcb4f0c33b56ee83be0b",
-    "commit": {
-      "message": "feat(ai): prompt audit — native anthropic structured output, de-dated prompts and agent config (#1283)",
-      "author": {
-        "date": "2026-09-25T03:29:22Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "9ece73fb91f36e4723ea609ce7f902e1d0322b95",
-    "commit": {
-      "message": "chore: sync landing download version to v0.156.0",
-      "author": {
-        "date": "2026-09-24T22:41:37Z"
-      }
-    },
-    "author": {
-      "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "8d829299cd29d1b9db21cd21d61f07c72c821599",
-    "commit": {
-      "message": "chore: sync homebrew cask to v0.156.0 [skip ci]",
-      "author": {
-        "date": "2026-09-24T22:41:09Z"
-      }
-    },
-    "author": {
-      "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "cd76b66d9e1c2392a75bf3e9e13eb4f90c343a2e",
-    "commit": {
-      "message": "chore(release): 0.156.0 [skip ci]",
-      "author": {
-        "date": "2026-09-24T21:54:34Z"
-      }
-    },
-    "author": {
-      "login": "semantic-release-bot"
-    }
-  },
-  {
-    "sha": "f0a3b3b656ee7082b71a5d8c3a88b7f0c4f7022d",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-24T21:53:48Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "da93b1f5efaf1cd771e09582fc3028dd06c66b3a",
-    "commit": {
-      "message": "perf(autopilot): keep only the 500 newest found jobs per autopilot (#1282)",
-      "author": {
-        "date": "2026-09-24T21:53:07Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "65dfb7a3c75b9be76fc5724cb948fdc7f67e266e",
-    "commit": {
-      "message": "perf(autopilot): store found jobs in sqlite instead of rewriting them into autopilots.json (#1281)",
-      "author": {
-        "date": "2026-09-24T21:43:30Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "7a0606d6d7bcee2ec98c565ce417b659cc56090a",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-24T21:27:09Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "14be1f08d555d6d47d3ca53103fee98ce7b83e92",
-    "commit": {
-      "message": "feat(updater): back up user data before installing an update (#1279)",
-      "author": {
-        "date": "2026-09-24T21:05:36Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "6d862509a19862f820916e3d30205d33036fbd46",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-24T20:16:42Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "ae118911f35631beec7e21409a21b6a90846479d",
-    "commit": {
-      "message": "fix(data): write json stores atomically and never overwrite a corrupt autopilots file (#1276)",
-      "author": {
-        "date": "2026-09-24T19:58:44Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "373cbdd6ada30fa1007187da123d0d809c083014",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-24T18:55:06Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "dc3556bb941f5957848004f14a4fe4f033a974e3",
-    "commit": {
-      "message": "feat(ai): opencode, cursor and qwen code as cli-agent providers (#1275)",
-      "author": {
-        "date": "2026-09-24T18:30:20Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "feefce7abe4f86b41feea42b56afd28a022c8ce8",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-24T15:07:50Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "f4a5f35ae087832b0a6d18be6774f649aad2f048",
-    "commit": {
-      "message": "perf(ai): isolate cli-agent calls from user config, schema-constrain claude code (#1273)",
-      "author": {
-        "date": "2026-09-24T14:47:45Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "ecfb432c33f5c92e30ff99df092ffa390c40c44c",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-09-24T12:15:03Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "c42211c7c4d50c2f5970e4ea8a58fbec6353cc39",
-    "commit": {
-      "message": "perf(pipeline): make match_evidence deterministic, with no provider call (#1270)",
-      "author": {
-        "date": "2026-09-24T11:51:16Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "730e44bf09c64058a400c11eb5f5f575a50943ee",
-    "commit": {
-      "message": "chore: update mission-control snapshot data [skip ci]",
-      "author": {
-        "date": "2026-09-24T08:25:16Z"
-      }
-    },
-    "author": {
-      "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "3501dc7eec0308d0c0ddb5573f5421b5ce236517",
-    "commit": {
-      "message": "chore: sync landing download version to v0.155.1",
-      "author": {
-        "date": "2026-09-23T20:13:36Z"
-      }
-    },
-    "author": {
-      "login": "github-actions[bot]"
-    }
-  },
-  {
-    "sha": "02402d34018508d51cc318eb521da3acd0651086",
-    "commit": {
-      "message": "chore: sync homebrew cask to v0.155.1 [skip ci]",
-      "author": {
-        "date": "2026-09-23T20:13:09Z"
       }
     },
     "author": {

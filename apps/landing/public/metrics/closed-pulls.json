@@ -1,503 +1,167 @@
 [
   {
-    "number": 1330,
-    "title": "refactor(extension): bring the remaining extension files under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1330",
+    "number": 1375,
+    "title": "perf(ai): humanize with line patches and run the résumé and letter arms together",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1375",
     "draft": false,
-    "created_at": "2026-10-06T05:02:06Z",
-    "updated_at": "2026-10-06T05:49:19Z",
-    "merged_at": "2026-10-06T05:49:17Z",
-    "closed_at": "2026-10-06T05:49:17Z",
+    "created_at": "2026-10-07T06:04:56Z",
+    "updated_at": "2026-10-07T06:30:12Z",
+    "merged_at": "2026-10-07T06:05:00Z",
+    "closed_at": "2026-10-07T06:05:00Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1328,
-    "title": "refactor(extension): split the background worker into per-gesture modules under 300 lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1328",
+    "number": 1374,
+    "title": "chore(ai): persist content-free provider routing and timing per pipeline stage",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1374",
     "draft": false,
-    "created_at": "2026-10-06T04:51:40Z",
-    "updated_at": "2026-10-06T05:29:08Z",
-    "merged_at": "2026-10-06T05:29:05Z",
-    "closed_at": "2026-10-06T05:29:05Z",
+    "created_at": "2026-10-07T05:14:53Z",
+    "updated_at": "2026-10-07T05:33:46Z",
+    "merged_at": "2026-10-07T05:14:56Z",
+    "closed_at": "2026-10-07T05:14:56Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1329,
-    "title": "refactor(extension): split the bridge client into per-concern modules under 300 lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1329",
+    "number": 1373,
+    "title": "perf(ai): key the analyze cache on the job alone and trim unused stage output",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1373",
     "draft": false,
-    "created_at": "2026-10-06T04:55:48Z",
-    "updated_at": "2026-10-06T05:28:56Z",
-    "merged_at": "2026-10-06T05:28:54Z",
-    "closed_at": "2026-10-06T05:28:54Z",
+    "created_at": "2026-10-07T04:43:15Z",
+    "updated_at": "2026-10-07T05:07:49Z",
+    "merged_at": "2026-10-07T04:43:18Z",
+    "closed_at": "2026-10-07T04:43:18Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1327,
-    "title": "build(deps): move to tauri-plugin-sentry 0.7 and sentry's minidump integration",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1327",
+    "number": 1372,
+    "title": "perf(ai): stream every completion and time out on silence, not wall clock",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1372",
     "draft": false,
-    "created_at": "2026-10-05T16:52:08Z",
-    "updated_at": "2026-10-05T17:08:33Z",
-    "merged_at": "2026-10-05T16:59:57Z",
-    "closed_at": "2026-10-05T16:59:58Z",
+    "created_at": "2026-10-07T01:44:46Z",
+    "updated_at": "2026-10-07T02:07:42Z",
+    "merged_at": "2026-10-07T01:44:49Z",
+    "closed_at": "2026-10-07T01:44:49Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1326,
-    "title": "ci: harden the ts size guard after review",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1326",
+    "number": 1371,
+    "title": "perf(ai): run cover-letter company research alongside strategy and draft",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1371",
     "draft": false,
-    "created_at": "2026-10-05T16:23:00Z",
-    "updated_at": "2026-10-05T16:51:37Z",
-    "merged_at": "2026-10-05T16:51:34Z",
-    "closed_at": "2026-10-05T16:51:34Z",
+    "created_at": "2026-10-07T00:29:46Z",
+    "updated_at": "2026-10-07T00:54:55Z",
+    "merged_at": "2026-10-07T00:29:49Z",
+    "closed_at": "2026-10-07T00:29:49Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1325,
-    "title": "ci: cap ts and tsx files at 300 code lines with a ratchet baseline",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1325",
+    "number": 1370,
+    "title": "perf(ai): run the mechanical pipeline stages at the lowest reasoning tier",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1370",
     "draft": false,
-    "created_at": "2026-10-05T16:14:36Z",
-    "updated_at": "2026-10-05T16:39:25Z",
-    "merged_at": "2026-10-05T16:15:46Z",
-    "closed_at": "2026-10-05T16:15:46Z",
+    "created_at": "2026-10-07T00:21:16Z",
+    "updated_at": "2026-10-07T00:45:51Z",
+    "merged_at": "2026-10-07T00:21:19Z",
+    "closed_at": "2026-10-07T00:21:19Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1324,
-    "title": "fix: unbreak the build and ship an appimage any user can start",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1324",
+    "number": 1283,
+    "title": "feat(ai): prompt audit — native anthropic structured output, de-dated prompts and agent config",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1283",
     "draft": false,
-    "created_at": "2026-10-05T15:07:59Z",
-    "updated_at": "2026-10-05T15:34:28Z",
-    "merged_at": "2026-10-05T15:10:17Z",
-    "closed_at": "2026-10-05T15:10:17Z",
+    "created_at": "2026-09-24T23:18:49Z",
+    "updated_at": "2026-10-06T20:43:21Z",
+    "merged_at": "2026-09-25T03:29:23Z",
+    "closed_at": "2026-09-25T03:29:23Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1322,
-    "title": "docs: sync file and module pointers after the #1280 split",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1322",
+    "number": 1284,
+    "title": "chore(arch): cap rust files at 300 lines and require sibling test files",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1284",
     "draft": false,
-    "created_at": "2026-10-05T14:52:26Z",
-    "updated_at": "2026-10-05T15:08:46Z",
-    "merged_at": "2026-10-05T14:56:56Z",
-    "closed_at": "2026-10-05T14:56:56Z",
+    "created_at": "2026-09-25T17:02:08Z",
+    "updated_at": "2026-10-06T20:43:18Z",
+    "merged_at": "2026-09-25T17:35:59Z",
+    "closed_at": "2026-09-25T17:35:59Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1301,
-    "title": "chore: bump tauri-plugin-sentry from 0.6.0 to 0.7.0 in /apps/desktop/src-tauri",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1301",
+    "number": 1285,
+    "title": "refactor(agent-cli): split agent_cli into modules under 300 lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1285",
     "draft": false,
-    "created_at": "2026-09-30T16:12:14Z",
-    "updated_at": "2026-10-05T14:42:32Z",
-    "merged_at": "2026-10-05T14:42:30Z",
-    "closed_at": "2026-10-05T14:42:30Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "number": 1321,
-    "title": "chore: bump the javascript group across 1 directory with 42 updates",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1321",
-    "draft": false,
-    "created_at": "2026-10-04T21:07:16Z",
-    "updated_at": "2026-10-05T11:56:42Z",
-    "merged_at": "2026-10-05T11:56:39Z",
-    "closed_at": "2026-10-05T11:56:39Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "number": 1300,
-    "title": "chore: bump the desktop-rust group across 1 directory with 22 updates",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1300",
-    "draft": false,
-    "created_at": "2026-09-30T16:12:07Z",
-    "updated_at": "2026-10-04T21:32:22Z",
-    "merged_at": "2026-10-04T21:32:21Z",
-    "closed_at": "2026-10-04T21:32:21Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "number": 1299,
-    "title": "chore: bump the codeql-action group across 1 directory with 3 updates",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1299",
-    "draft": false,
-    "created_at": "2026-09-30T16:08:55Z",
-    "updated_at": "2026-10-04T21:09:54Z",
-    "merged_at": "2026-10-04T21:09:53Z",
-    "closed_at": "2026-10-04T21:09:53Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "number": 1305,
-    "title": "chore: bump the javascript group with 31 updates",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1305",
-    "draft": false,
-    "created_at": "2026-09-30T16:34:17Z",
-    "updated_at": "2026-10-04T21:04:20Z",
-    "merged_at": null,
-    "closed_at": "2026-10-04T21:04:18Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "number": 1302,
-    "title": "chore: bump feed-rs from 2.4.0 to 3.0.0 in /apps/desktop/src-tauri",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1302",
-    "draft": false,
-    "created_at": "2026-09-30T16:12:22Z",
-    "updated_at": "2026-10-04T21:01:28Z",
-    "merged_at": "2026-10-04T21:01:27Z",
-    "closed_at": "2026-10-04T21:01:27Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "number": 1303,
-    "title": "chore: bump the ci-actions group with 2 updates",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1303",
-    "draft": false,
-    "created_at": "2026-09-30T16:13:03Z",
-    "updated_at": "2026-10-04T20:29:05Z",
-    "merged_at": "2026-10-04T20:29:04Z",
-    "closed_at": "2026-10-04T20:29:04Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "number": 1298,
-    "title": "chore: bump the vitest group with 3 updates",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1298",
-    "draft": false,
-    "created_at": "2026-09-30T16:08:13Z",
-    "updated_at": "2026-10-04T20:27:56Z",
-    "merged_at": "2026-10-04T20:27:53Z",
-    "closed_at": "2026-10-04T20:27:53Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "number": 1320,
-    "title": "refactor(platform): split platform and shell infra, emptying the r8 baselines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1320",
-    "draft": false,
-    "created_at": "2026-10-04T20:09:21Z",
-    "updated_at": "2026-10-04T20:27:55Z",
-    "merged_at": "2026-10-04T20:24:00Z",
-    "closed_at": "2026-10-04T20:24:00Z",
+    "created_at": "2026-09-25T21:12:57Z",
+    "updated_at": "2026-10-06T20:43:15Z",
+    "merged_at": "2026-09-25T21:39:12Z",
+    "closed_at": "2026-09-25T21:39:12Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1319,
-    "title": "refactor(commands): split the remaining command modules under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1319",
+    "number": 1286,
+    "title": "refactor(agent-call): split agent_call and agent_read into modules under 300 lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1286",
     "draft": false,
-    "created_at": "2026-10-04T19:58:14Z",
-    "updated_at": "2026-10-04T20:15:32Z",
-    "merged_at": "2026-10-04T19:59:55Z",
-    "closed_at": "2026-10-04T19:59:55Z",
+    "created_at": "2026-09-26T05:33:54Z",
+    "updated_at": "2026-10-06T20:43:12Z",
+    "merged_at": "2026-09-26T05:59:30Z",
+    "closed_at": "2026-09-26T05:59:30Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1318,
-    "title": "refactor(model): split the document model, locale and text modules under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1318",
+    "number": 1287,
+    "title": "refactor(extension-bridge): split and shrink the answer/assist family",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1287",
     "draft": false,
-    "created_at": "2026-10-04T19:20:20Z",
-    "updated_at": "2026-10-04T19:44:31Z",
-    "merged_at": "2026-10-04T19:43:37Z",
-    "closed_at": "2026-10-04T19:43:37Z",
+    "created_at": "2026-09-26T10:48:33Z",
+    "updated_at": "2026-10-06T20:43:09Z",
+    "merged_at": "2026-09-26T11:14:11Z",
+    "closed_at": "2026-09-26T11:14:11Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1317,
-    "title": "refactor(stores): split the user data stores under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1317",
+    "number": 1288,
+    "title": "refactor(extension-bridge): split the bridge core into modules under 300 lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1288",
     "draft": false,
-    "created_at": "2026-10-04T18:09:34Z",
-    "updated_at": "2026-10-04T18:37:15Z",
-    "merged_at": "2026-10-04T18:37:11Z",
-    "closed_at": "2026-10-04T18:37:11Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1316,
-    "title": "refactor(commands): split match_resume, ai, applications, scrape and lib.rs under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1316",
-    "draft": false,
-    "created_at": "2026-10-04T17:21:53Z",
-    "updated_at": "2026-10-04T17:46:24Z",
-    "merged_at": "2026-10-04T17:23:07Z",
-    "closed_at": "2026-10-04T17:23:07Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1315,
-    "title": "refactor(autopilot): split the autopilot family under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1315",
-    "draft": false,
-    "created_at": "2026-10-04T16:11:24Z",
-    "updated_at": "2026-10-04T16:37:10Z",
-    "merged_at": "2026-10-04T16:37:08Z",
-    "closed_at": "2026-10-04T16:37:08Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1314,
-    "title": "refactor(applications): split applications/ and ai_generations/ under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1314",
-    "draft": false,
-    "created_at": "2026-10-04T14:56:54Z",
-    "updated_at": "2026-10-04T15:21:44Z",
-    "merged_at": "2026-10-04T15:21:41Z",
-    "closed_at": "2026-10-04T15:21:41Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1313,
-    "title": "refactor(documents): split documents/ into modules under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1313",
-    "draft": false,
-    "created_at": "2026-10-04T13:25:24Z",
-    "updated_at": "2026-10-04T13:49:14Z",
-    "merged_at": "2026-10-04T13:49:11Z",
-    "closed_at": "2026-10-04T13:49:11Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1312,
-    "title": "refactor(email-watch): split email_watch/ and extraction/ under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1312",
-    "draft": false,
-    "created_at": "2026-10-04T11:40:56Z",
-    "updated_at": "2026-10-04T12:33:07Z",
-    "merged_at": "2026-10-04T12:33:03Z",
-    "closed_at": "2026-10-04T12:33:03Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1311,
-    "title": "refactor(validate): split validate/ into modules under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1311",
-    "draft": false,
-    "created_at": "2026-10-04T10:52:43Z",
-    "updated_at": "2026-10-04T11:14:28Z",
-    "merged_at": "2026-10-04T11:02:31Z",
-    "closed_at": "2026-10-04T11:02:31Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1310,
-    "title": "refactor(export): split docx, parser, templates, pdf and model_docx under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1310",
-    "draft": false,
-    "created_at": "2026-10-04T09:01:36Z",
-    "updated_at": "2026-10-04T09:30:50Z",
-    "merged_at": "2026-10-04T09:30:46Z",
-    "closed_at": "2026-10-04T09:30:46Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1309,
-    "title": "refactor(export): split the typst engine into modules under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1309",
-    "draft": false,
-    "created_at": "2026-10-01T03:50:40Z",
-    "updated_at": "2026-10-01T04:15:55Z",
-    "merged_at": "2026-10-01T03:51:37Z",
-    "closed_at": "2026-10-01T03:51:37Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1308,
-    "title": "refactor(pipeline): split the resume pipeline into modules under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1308",
-    "draft": false,
-    "created_at": "2026-09-30T21:11:36Z",
-    "updated_at": "2026-09-30T22:08:20Z",
-    "merged_at": "2026-09-30T22:08:18Z",
-    "closed_at": "2026-09-30T22:08:18Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1307,
-    "title": "refactor(pipeline): split the pipeline core into modules under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1307",
-    "draft": false,
-    "created_at": "2026-09-30T19:29:47Z",
-    "updated_at": "2026-09-30T19:46:29Z",
-    "merged_at": "2026-09-30T19:37:35Z",
-    "closed_at": "2026-09-30T19:37:35Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1306,
-    "title": "refactor(ai-provider): split the cli agent layer into modules under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1306",
-    "draft": false,
-    "created_at": "2026-09-30T17:40:03Z",
-    "updated_at": "2026-09-30T18:06:49Z",
-    "merged_at": "2026-09-30T18:06:46Z",
-    "closed_at": "2026-09-30T18:06:46Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1304,
-    "title": "refactor(ai-provider): split the shared provider layer into modules under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1304",
-    "draft": false,
-    "created_at": "2026-09-30T16:14:24Z",
-    "updated_at": "2026-09-30T17:06:00Z",
-    "merged_at": "2026-09-30T16:46:53Z",
-    "closed_at": "2026-09-30T16:46:53Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1297,
-    "title": "refactor(ai-provider): split the provider adapters into modules under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1297",
-    "draft": false,
-    "created_at": "2026-09-30T14:26:24Z",
-    "updated_at": "2026-09-30T15:09:46Z",
-    "merged_at": "2026-09-30T15:09:44Z",
-    "closed_at": "2026-09-30T15:09:44Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1296,
-    "title": "refactor(scraping): split the job-board scrapers into modules under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1296",
-    "draft": false,
-    "created_at": "2026-09-30T06:01:02Z",
-    "updated_at": "2026-09-30T06:21:00Z",
-    "merged_at": "2026-09-30T06:06:52Z",
-    "closed_at": "2026-09-30T06:06:52Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1295,
-    "title": "refactor(scraping): split the scraping core into modules under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1295",
-    "draft": false,
-    "created_at": "2026-09-28T23:23:38Z",
-    "updated_at": "2026-09-28T23:39:36Z",
-    "merged_at": "2026-09-28T23:31:07Z",
-    "closed_at": "2026-09-28T23:31:07Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1294,
-    "title": "fix(cli-agents): detect npm-installed CLIs and list opencode models on windows",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1294",
-    "draft": false,
-    "created_at": "2026-09-28T22:39:08Z",
-    "updated_at": "2026-09-28T23:39:35Z",
-    "merged_at": "2026-09-28T23:30:51Z",
-    "closed_at": "2026-09-28T23:30:51Z",
+    "created_at": "2026-09-28T15:22:00Z",
+    "updated_at": "2026-10-06T20:43:06Z",
+    "merged_at": "2026-09-28T15:22:40Z",
+    "closed_at": "2026-09-28T15:22:40Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
@@ -509,7 +173,7 @@
     "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1290",
     "draft": false,
     "created_at": "2026-09-28T15:37:03Z",
-    "updated_at": "2026-09-28T15:57:10Z",
+    "updated_at": "2026-10-06T20:43:03Z",
     "merged_at": "2026-09-28T15:38:32Z",
     "closed_at": "2026-09-28T15:38:32Z",
     "requested_reviewers": [],
@@ -523,7 +187,7 @@
     "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1291",
     "draft": false,
     "created_at": "2026-09-28T15:38:07Z",
-    "updated_at": "2026-09-28T15:58:07Z",
+    "updated_at": "2026-10-06T20:43:00Z",
     "merged_at": "2026-09-28T15:39:47Z",
     "closed_at": "2026-09-28T15:39:47Z",
     "requested_reviewers": [],
@@ -532,168 +196,504 @@
     }
   },
   {
-    "number": 1288,
-    "title": "refactor(extension-bridge): split the bridge core into modules under 300 lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1288",
+    "number": 1294,
+    "title": "fix(cli-agents): detect npm-installed CLIs and list opencode models on windows",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1294",
     "draft": false,
-    "created_at": "2026-09-28T15:22:00Z",
-    "updated_at": "2026-09-28T15:39:54Z",
-    "merged_at": "2026-09-28T15:22:40Z",
-    "closed_at": "2026-09-28T15:22:40Z",
+    "created_at": "2026-09-28T22:39:08Z",
+    "updated_at": "2026-10-06T20:42:57Z",
+    "merged_at": "2026-09-28T23:30:51Z",
+    "closed_at": "2026-09-28T23:30:51Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1287,
-    "title": "refactor(extension-bridge): split and shrink the answer/assist family",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1287",
+    "number": 1295,
+    "title": "refactor(scraping): split the scraping core into modules under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1295",
     "draft": false,
-    "created_at": "2026-09-26T10:48:33Z",
-    "updated_at": "2026-09-26T11:14:13Z",
-    "merged_at": "2026-09-26T11:14:11Z",
-    "closed_at": "2026-09-26T11:14:11Z",
+    "created_at": "2026-09-28T23:23:38Z",
+    "updated_at": "2026-10-06T20:42:54Z",
+    "merged_at": "2026-09-28T23:31:07Z",
+    "closed_at": "2026-09-28T23:31:07Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1286,
-    "title": "refactor(agent-call): split agent_call and agent_read into modules under 300 lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1286",
+    "number": 1296,
+    "title": "refactor(scraping): split the job-board scrapers into modules under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1296",
     "draft": false,
-    "created_at": "2026-09-26T05:33:54Z",
-    "updated_at": "2026-09-26T05:59:32Z",
-    "merged_at": "2026-09-26T05:59:30Z",
-    "closed_at": "2026-09-26T05:59:30Z",
+    "created_at": "2026-09-30T06:01:02Z",
+    "updated_at": "2026-10-06T20:42:51Z",
+    "merged_at": "2026-09-30T06:06:52Z",
+    "closed_at": "2026-09-30T06:06:52Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1285,
-    "title": "refactor(agent-cli): split agent_cli into modules under 300 lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1285",
+    "number": 1297,
+    "title": "refactor(ai-provider): split the provider adapters into modules under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1297",
     "draft": false,
-    "created_at": "2026-09-25T21:12:57Z",
-    "updated_at": "2026-09-25T21:39:14Z",
-    "merged_at": "2026-09-25T21:39:12Z",
-    "closed_at": "2026-09-25T21:39:12Z",
+    "created_at": "2026-09-30T14:26:24Z",
+    "updated_at": "2026-10-06T20:42:49Z",
+    "merged_at": "2026-09-30T15:09:44Z",
+    "closed_at": "2026-09-30T15:09:44Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1284,
-    "title": "chore(arch): cap rust files at 300 lines and require sibling test files",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1284",
+    "number": 1304,
+    "title": "refactor(ai-provider): split the shared provider layer into modules under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1304",
     "draft": false,
-    "created_at": "2026-09-25T17:02:08Z",
-    "updated_at": "2026-09-25T17:36:01Z",
-    "merged_at": "2026-09-25T17:35:59Z",
-    "closed_at": "2026-09-25T17:35:59Z",
+    "created_at": "2026-09-30T16:14:24Z",
+    "updated_at": "2026-10-06T20:42:45Z",
+    "merged_at": "2026-09-30T16:46:53Z",
+    "closed_at": "2026-09-30T16:46:53Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1283,
-    "title": "feat(ai): prompt audit — native anthropic structured output, de-dated prompts and agent config",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1283",
+    "number": 1306,
+    "title": "refactor(ai-provider): split the cli agent layer into modules under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1306",
     "draft": false,
-    "created_at": "2026-09-24T23:18:49Z",
-    "updated_at": "2026-09-25T03:29:24Z",
-    "merged_at": "2026-09-25T03:29:23Z",
-    "closed_at": "2026-09-25T03:29:23Z",
+    "created_at": "2026-09-30T17:40:03Z",
+    "updated_at": "2026-10-06T20:42:42Z",
+    "merged_at": "2026-09-30T18:06:46Z",
+    "closed_at": "2026-09-30T18:06:46Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1282,
-    "title": "perf(autopilot): keep only the 500 newest found jobs per autopilot",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1282",
+    "number": 1307,
+    "title": "refactor(pipeline): split the pipeline core into modules under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1307",
     "draft": false,
-    "created_at": "2026-09-24T21:51:31Z",
-    "updated_at": "2026-09-24T22:16:55Z",
-    "merged_at": "2026-09-24T21:53:08Z",
-    "closed_at": "2026-09-24T21:53:08Z",
+    "created_at": "2026-09-30T19:29:47Z",
+    "updated_at": "2026-10-06T20:42:39Z",
+    "merged_at": "2026-09-30T19:37:35Z",
+    "closed_at": "2026-09-30T19:37:35Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1281,
-    "title": "perf(autopilot): store found jobs in sqlite instead of rewriting them into autopilots.json",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1281",
+    "number": 1308,
+    "title": "refactor(pipeline): split the resume pipeline into modules under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1308",
     "draft": false,
-    "created_at": "2026-09-24T21:00:41Z",
-    "updated_at": "2026-09-24T21:55:09Z",
-    "merged_at": "2026-09-24T21:43:31Z",
-    "closed_at": "2026-09-24T21:43:31Z",
+    "created_at": "2026-09-30T21:11:36Z",
+    "updated_at": "2026-10-06T20:42:36Z",
+    "merged_at": "2026-09-30T22:08:18Z",
+    "closed_at": "2026-09-30T22:08:18Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1270,
-    "title": "perf(pipeline): make match_evidence deterministic, with no provider call",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1270",
+    "number": 1309,
+    "title": "refactor(export): split the typst engine into modules under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1309",
     "draft": false,
-    "created_at": "2026-09-24T11:33:40Z",
-    "updated_at": "2026-09-24T21:55:00Z",
-    "merged_at": "2026-09-24T11:51:17Z",
-    "closed_at": "2026-09-24T11:51:17Z",
+    "created_at": "2026-10-01T03:50:40Z",
+    "updated_at": "2026-10-06T20:42:33Z",
+    "merged_at": "2026-10-01T03:51:37Z",
+    "closed_at": "2026-10-01T03:51:37Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1273,
-    "title": "perf(ai): isolate cli-agent calls from user config, schema-constrain claude code",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1273",
+    "number": 1310,
+    "title": "refactor(export): split docx, parser, templates, pdf and model_docx under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1310",
     "draft": false,
-    "created_at": "2026-09-24T14:04:22Z",
-    "updated_at": "2026-09-24T21:54:59Z",
-    "merged_at": "2026-09-24T14:47:45Z",
-    "closed_at": "2026-09-24T14:47:45Z",
+    "created_at": "2026-10-04T09:01:36Z",
+    "updated_at": "2026-10-06T20:42:30Z",
+    "merged_at": "2026-10-04T09:30:46Z",
+    "closed_at": "2026-10-04T09:30:46Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1275,
-    "title": "feat(ai): opencode, cursor and qwen code as cli-agent providers",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1275",
+    "number": 1311,
+    "title": "refactor(validate): split validate/ into modules under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1311",
     "draft": false,
-    "created_at": "2026-09-24T17:32:53Z",
-    "updated_at": "2026-09-24T21:54:57Z",
-    "merged_at": "2026-09-24T18:30:21Z",
-    "closed_at": "2026-09-24T18:30:21Z",
+    "created_at": "2026-10-04T10:52:43Z",
+    "updated_at": "2026-10-06T20:42:27Z",
+    "merged_at": "2026-10-04T11:02:31Z",
+    "closed_at": "2026-10-04T11:02:31Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"
     }
   },
   {
-    "number": 1279,
-    "title": "feat(updater): back up user data before installing an update",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1279",
+    "number": 1312,
+    "title": "refactor(email-watch): split email_watch/ and extraction/ under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1312",
     "draft": false,
-    "created_at": "2026-09-24T20:14:47Z",
-    "updated_at": "2026-09-24T21:54:56Z",
-    "merged_at": "2026-09-24T21:05:37Z",
-    "closed_at": "2026-09-24T21:05:37Z",
+    "created_at": "2026-10-04T11:40:56Z",
+    "updated_at": "2026-10-06T20:42:24Z",
+    "merged_at": "2026-10-04T12:33:03Z",
+    "closed_at": "2026-10-04T12:33:03Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1313,
+    "title": "refactor(documents): split documents/ into modules under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1313",
+    "draft": false,
+    "created_at": "2026-10-04T13:25:24Z",
+    "updated_at": "2026-10-06T20:42:21Z",
+    "merged_at": "2026-10-04T13:49:11Z",
+    "closed_at": "2026-10-04T13:49:11Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1314,
+    "title": "refactor(applications): split applications/ and ai_generations/ under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1314",
+    "draft": false,
+    "created_at": "2026-10-04T14:56:54Z",
+    "updated_at": "2026-10-06T20:42:18Z",
+    "merged_at": "2026-10-04T15:21:41Z",
+    "closed_at": "2026-10-04T15:21:41Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1315,
+    "title": "refactor(autopilot): split the autopilot family under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1315",
+    "draft": false,
+    "created_at": "2026-10-04T16:11:24Z",
+    "updated_at": "2026-10-06T20:42:15Z",
+    "merged_at": "2026-10-04T16:37:08Z",
+    "closed_at": "2026-10-04T16:37:08Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1316,
+    "title": "refactor(commands): split match_resume, ai, applications, scrape and lib.rs under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1316",
+    "draft": false,
+    "created_at": "2026-10-04T17:21:53Z",
+    "updated_at": "2026-10-06T20:42:12Z",
+    "merged_at": "2026-10-04T17:23:07Z",
+    "closed_at": "2026-10-04T17:23:07Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1317,
+    "title": "refactor(stores): split the user data stores under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1317",
+    "draft": false,
+    "created_at": "2026-10-04T18:09:34Z",
+    "updated_at": "2026-10-06T20:42:09Z",
+    "merged_at": "2026-10-04T18:37:11Z",
+    "closed_at": "2026-10-04T18:37:11Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1319,
+    "title": "refactor(commands): split the remaining command modules under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1319",
+    "draft": false,
+    "created_at": "2026-10-04T19:58:14Z",
+    "updated_at": "2026-10-06T20:42:08Z",
+    "merged_at": "2026-10-04T19:59:55Z",
+    "closed_at": "2026-10-04T19:59:55Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1318,
+    "title": "refactor(model): split the document model, locale and text modules under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1318",
+    "draft": false,
+    "created_at": "2026-10-04T19:20:20Z",
+    "updated_at": "2026-10-06T20:42:08Z",
+    "merged_at": "2026-10-04T19:43:37Z",
+    "closed_at": "2026-10-04T19:43:37Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1320,
+    "title": "refactor(platform): split platform and shell infra, emptying the r8 baselines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1320",
+    "draft": false,
+    "created_at": "2026-10-04T20:09:21Z",
+    "updated_at": "2026-10-06T20:42:06Z",
+    "merged_at": "2026-10-04T20:24:00Z",
+    "closed_at": "2026-10-04T20:24:00Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1298,
+    "title": "chore: bump the vitest group with 3 updates",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1298",
+    "draft": false,
+    "created_at": "2026-09-30T16:08:13Z",
+    "updated_at": "2026-10-06T20:42:05Z",
+    "merged_at": "2026-10-04T20:27:53Z",
+    "closed_at": "2026-10-04T20:27:53Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "number": 1303,
+    "title": "chore: bump the ci-actions group with 2 updates",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1303",
+    "draft": false,
+    "created_at": "2026-09-30T16:13:03Z",
+    "updated_at": "2026-10-06T20:42:04Z",
+    "merged_at": "2026-10-04T20:29:04Z",
+    "closed_at": "2026-10-04T20:29:04Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "number": 1302,
+    "title": "chore: bump feed-rs from 2.4.0 to 3.0.0 in /apps/desktop/src-tauri",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1302",
+    "draft": false,
+    "created_at": "2026-09-30T16:12:22Z",
+    "updated_at": "2026-10-06T20:42:03Z",
+    "merged_at": "2026-10-04T21:01:27Z",
+    "closed_at": "2026-10-04T21:01:27Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "number": 1299,
+    "title": "chore: bump the codeql-action group across 1 directory with 3 updates",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1299",
+    "draft": false,
+    "created_at": "2026-09-30T16:08:55Z",
+    "updated_at": "2026-10-06T20:42:02Z",
+    "merged_at": "2026-10-04T21:09:53Z",
+    "closed_at": "2026-10-04T21:09:53Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "number": 1300,
+    "title": "chore: bump the desktop-rust group across 1 directory with 22 updates",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1300",
+    "draft": false,
+    "created_at": "2026-09-30T16:12:07Z",
+    "updated_at": "2026-10-06T20:42:01Z",
+    "merged_at": "2026-10-04T21:32:21Z",
+    "closed_at": "2026-10-04T21:32:21Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "number": 1321,
+    "title": "chore: bump the javascript group across 1 directory with 42 updates",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1321",
+    "draft": false,
+    "created_at": "2026-10-04T21:07:16Z",
+    "updated_at": "2026-10-06T20:42:00Z",
+    "merged_at": "2026-10-05T11:56:39Z",
+    "closed_at": "2026-10-05T11:56:39Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "number": 1301,
+    "title": "chore: bump tauri-plugin-sentry from 0.6.0 to 0.7.0 in /apps/desktop/src-tauri",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1301",
+    "draft": false,
+    "created_at": "2026-09-30T16:12:14Z",
+    "updated_at": "2026-10-06T20:41:59Z",
+    "merged_at": "2026-10-05T14:42:30Z",
+    "closed_at": "2026-10-05T14:42:30Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "dependabot[bot]"
+    }
+  },
+  {
+    "number": 1322,
+    "title": "docs: sync file and module pointers after the #1280 split",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1322",
+    "draft": false,
+    "created_at": "2026-10-05T14:52:26Z",
+    "updated_at": "2026-10-06T20:41:58Z",
+    "merged_at": "2026-10-05T14:56:56Z",
+    "closed_at": "2026-10-05T14:56:56Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1324,
+    "title": "fix: unbreak the build and ship an appimage any user can start",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1324",
+    "draft": false,
+    "created_at": "2026-10-05T15:07:59Z",
+    "updated_at": "2026-10-06T20:41:57Z",
+    "merged_at": "2026-10-05T15:10:17Z",
+    "closed_at": "2026-10-05T15:10:17Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1325,
+    "title": "ci: cap ts and tsx files at 300 code lines with a ratchet baseline",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1325",
+    "draft": false,
+    "created_at": "2026-10-05T16:14:36Z",
+    "updated_at": "2026-10-06T20:41:56Z",
+    "merged_at": "2026-10-05T16:15:46Z",
+    "closed_at": "2026-10-05T16:15:46Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1326,
+    "title": "ci: harden the ts size guard after review",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1326",
+    "draft": false,
+    "created_at": "2026-10-05T16:23:00Z",
+    "updated_at": "2026-10-06T20:41:55Z",
+    "merged_at": "2026-10-05T16:51:34Z",
+    "closed_at": "2026-10-05T16:51:34Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1327,
+    "title": "build(deps): move to tauri-plugin-sentry 0.7 and sentry's minidump integration",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1327",
+    "draft": false,
+    "created_at": "2026-10-05T16:52:08Z",
+    "updated_at": "2026-10-06T20:41:54Z",
+    "merged_at": "2026-10-05T16:59:57Z",
+    "closed_at": "2026-10-05T16:59:58Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1329,
+    "title": "refactor(extension): split the bridge client into per-concern modules under 300 lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1329",
+    "draft": false,
+    "created_at": "2026-10-06T04:55:48Z",
+    "updated_at": "2026-10-06T20:41:53Z",
+    "merged_at": "2026-10-06T05:28:54Z",
+    "closed_at": "2026-10-06T05:28:54Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1328,
+    "title": "refactor(extension): split the background worker into per-gesture modules under 300 lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1328",
+    "draft": false,
+    "created_at": "2026-10-06T04:51:40Z",
+    "updated_at": "2026-10-06T20:41:52Z",
+    "merged_at": "2026-10-06T05:29:05Z",
+    "closed_at": "2026-10-06T05:29:05Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1330,
+    "title": "refactor(extension): bring the remaining extension files under 300 code lines",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1330",
+    "draft": false,
+    "created_at": "2026-10-06T05:02:06Z",
+    "updated_at": "2026-10-06T20:41:51Z",
+    "merged_at": "2026-10-06T05:49:17Z",
+    "closed_at": "2026-10-06T05:49:17Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "saeedkolivand"
+    }
+  },
+  {
+    "number": 1332,
+    "title": "refactor(desktop): bring the jobs feature under 300 code lines per file",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1332",
+    "draft": false,
+    "created_at": "2026-10-06T12:10:26Z",
+    "updated_at": "2026-10-06T20:41:50Z",
+    "merged_at": "2026-10-06T12:36:50Z",
+    "closed_at": "2026-10-06T12:36:50Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"

@@ -1,50 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791338927863,
+  "lastUpdate": 1791348919648,
   "repoUrl": "https://github.com/saeedkolivand/ai-job-hunter-app",
   "entries": {
     "Export render": [
-      {
-        "commit": {
-          "author": {
-            "email": "51081940+saeedkolivand@users.noreply.github.com",
-            "name": "Saeed Kolivand",
-            "username": "saeedkolivand"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "1f00aafcc2af49e8eabdae8adb6aaa1f933a3611",
-          "message": "refactor(platform): own the test data-dir override where the rule says it belongs (#1006)\n\nThe Stop gate flagged std::env::var in the new SSRF test. The architecture test\ndisagreed and passed, because R4 exempts files it classifies as tests - so the\nrule was enforceable everywhere except the one place a test would actually reach\nfor the variable. The gate was right in spirit: platform/config.rs's own module\ndoc calls it the sole owner of that env var and says no other module may read\nit.\n\nRather than argue the exemption, the override moved to where the rule points.\nplatform::config::DataDirGuard is a test-only RAII scope: a caller names a\ndirectory, never the variable. It restores on Drop instead of at the end of the\ntest body, so a panicking assertion cannot leak the override into whatever runs\nnext - which the previous inline version could.\n\nAlso added #[serial] to data_dir_honors_env_then_falls_back. It mutates the same\nprocess-global variable directly and had no serialization, so it could race the\nnew test. That gap was pre-existing but only became reachable once a second test\nstarted scoping the same variable.\n\nThe test file now contains no env access and does not name the variable in\nprose either, so both the gate's ast-grep matcher and R4's literal search are\nsatisfied for the right reason rather than by an exemption.\n\nCo-authored-by: Claude Opus 5 <noreply@anthropic.com>",
-          "timestamp": "2026-08-17T22:36:19+02:00",
-          "tree_id": "59d4d561583ac29b9c0e50c77bd11000226c0f01",
-          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/1f00aafcc2af49e8eabdae8adb6aaa1f933a3611"
-        },
-        "date": 1787000443916,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "pdf/classic",
-            "value": 2180555,
-            "range": "± 44610",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "pdf/atelier_two_column",
-            "value": 2569363,
-            "range": "± 24665",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "docx_classic",
-            "value": 297200,
-            "range": "± 11134",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -4193,6 +4151,48 @@ window.BENCHMARK_DATA = {
             "name": "docx_classic",
             "value": 303984,
             "range": "± 11032",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "51081940+saeedkolivand@users.noreply.github.com",
+            "name": "Saeed Kolivand",
+            "username": "saeedkolivand"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0f54d0145277eecf00a971641f4af04afab10132",
+          "message": "perf(ai): key the analyze cache on the job alone and trim unused stage output fields (#1373)\n\nAnalyze never reads the résumé, so its cache key no longer chains it; the\nrésumé is folded in at match_evidence, where it is first read. redFlags and\nthe program-seeded company-plan fields are no longer requested from the model.\n\n\nClaude-Session: https://claude.ai/code/session_01RwZFadYd3YUadtn2ik5TmT\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-07T06:43:18+02:00",
+          "tree_id": "bed3e0db65c9bd3b4ece796a38478a558801b3e4",
+          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/0f54d0145277eecf00a971641f4af04afab10132"
+        },
+        "date": 1791348919310,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "pdf/classic",
+            "value": 2001127,
+            "range": "± 12095",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "pdf/atelier_two_column",
+            "value": 2333657,
+            "range": "± 89090",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "docx_classic",
+            "value": 210122,
+            "range": "± 4761",
             "unit": "ns/iter"
           }
         ]

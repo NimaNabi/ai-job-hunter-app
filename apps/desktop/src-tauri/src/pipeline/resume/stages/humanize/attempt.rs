@@ -2,7 +2,7 @@
 //! gate, and the deterministic accept/revert decision, all injected so the
 //! seam is testable without a live `Completer`.
 
-use crate::error::AppResult;
+use crate::error::{AppError, AppResult};
 use crate::pipeline::resume::{prompts::HumanizeTier, RunDeadline};
 use crate::validate::content::ContentReport;
 
@@ -31,6 +31,8 @@ pub(crate) struct HumanizeAttempt {
     /// [`exceeds_humanize_cap`]. Nothing was sent; a truncated prefix rewrite
     /// is never an acceptable substitute for the whole document.
     pub too_large: bool,
+    /// The daily request ceiling refused the call; nothing was sent.
+    pub capped: bool,
 }
 
 impl HumanizeAttempt {
@@ -43,6 +45,7 @@ impl HumanizeAttempt {
             failed: false,
             timed_out: false,
             too_large: false,
+            capped: false,
         }
     }
 }
@@ -55,33 +58,44 @@ impl HumanizeAttempt {
 /// by reading the code, and this crate has no Tauri test harness to build a
 /// real `Completer` from.
 ///
-/// `findings` is ALREADY the filtered `<humanize_findings>` list
-/// (`super::predicates::voice_findings`) — empty findings (every flag landed
-/// on a link line, or there were none) is a no-op, not a call with nothing to
-/// ask about.
+/// `findings` is ALREADY the filtered list of patchable flags
+/// (`super::patches::flagged_lines`) — an empty list (every flag landed on a
+/// link line, had no locatable line, or there were none) is a no-op, not a
+/// call with nothing to ask about. It is generic: this seam only hands it back
+/// to `complete`.
+///
+/// `complete` returns the CANDIDATE document (the stage applies the model's
+/// line patches to `original_text` inside it). A patch answer that cannot be
+/// read is an `Err` there and lands in the same fail-soft arm as a provider
+/// error: original kept, `failed`.
+///
+/// `enforce_cap` applies the whole-document size cap: true when the whole
+/// document is sent (rewrite mode), false for line patches (a small excerpt).
 ///
 /// `normalize` is `|candidate| Option<String>`, exactly like `repair_loop`'s
 /// own parameter: `Some` replaces the candidate with the re-rendered Projects
 /// section, `None` means no change. The letter tier passes a closure that
 /// always returns `None` — a letter has no Projects section to normalize.
-pub(crate) async fn humanize_one<F, Fut, N, G, GFut>(
+#[allow(clippy::too_many_arguments)]
+pub(crate) async fn humanize_one<T, F, Fut, N, G, GFut>(
     deadline: RunDeadline,
     original_text: String,
     original_report: ContentReport,
-    findings: Vec<String>,
+    findings: Vec<T>,
     mut complete: F,
     normalize: N,
     mut revalidate: G,
     tier: HumanizeTier,
+    enforce_cap: bool,
 ) -> AppResult<HumanizeAttempt>
 where
-    F: FnMut(String, Vec<String>) -> Fut,
+    F: FnMut(String, Vec<T>) -> Fut,
     Fut: std::future::Future<Output = AppResult<String>>,
     N: Fn(&str) -> Option<String>,
     G: FnMut(String) -> GFut,
     GFut: std::future::Future<Output = AppResult<ContentReport>>,
 {
-    if exceeds_humanize_cap(&original_text) {
+    if enforce_cap && exceeds_humanize_cap(&original_text) {
         let mut attempt = HumanizeAttempt::kept(original_text, original_report);
         attempt.too_large = true;
         return Ok(attempt);
@@ -96,13 +110,22 @@ where
     }
 
     match complete(original_text.clone(), findings).await {
-        Err(_) => {
+        Err(error) => {
+            // The daily ceiling refuses BEFORE the request: nothing was sent.
+            let capped = matches!(error, AppError::RateLimited(_));
             let mut attempt = HumanizeAttempt::kept(original_text, original_report);
-            attempt.called = true;
-            attempt.failed = true;
+            attempt.called = !capped;
+            attempt.failed = !capped;
+            attempt.capped = capped;
             Ok(attempt)
         }
         Ok(candidate) => {
+            // No patch survived: nothing to grade, nothing to revalidate.
+            if candidate == original_text {
+                let mut attempt = HumanizeAttempt::kept(original_text, original_report);
+                attempt.called = true;
+                return Ok(attempt);
+            }
             if !is_usable_rewrite(&original_text, &candidate, tier) {
                 let mut attempt = HumanizeAttempt::kept(original_text, original_report);
                 attempt.called = true;
@@ -144,6 +167,7 @@ where
                     failed: false,
                     timed_out: false,
                     too_large: false,
+                    capped: false,
                 })
             }
         }

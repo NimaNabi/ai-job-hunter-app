@@ -1,50 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791353991292,
+  "lastUpdate": 1791433441183,
   "repoUrl": "https://github.com/saeedkolivand/ai-job-hunter-app",
   "entries": {
     "Export render": [
-      {
-        "commit": {
-          "author": {
-            "email": "51081940+saeedkolivand@users.noreply.github.com",
-            "name": "Saeed Kolivand",
-            "username": "saeedkolivand"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "82772ddf250cfafa9b5a3b94b675a3c73f52d4c6",
-          "message": "fix(locale): give Spain, Portugal and Brazil the profiles they were already promised (#1009)\n\n* fix(locale): give spain, portugal and brazil the profiles they were already promised\n\n#1007 fixed Italy and explicitly deferred the identical gap for Spain and\nPortugal. This closes it, and Brazil with it.\n\nAll three were already live market ids on the TS side — `COUNTRY_TO_MARKET`\nmaps `ES`/`PT`/`BR` and `LANGUAGE_TO_MARKET` maps `es`/`pt` — and the Rust side\nhad an arm for none of them, so they fell through to the international default.\nThe visible result was half a localization: `resume_conventions` HAS curated\nes/pt entries, so the model wrote \"Experiencia profesional\" and \"Formação\" and\nthen arranged them in the American order, with `photo: Never` and the 2-page\nAnglophone budget. Half-localized reads worse than not localized, because the\ndocument then matches no market's expectations.\n\n`IT_ORDER` is renamed `EUROPASS_ORDER` and now serves all four. That is what it\nalways was — the doc already justified it by pointing at Europass, not at\nanything specifically Italian.\n\nScope is principled, not arbitrary: these are exactly the markets whose section\nHEADINGS are already curated. A market with no curated headings (tr, ru, cn, jp,\nkr are all live TS ids too) gets English headings, and giving it a non-English\nsection ORDER would create the same half-localized document this commit is\nfixing. The order axis tracks the heading axis deliberately.\n\nTwo per-market calls, both flagged as reviewable rather than asserted:\n\n- Spain and Portugal cap at **2 pages**, not Italy's 3. Spanish guidance is\n  consistently \"máximo dos páginas\", and this cap is advice the trim panel acts\n  on, so inheriting 3 would license a longer document than the market expects.\n- Brazil gets `photo: Never` where Portugal gets `Optional` — Brazilian hiring\n  guidance has moved against CV photos on anti-discrimination grounds. Same\n  language and same section order, different norm; that is precisely why it is\n  a distinct profile rather than an alias.\n\n`all_markets_are_distinct_and_present` asserted a hardcoded count and id list,\nso it could not have caught any of this — it passed throughout. It now asserts\nthe property instead: every profile `all()` advertises must round-trip through\n`get()` back to itself. Mutation-checked by deleting the `\"es\"` arm, which is\nthe exact shape of the bug that shipped; the old test stayed green under it.\n\nEvery guard here mutation-checked: green at baseline, red with the feature\ndeleted, restored.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\n\n* fix(locale): reattach italy's doc to italy, and stop claiming the page cap is enforced\n\nCodeRabbit flagged a contradiction on #1009: the Spain profile said the page cap\nis \"advice the export actually enforces\", while `max_pages`'s own field doc says\nit is advisory and that nothing blocks a longer export. The field doc is right,\nand it predates this branch.\n\nChasing it found the actual cause, which the finding described only as a\nsymptom. The new constructors were inserted at the wrong offset — between\nItaly's doc comment and `pub fn it()`. Rust attaches a doc comment to whatever\nitem follows it, so **Italy's documentation had silently become Spain's**, and\n`it()` was left with none. That is why two page-limit paragraphs ended up\nadjacent and disagreeing: they were never meant to be read together.\n\nMoved the three constructors below `it()`, restoring the original attachment,\nand reworded the Spain note to state what actually happens: inheriting Italy's\n3 would not break an export, it would stop the trim panel ever offering a\nsuggestion to a Spanish user whose CV has run a page long.\n\nAlso finishes the `IT_ORDER` → `EUROPASS_ORDER` rename — three doc references\nin `locale/mod.rs` and `pipeline/resume/test.rs` still named the old const.\nNothing failed, because a doc comment naming a symbol that no longer exists\ncompiles perfectly well; that is precisely the class this repo treats as a\ndefect rather than a nit.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5 <noreply@anthropic.com>",
-          "timestamp": "2026-08-18T03:55:42+02:00",
-          "tree_id": "a7935ef0c84bbdf28296cdb06c69f024cee74601",
-          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/82772ddf250cfafa9b5a3b94b675a3c73f52d4c6"
-        },
-        "date": 1787018875162,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "pdf/classic",
-            "value": 2263944,
-            "range": "± 30499",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "pdf/atelier_two_column",
-            "value": 2642606,
-            "range": "± 88145",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "docx_classic",
-            "value": 293193,
-            "range": "± 1932",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -4193,6 +4151,48 @@ window.BENCHMARK_DATA = {
             "name": "docx_classic",
             "value": 250012,
             "range": "± 3705",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "51081940+saeedkolivand@users.noreply.github.com",
+            "name": "Saeed Kolivand",
+            "username": "saeedkolivand"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "79c6ae90ec40fc2b865e591d58b4856894855827",
+          "message": "fix(ai): retry a degraded job analysis or strategy once and never cache it (#1384)\n\nAt the cheapest effort tier a local qwen3 analysis came back with no\nrequirements and its reasoning dumped into a string field, and the analyze\ncache then served it for a week. Both JSON stages now check a quality floor,\nretry once at the provider default when it trips, keep the richer answer, and\nskip the cache write for a floor miss. A cached row below the floor is read as\na miss, so already-poisoned rows stop being served. A source guard pins the\nwiring in both stages.\n\nAlso: the four complete paths streamed since #1372 now log streaming=true, and\nstructured Ollama calls log a content-free request-shape line (think value,\nformat kind, option keys) to pin down the unreproduced root cause.\n\nCloses #1382\n\n\nClaude-Session: https://claude.ai/code/session_01RwZFadYd3YUadtn2ik5TmT\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-08T06:05:01+02:00",
+          "tree_id": "ad66ef77029c5436d908ff26ce39683e70afde6f",
+          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/79c6ae90ec40fc2b865e591d58b4856894855827"
+        },
+        "date": 1791433440349,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "pdf/classic",
+            "value": 1558352,
+            "range": "± 154348",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "pdf/atelier_two_column",
+            "value": 1779373,
+            "range": "± 112369",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "docx_classic",
+            "value": 196404,
+            "range": "± 8640",
             "unit": "ns/iter"
           }
         ]

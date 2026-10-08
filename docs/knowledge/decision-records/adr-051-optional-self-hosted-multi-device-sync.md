@@ -40,12 +40,12 @@ and write-path changes in every store.
    so a fresh install cannot wipe another machine.
 4. **Scope is the whole export bundle.** Every section the bundle contains syncs (the canonical
    list is `ARRAY_SECTIONS` + `OBJECT_SECTIONS` in `commands/data.rs`). Everything the bundle
-   already excludes stays device-local: keychain secrets, `email_watch.db`, caches, `jobs.db`,
-   `board_health.db`, notifications and embeddings.
+   already excludes stays device-local; the exclusion rule is documented on `DataStore`
+   (`data_store.rs`) and enforced by what `build_bundle` assembles.
 5. **Transport and auth.** Plain HTTP API with `GET /health`, `POST /changes` and
    `GET /changes?since=<cursor>`, authenticated with a bearer sync token. The server stores opaque
    envelopes per namespace and never has to understand the payload.
-6. **TLS only for v1, no end-to-end encryption.** The server operator can read synced data. A
+6. **TLS expected, warned `http://` allowed, no end-to-end encryption in v1.** The server operator can read synced data. A
    `http://` URL is allowed, but the Sync settings must warn that data travels unencrypted unless
    the link is already protected (Tailscale, a trusted LAN). This is a new user-configured egress
    class, recorded as an amendment to [ADR 0005](0005-network-egress-privacy-boundary.md).
@@ -61,7 +61,9 @@ and write-path changes in every store.
    store's own transaction ([ADR-022](adr-022-atomic-store-transactions-and-centralized-db.md)).
    An interrupted run resumes from the last acknowledged cursor; a malformed response is rejected,
    never applied. An unreachable server skips the run quietly and the UI shows "last synced".
-10. **Triggers (runtime, later PRs).** On launch, every 15 minutes, and from a "Sync now" button.
+10. **Triggers (runtime, later PRs).** On launch, on a periodic interval (decided as every 15
+    minutes; the client engine owns it as a source constant, which becomes the reference), and
+    from a "Sync now" button.
 11. **Secrets.** The sync token is a device-local credential in the OS keychain, like the other
     credentials. It is never logged, never sent to crash reporting and never written to the
     export bundle. Keychain contents never enter sync.

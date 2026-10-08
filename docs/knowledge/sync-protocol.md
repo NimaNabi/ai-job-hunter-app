@@ -11,7 +11,7 @@ Keywords **MUST**, **MUST NOT**, **SHOULD** and **MAY** are used in the RFC 2119
 
 - **Client:** an AI Job Hunter install with sync enabled. Each install has a stable, randomly
   generated **device id** (an opaque string, unique per install).
-- **Server:** any HTTP service that implements the three endpoints below. It stores **opaque
+- **Server:** any HTTP service that implements the endpoints below. It stores **opaque
   envelopes** and never needs to parse `payload`.
 - **Namespace:** the server-side bucket a set of devices share. The server derives it from the
   bearer token; the protocol has no namespace parameter. Two devices sync with each other exactly
@@ -109,11 +109,13 @@ Downloads changes in the order the server stored them.
 
 1. Build the export bundle (`build_bundle`).
 2. Hash each record in each section.
-3. Compare with the **baseline**: the record hashes saved at the last successful sync with this
-   server URL, in the local sync-state store.
+3. Compare with the **baseline**: the record hashes saved at the last successful sync, in the
+   local sync-state store. Sync state (baseline and cursor) is keyed by the server URL **and** the
+   sync token, because the token selects the namespace. When either changes, the client MUST
+   discard the saved baseline and cursor and treat the next run as a first sync.
 4. A record that is new or whose hash differs becomes an upsert envelope. A record present in the
    baseline but absent now becomes a tombstone.
-5. **First sync:** with no baseline for this server URL, the client MUST NOT produce tombstones.
+5. **First sync:** with no baseline for this server URL and token, the client MUST NOT produce tombstones.
    It uploads every record as an upsert.
 
 ### Order of a sync run
@@ -145,6 +147,12 @@ between it and the incoming change:
 
 - **Last sync wins.** The envelope with the greater `rev` wins. If `rev` is equal, the greater
   `deviceId` (byte-wise comparison) wins. A losing envelope is ignored.
+- **Never downgrade a record's schema.** The client records the `schemaVersion` each record was
+  last written or applied at. An envelope with a lower `schemaVersion` than that MUST NOT replace
+  the record, even with a greater `rev`; it is ignored, so newer fields are never lost. On the
+  sending side, a client that holds an unapplied newer-schema envelope for a record (see
+  [Schema versions](#schema-versions)) MUST NOT push its own change for that record until it has
+  been updated and applied the held envelope.
 - **Whole record.** A winning upsert replaces the whole local record with `payload`. There is no
   field-level merge. Known ceiling: if two different fields of one record were edited on two
   devices between syncs, one edit is lost.
@@ -186,13 +194,13 @@ between it and the incoming change:
   never leave the device through sync.
 - The server operator can read every payload in v1. Run the server yourself, or only on a host you
   trust.
-- Egress rules: class 9 in [ADR 0005](decision-records/0005-network-egress-privacy-boundary.md).
+- Egress rules: the self-hosted sync egress class in [ADR 0005](decision-records/0005-network-egress-privacy-boundary.md).
 
 ## Running your own server
 
 The project does not provide a server. A compatible one only needs to:
 
-1. serve the three endpoints above over HTTPS (a reverse proxy such as Caddy or nginx can
+1. serve the endpoints above over HTTPS (a reverse proxy such as Caddy or nginx can
    terminate TLS), or over `http://` only on a link that is already private;
 2. map bearer tokens to namespaces and reject unknown tokens with `401`;
 3. append envelopes atomically to a per-namespace log that survives restarts (a single SQLite

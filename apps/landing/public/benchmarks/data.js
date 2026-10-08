@@ -1,50 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791486978183,
+  "lastUpdate": 1791488093184,
   "repoUrl": "https://github.com/saeedkolivand/ai-job-hunter-app",
   "entries": {
     "Export render": [
-      {
-        "commit": {
-          "author": {
-            "email": "51081940+saeedkolivand@users.noreply.github.com",
-            "name": "Saeed Kolivand",
-            "username": "saeedkolivand"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "b0de8e062b1f476a80f44132408696cc948bb917",
-          "message": "test(pipeline): pin what a killed resume run leaves on disk and what nothing cleans up (#1020)\n\n* test(pipeline): pin what a killed resume run leaves on disk and what nothing cleans up\n\nTracing the recovery contract for a resume pipeline killed mid-run found that there is no recovery contract: `jobs::JobTracker::open`\nsweeps interrupted jobs to `failed` on every startup and `AutopilotStore::mark_interrupted_runs` does the same for autopilot, but\n`PipelineRunStore::open` runs migrations and a url normalisation and nothing else. A `pipeline_runs` row written `running` before the\nfirst stage stays `running` forever after a kill.\n\nThese tests document that gap rather than assert it is correct.\n\n`tests/pipeline_kill_recovery.rs` performs a real kill: the test binary re-executes itself as a child, the child opens the same stores\nthe app opens and writes the state a run interrupted during `draft` would have, and the parent kills the process outright before\nreopening those files the way startup does. The run row and its partial stage trail come back untouched; the same kill's jobs.db row\ncomes back `failed` with a stated reason. That contrast is the finding, and the jobs.db half doubles as the positive control.\n\n`a_crashed_running_run_locks_out_the_last_good_runs_report` pins the consequence against the real decision function: the orphan is\npermanently the newest run for its posting, so `ensure_latest_run` refuses `regenerateSection` and `resolveFabrication` against the run\nthat actually holds the saved document, telling the user to wait for a run whose process no longer exists.\n\nMutation-checked four ways: neutering the jobs.db sweep, adding reconciliation to the run store, breaking the child readiness\nhandshake, and neutering `ensure_latest_run` each turn the relevant tests red.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\n\n* test(pipeline): make the killed-run fixture guard catch a reorder\n\nAddresses three review findings on #1020.\n\nThe fixture guard checked membership and phase vocabulary only, so a REORDER of\n`QUALITY_STAGES` — or a stage inserted ahead of `draft` — left `KILLED_TRAIL` describing a\nrun nothing can write while the test stayed green, and `len() < len() * 2` accepted any\nshorter trail at all. That guard sits under the whole file: if the fixture is not a\nfaithful stand-in for a real run, \"what a killed run leaves on disk\" is fiction. It now\nasserts prefix equality against `QUALITY_STAGES` expanded into its start/finish pairs, that\nthe trail ends on an opened stage, and that `seq` runs contiguously from 0. The expected\nvalue stays hand-written; only the assertion is derived, so the fixture can still disagree\nwith the pipeline.\n\nThe `RUN_KIND`/`RUN_DEPTH` note cited a test that reads those consts through `super::` and\ntherefore moves with them. It now cites\n`the_run_kind_the_budget_floor_and_the_run_depth_are_pinned`, which pins them against the\nsame literals this fixture repeats.\n\nBoth gap doc comments now reference #1020, so a maintainer meeting a deliberately-red\nassertion has the finding — the lockout, the missing run-to-job link on disk, and the fact\nthat `ensure_latest_run` keys on recency rather than status — without reconstructing it.\n\nMutation checks, all executed: reordering two stages and inserting one ahead of `draft`\neach turn the new guard red where the old one passed, and adding reconciliation at\n`PipelineRunStore::open` still turns both gap assertions red.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5 <noreply@anthropic.com>",
-          "timestamp": "2026-08-18T11:25:17+02:00",
-          "tree_id": "4f31416f096cc643d617c297503d53720ac2376b",
-          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/b0de8e062b1f476a80f44132408696cc948bb917"
-        },
-        "date": 1787046644448,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "pdf/classic",
-            "value": 2196678,
-            "range": "± 85321",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "pdf/atelier_two_column",
-            "value": 2613698,
-            "range": "± 37309",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "docx_classic",
-            "value": 313832,
-            "range": "± 5937",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -4193,6 +4151,48 @@ window.BENCHMARK_DATA = {
             "name": "docx_classic",
             "value": 313256,
             "range": "± 15874",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "51081940+saeedkolivand@users.noreply.github.com",
+            "name": "Saeed Kolivand",
+            "username": "saeedkolivand"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9d66ed8ba3a582d53ba8bfb804f33eaadfcc60f3",
+          "message": "fix(extension): refuse article and company pages on import and refresh the panel on status changes (#1415)\n\nThe prose-only job check accepted any long page that mentioned two job words, so\nencyclopedia articles and company about pages imported as applications. With no\nATS, JobPosting or title/path signal, the description now also needs a job-word\ndensity, a length within posting range, and a requirements-type cue (multilingual\nprefixes plus common English section phrases). The refusal now tells the user\nto open the job's own page.\n\nThe side panel now refreshes when the popup marks a job applied or imports it,\ninstead of only after a tab switch.\n\nCloses #1408\nCloses #1410\n\n\nClaude-Session: https://claude.ai/code/session_01RwZFadYd3YUadtn2ik5TmT\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-08T21:21:22+02:00",
+          "tree_id": "8128e51529c0110e83dc728d73c82636fcd093d6",
+          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/9d66ed8ba3a582d53ba8bfb804f33eaadfcc60f3"
+        },
+        "date": 1791488092110,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "pdf/classic",
+            "value": 2269829,
+            "range": "± 40680",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "pdf/atelier_two_column",
+            "value": 2739882,
+            "range": "± 20073",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "docx_classic",
+            "value": 323740,
+            "range": "± 6892",
             "unit": "ns/iter"
           }
         ]

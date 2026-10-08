@@ -1,50 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791465375681,
+  "lastUpdate": 1791481254165,
   "repoUrl": "https://github.com/saeedkolivand/ai-job-hunter-app",
   "entries": {
     "Export render": [
-      {
-        "commit": {
-          "author": {
-            "email": "51081940+saeedkolivand@users.noreply.github.com",
-            "name": "Saeed Kolivand",
-            "username": "saeedkolivand"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "531a74c868b176603f4282f6803f0ad77282bd14",
-          "message": "test(export): enforce adr-002's golden-parity claim for the first time (#1012)\n\nADR-002 says the PDF and DOCX backends are kept \"in golden parity where the\ndesign requires, pinned by deterministic golden snapshot tests\". The\nper-backend tests were real, but nothing rendered ONE document through BOTH and\nchecked the same facts came out. The parity half of the claim was documented,\nnot enforced — the gap the architecture audit filed as Track A3.\n\nNot hypothetical for this codebase: DOCX body bold had never rendered at all,\nand a macOS incident shipped with the two formats disagreeing. An ATS reads the\nextracted text, so a fact that survives one export and not the other means the\ncandidate submits a materially different résumé depending on which button they\npressed — and only the backend that still had the content would look fine in\nits own snapshot.\n\nThe harness renders every canonical template through both backends from the\nsame `ExportRequest`, extracts text from each, and asserts a fixed set of\nfacts (name, section headings, employer, title, a bullet, degree) survived\ninto both.\n\n**Anchored on the SOURCE, not on the other backend.** Comparing PDF text to\nDOCX text is the shape this repo has shipped broken repeatedly — two derived\nvalues with nothing absolute behind them, so a change that drops Education from\nBOTH stays green forever. Each rendering is checked against the input fixture\ninstead, which cannot pass that way.\n\nIt asserts facts rather than the fixture verbatim, because line breaks,\nhyphenation, column order and glyph runs legitimately differ between a Typst\npage and a Word document. What may not differ is whether a fact survived.\n\nIncludes a vacuity guard: an extractor returning almost nothing would make\nevery containment check pass trivially, so both extractions must exceed a\nlength floor before they are trusted.\n\nRuns the whole roster rather than a sample, for the reason the sibling PDF\nmatrix gives — a template nobody rendered is a template nobody validated.\n\nMutations, both red at baseline-green: making the DOCX renderer silently skip\nthe Education section, and making the DOCX extractor return an empty string\n(caught by the vacuity guard, not by the parity assertions).\n\nCo-authored-by: Claude Opus 5 <noreply@anthropic.com>",
-          "timestamp": "2026-08-18T06:14:11+02:00",
-          "tree_id": "c63c5426bfb2faec581e2f0622ce8384ab64a9fb",
-          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/531a74c868b176603f4282f6803f0ad77282bd14"
-        },
-        "date": 1787027222485,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "pdf/classic",
-            "value": 1771469,
-            "range": "± 26389",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "pdf/atelier_two_column",
-            "value": 2225746,
-            "range": "± 66461",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "docx_classic",
-            "value": 271899,
-            "range": "± 33582",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -4193,6 +4151,48 @@ window.BENCHMARK_DATA = {
             "name": "docx_classic",
             "value": 260759,
             "range": "± 8337",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "51081940+saeedkolivand@users.noreply.github.com",
+            "name": "Saeed Kolivand",
+            "username": "saeedkolivand"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "683d92020dc9c500de0ae97ec89d122c7f8ecbc8",
+          "message": "fix: cap local structured calls, abandon stages on cancel, name provider errors (#1406)\n\nStructured pipeline stages on local providers (Ollama, LAN OpenAI-compatible)\nnow cap output at 8192 tokens and surface the cutoff as its own output_limit\nstop reason instead of a generic failure. Stages that opt in (strategy,\nhumanize) are abandoned the moment the run is cancelled. A mid-stream network\nbreak is retried once and re-charged; rate-limit/busy errors and the\ndeterministic cutoff are never retried. Provider, network and refusal failures\nmap to provider_error, refusal text is never logged, and a timeout at the\nlowest effort hints at a faster model instead.\n\nCloses #1391\nCloses #1393\n\n\nClaude-Session: https://claude.ai/code/session_01RwZFadYd3YUadtn2ik5TmT\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-08T19:28:13+02:00",
+          "tree_id": "55a357aa28b62ba8505c2e1159a63a69eae58a39",
+          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/683d92020dc9c500de0ae97ec89d122c7f8ecbc8"
+        },
+        "date": 1791481252745,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "pdf/classic",
+            "value": 2211814,
+            "range": "± 78591",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "pdf/atelier_two_column",
+            "value": 2620473,
+            "range": "± 22648",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "docx_classic",
+            "value": 309963,
+            "range": "± 3273",
             "unit": "ns/iter"
           }
         ]

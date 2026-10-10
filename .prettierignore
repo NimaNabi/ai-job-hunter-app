@@ -13,6 +13,11 @@ CHANGELOG.md
 # scripts/gen-social-cards.mjs: verbatim HTML template for the og-image generator —
 # never reformatted, kept byte-identical to what the script renders.
 scripts/assets/social-card.html
+# scrape_url test fixtures: real captured job pages, loaded verbatim with
+# include_str! by the scraper tests. They are deliberately malformed HTML (that is
+# what the scraper has to survive), so prettier cannot parse them, and reformatting
+# them would change the tests' inputs.
+apps/desktop/src-tauri/src/scraping/scrape_url/tests/fixtures/
 # @ajh/landing: format the app's TS/TSX (src/app, src/components, src/lib) but
 # never the verbatim ports — the passthrough dashboards/scripts in public/ and the
 # extracted HTML/CSS page fragments in src/content/ must stay byte-identical.

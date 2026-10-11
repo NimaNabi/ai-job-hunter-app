@@ -1,5 +1,29 @@
 [
   {
+    "sha": "c668bf4d4a390f651a6b82e17276f0fd27073fa8",
+    "commit": {
+      "message": "docs(sync): add the self-hosted sync adr and v1 protocol, amend the egress boundary adr (#1418)",
+      "author": {
+        "date": "2026-10-10T20:32:34Z"
+      }
+    },
+    "author": {
+      "login": "NimaNabi"
+    }
+  },
+  {
+    "sha": "5aa705b9b5528c2e5737898a59d15f6653b4ae9a",
+    "commit": {
+      "message": "chore: update mission-control snapshot data [skip ci]",
+      "author": {
+        "date": "2026-10-10T09:48:05Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
     "sha": "3b14ce79583bcc3756a2a535599ceffac6a5b388",
     "commit": {
       "message": "chore: sync landing download version to v0.157.1",
@@ -1169,30 +1193,6 @@
       "message": "refactor(applications): split applications/ and ai_generations/ under 300 code lines (#1314)",
       "author": {
         "date": "2026-10-04T15:21:40Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "33fe400d3e2596cd1312d8dee95155eb957a655e",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-10-04T14:13:02Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "7a7386f85443f7d14aeaa993e9094a7a8b5f3bd9",
-    "commit": {
-      "message": "refactor(documents): split documents/ into modules under 300 code lines (#1313)",
-      "author": {
-        "date": "2026-10-04T13:49:11Z"
       }
     },
     "author": {

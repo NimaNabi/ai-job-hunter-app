@@ -1,5 +1,17 @@
 [
   {
+    "sha": "fb7e99ef4830d29accc9982264f44d742daf2581",
+    "commit": {
+      "message": "chore: update mission-control snapshot data [skip ci]",
+      "author": {
+        "date": "2026-10-11T09:58:24Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
     "sha": "c668bf4d4a390f651a6b82e17276f0fd27073fa8",
     "commit": {
       "message": "docs(sync): add the self-hosted sync adr and v1 protocol, amend the egress boundary adr (#1418)",
@@ -1185,18 +1197,6 @@
     },
     "author": {
       "login": "github"
-    }
-  },
-  {
-    "sha": "de5ce7cdebbb4857f63a2bb2bfc050d649492b64",
-    "commit": {
-      "message": "refactor(applications): split applications/ and ai_generations/ under 300 code lines (#1314)",
-      "author": {
-        "date": "2026-10-04T15:21:40Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
     }
   }
 ]

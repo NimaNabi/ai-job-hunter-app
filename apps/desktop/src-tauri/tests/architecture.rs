@@ -480,6 +480,11 @@ const R3_ALLOW: &[&str] = &[
     // `applications` domain store, on the SAME connection — see
     // applications::status_events.
     "applications/status_events.rs",
+    // Same store, same table: the `applicationStatusEvents` backup section
+    // (`ApplicationStatusEvents`) reads and replaces `status_events` on the
+    // SAME `ApplicationStore` connection — persistence stays entirely inside
+    // the `applications` domain store, see applications::status_events_backup.
+    "applications/status_events_backup.rs",
     "documents/mod.rs",
     // Same store, split only to stay under R8's LOC cap (the derived caches and
     // the schema moved out of `documents/mod.rs`): `caches.rs` (posting_vectors +

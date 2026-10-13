@@ -86,6 +86,12 @@ const EGRESS: &[Egress] = &[
     Egress { host: "api.openai.com", public_name: None, note: "AI provider you configure (OpenAI). commands/ai_provider/openai.rs." },
     Egress { host: "generativelanguage.googleapis.com", public_name: None, note: "AI provider you configure (Gemini). commands/ai_provider/gemini.rs." },
     Egress { host: "ollama.com", public_name: None, note: "AI provider you configure (Ollama Cloud). commands/ai_provider/{ollama,ollama_cloud}.rs." },
+    // XML namespace identifiers written into a generated DOCX's core
+    // properties part (`docProps/core.xml`): part of the file format, never
+    // fetched by this app or by Word.
+    Egress { host: "schemas.openxmlformats.org", public_name: None, note: "OOXML namespace URI in generated DOCX metadata; never fetched. export/docx/mod.rs." },
+    Egress { host: "purl.org", public_name: None, note: "Dublin Core namespace URI in generated DOCX metadata; never fetched. export/docx/mod.rs." },
+    Egress { host: "www.w3.org", public_name: None, note: "XML Schema instance namespace URI in generated DOCX metadata; never fetched. export/docx/mod.rs." },
     // CLI-agent install-help links: rendered in Settings so the user can go
     // install the CLI, never fetched by this app.
     Egress { host: "code.claude.com", public_name: None, note: "CLI install-help link (Claude Code); rendered only, never fetched. commands/ai_provider/cli_agent/claude_code.rs." },
@@ -265,6 +271,10 @@ const DYNAMIC_SITES: &[(&str, &str)] = &[
     // to satisfy `reqwest::Url::parse` for IDENTITY comparison (issue
     // #1166) — the parsed `Url` is never fetched, only read for its host/path.
     ("scraping/scrape_url/identity.rs", "https://{url}"),
+    // Puts a scheme on a `linkedin.com/in/...` slug found in an imported CV so
+    // the contact profile stores a full URL. Only stored and rendered; this app
+    // never fetches it.
+    ("contact_profile/classify.rs", "https://{}"),
 ];
 
 // ── Source-tree access (mirrors tests/architecture.rs's `sources()`) ────────

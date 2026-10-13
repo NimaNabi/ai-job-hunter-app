@@ -302,10 +302,8 @@ pub async fn data_import(app: AppHandle) -> Value {
         // AFTER "applications": that import seeds one synthetic event per
         // application, and this section (when the bundle has it) replaces them
         // with the real history. Older bundles skip this and keep the seeds.
-        import_into(
-            "applicationStatusEvents",
-            &ApplicationStatusEvents(s.inner()),
-        );
+        let events = ApplicationStatusEvents(s.inner());
+        import_into("applicationStatusEvents", &events);
         // Restore-specific link pass (own doc on `ApplicationStore::
         // relink_legacy_generations_after_restore`): a bundle that replaced
         // `aiGenerations` but carries NO `"applications"` section is

@@ -83,9 +83,9 @@ impl DataStore for ApplicationStatusEvents<'_> {
     /// application is not in the store is skipped rather than kept as an
     /// orphan. Returns the number of events written.
     fn import(&self, data: &serde_json::Value) -> AppResult<usize> {
-        let items = data.as_array().ok_or_else(|| {
-            AppError::Parse("applicationStatusEvents: expected an array".into())
-        })?;
+        let items = data
+            .as_array()
+            .ok_or_else(|| AppError::Parse("applicationStatusEvents: expected an array".into()))?;
         let events: Vec<StatusEventRecord> = items
             .iter()
             .map(|item| serde_json::from_value(item.clone()).map_err(AppError::from))

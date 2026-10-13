@@ -96,8 +96,8 @@ fn a_malformed_section_is_rejected_before_anything_is_cleared() {
     let not_array = ApplicationStatusEvents(&store).import(&serde_json::json!({}));
     assert!(matches!(not_array, Err(AppError::Parse(_))));
 
-    let bad_record = ApplicationStatusEvents(&store)
-        .import(&serde_json::json!([{ "applicationId": id }]));
+    let bad_record =
+        ApplicationStatusEvents(&store).import(&serde_json::json!([{ "applicationId": id }]));
     assert!(bad_record.is_err());
 
     assert_eq!(store.events(&id).len(), before, "history must be untouched");

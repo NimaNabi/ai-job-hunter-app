@@ -1,5 +1,17 @@
 [
   {
+    "sha": "1b2a0b4dd94c76330de1bd542f812b5d72ba6b25",
+    "commit": {
+      "message": "chore: update mission-control snapshot data [skip ci]",
+      "author": {
+        "date": "2026-10-12T10:45:43Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
     "sha": "fb7e99ef4830d29accc9982264f44d742daf2581",
     "commit": {
       "message": "chore: update mission-control snapshot data [skip ci]",
@@ -1185,18 +1197,6 @@
     },
     "author": {
       "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "b155454023ddea8bd212999d69aa852a088d1494",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-10-04T15:42:56Z"
-      }
-    },
-    "author": {
-      "login": "github"
     }
   }
 ]

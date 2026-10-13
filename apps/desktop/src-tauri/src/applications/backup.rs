@@ -14,8 +14,9 @@ impl DataStore for ApplicationStore {
     }
 
     fn export(&self) -> serde_json::Value {
-        // Export Applications; status history is audit-only + derivable, so it is
-        // not part of the portable bundle (mirrors not exporting transient logs).
+        // Applications only. Their status history is its own bundle section,
+        // `applicationStatusEvents` (`super::status_events_backup`), whose import
+        // replaces the one synthetic event per application seeded below.
         serde_json::json!(self.list())
     }
 

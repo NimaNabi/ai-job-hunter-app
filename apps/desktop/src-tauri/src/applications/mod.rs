@@ -41,6 +41,7 @@ mod reads;
 mod reminders;
 mod rows;
 mod status_events;
+mod status_events_backup;
 #[cfg(test)]
 mod tests;
 mod writes;
@@ -55,6 +56,8 @@ pub use job_url::normalize_job_url;
 pub(crate) use job_url::decode_unreserved;
 // Same for the reminder projection the scheduler imports (see `reminders`).
 pub use reminders::FollowUpCandidate;
+// The `applicationStatusEvents` bundle section (own doc there).
+pub use status_events_backup::ApplicationStatusEvents;
 // `status_events` split out purely for R8 LOC (own doc there). `StatusEvent`
 // and the two source constants an OUTSIDE caller actually needs today are
 // re-exported here so `crate::applications::StatusEvent`/`EVENT_SOURCE_USER`/

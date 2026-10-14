@@ -17,6 +17,7 @@ use crate::error::{AppError, AppResult};
 
 mod engine_cases;
 mod rules_cases;
+mod stores;
 
 /// An in-memory section: `id -> payload`.
 pub(super) struct FakeSection {

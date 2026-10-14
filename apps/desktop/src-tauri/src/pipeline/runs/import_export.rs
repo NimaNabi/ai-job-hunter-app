@@ -36,7 +36,7 @@ fn check_len(column: &str, value: &str, cap: usize) -> AppResult<()> {
 }
 
 /// Bound every identity/text column of one imported run.
-fn check_run(run: &RunRow) -> AppResult<()> {
+pub(super) fn check_run(run: &RunRow) -> AppResult<()> {
     check_len("run id", &run.id, IMPORT_ID_CAP_BYTES)?;
     check_len("run jobUrl", &run.job_url, IMPORT_JOB_URL_CAP_BYTES)?;
     check_len("run kind", &run.kind, IMPORT_LABEL_CAP_BYTES)?;
@@ -55,7 +55,7 @@ fn check_run(run: &RunRow) -> AppResult<()> {
 /// length cap (six legal bytes, and a rolled-back transaction for anything
 /// else). A second, weaker guard here would only raise the question of which
 /// one is authoritative.
-fn check_event(event: &RunEventRow) -> AppResult<()> {
+pub(super) fn check_event(event: &RunEventRow) -> AppResult<()> {
     check_len("event runId", &event.run_id, IMPORT_ID_CAP_BYTES)?;
     check_len("event stage", &event.stage, IMPORT_LABEL_CAP_BYTES)?;
     Ok(())
@@ -90,6 +90,66 @@ struct RunsBundle {
     runs: Vec<RunRow>,
     #[serde(default)]
     events: Vec<RunEventRow>,
+}
+
+/// Write one run row (insert, or replace by id), re-normalized and re-clamped
+/// as on the live write path. Shared by the backup import and the per-record
+/// sync upsert (`super::sync_section`).
+pub(super) fn insert_run_conn(conn: &rusqlite::Connection, run: &RunRow) -> AppResult<()> {
+    conn.execute(
+        "INSERT OR REPLACE INTO pipeline_runs
+            (id, job_url, kind, depth, status, started_at, finished_at,
+             stopped_reason, metrics_json)
+         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)",
+        rusqlite::params![
+            run.id,
+            // Re-NORMALIZE on import, for the same reason the two
+            // clamps below re-apply their write-site rules: a restore
+            // must not be able to produce a row the live write path
+            // could not. Binding this raw made every backup taken
+            // before the normalization landed restore rows in a
+            // spelling no reader and no delete could reach — the runs
+            // panel came back empty, `delete_for_job` matched nothing
+            // and still reported success, and the strategy/evidence
+            // detail those rows carry outlived the owner that was
+            // supposed to delete it. `data_import` runs against the
+            // LIVE store with no re-open, so
+            // `normalize_existing_job_urls` never gets to repair them.
+            normalized_job_url(&run.job_url),
+            run.kind,
+            run.depth,
+            run.status,
+            crate::db::ts_to_db(run.started_at),
+            run.finished_at.map(crate::db::ts_to_db),
+            run.stopped_reason,
+            // Re-clamp on import, exactly like `artifact_json` below: a
+            // hand-edited bundle must not be able to restore a row the
+            // live write path could never have produced.
+            clamp_metrics(&run.metrics_json),
+        ],
+    )?;
+    Ok(())
+}
+
+/// Write one event row (insert, or replace by `(runId, seq)`), re-clamped.
+/// Shared like [`insert_run_conn`].
+pub(super) fn insert_event_conn(conn: &rusqlite::Connection, event: &RunEventRow) -> AppResult<()> {
+    conn.execute(
+        "INSERT OR REPLACE INTO pipeline_run_events
+            (run_id, seq, ts, stage, phase, artifact_json)
+         VALUES (?1, ?2, ?3, ?4, ?5, ?6)",
+        rusqlite::params![
+            event.run_id,
+            event.seq,
+            crate::db::ts_to_db(event.ts),
+            event.stage,
+            event.phase,
+            // Re-clamp on import: a hand-edited or legacy bundle must
+            // not be able to write past the cap the live path enforces.
+            clamp_artifact(&event.artifact_json),
+        ],
+    )?;
+    Ok(())
 }
 
 impl DataStore for PipelineRunStore {
@@ -128,55 +188,10 @@ impl DataStore for PipelineRunStore {
         tx.execute("DELETE FROM pipeline_run_events", [])?;
         tx.execute("DELETE FROM pipeline_runs", [])?;
         for run in &bundle.runs {
-            tx.execute(
-                "INSERT OR REPLACE INTO pipeline_runs
-                    (id, job_url, kind, depth, status, started_at, finished_at,
-                     stopped_reason, metrics_json)
-                 VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)",
-                rusqlite::params![
-                    run.id,
-                    // Re-NORMALIZE on import, for the same reason the two
-                    // clamps below re-apply their write-site rules: a restore
-                    // must not be able to produce a row the live write path
-                    // could not. Binding this raw made every backup taken
-                    // before the normalization landed restore rows in a
-                    // spelling no reader and no delete could reach — the runs
-                    // panel came back empty, `delete_for_job` matched nothing
-                    // and still reported success, and the strategy/evidence
-                    // detail those rows carry outlived the owner that was
-                    // supposed to delete it. `data_import` runs against the
-                    // LIVE store with no re-open, so
-                    // `normalize_existing_job_urls` never gets to repair them.
-                    normalized_job_url(&run.job_url),
-                    run.kind,
-                    run.depth,
-                    run.status,
-                    crate::db::ts_to_db(run.started_at),
-                    run.finished_at.map(crate::db::ts_to_db),
-                    run.stopped_reason,
-                    // Re-clamp on import, exactly like `artifact_json` below: a
-                    // hand-edited bundle must not be able to restore a row the
-                    // live write path could never have produced.
-                    clamp_metrics(&run.metrics_json),
-                ],
-            )?;
+            insert_run_conn(&tx, run)?;
         }
         for event in &bundle.events {
-            tx.execute(
-                "INSERT OR REPLACE INTO pipeline_run_events
-                    (run_id, seq, ts, stage, phase, artifact_json)
-                 VALUES (?1, ?2, ?3, ?4, ?5, ?6)",
-                rusqlite::params![
-                    event.run_id,
-                    event.seq,
-                    crate::db::ts_to_db(event.ts),
-                    event.stage,
-                    event.phase,
-                    // Re-clamp on import: a hand-edited or legacy bundle must
-                    // not be able to write past the cap the live path enforces.
-                    clamp_artifact(&event.artifact_json),
-                ],
-            )?;
+            insert_event_conn(&tx, event)?;
         }
         tx.commit()?;
         Ok(bundle.runs.len())

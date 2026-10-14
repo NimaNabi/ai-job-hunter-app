@@ -37,6 +37,7 @@ pub mod keywords;
 mod migrations;
 mod mojibake_repair;
 mod sql;
+mod sync_section;
 mod vectors;
 
 pub use caches::{MatchScoreKey, OwnedMatchScoreKey};

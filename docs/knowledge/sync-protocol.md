@@ -93,15 +93,22 @@ Downloads changes in the order the server stored them.
   Servers MUST NOT validate it against a fixed list; a newer client may add sections.
 - `recordId` — the record's own id inside the section. For a single-object section (a settings
   store with one row), the record id is the section key itself. The exact per-section id source
-  is defined by the client implementation and pinned in its tests.
+  is defined by the client implementation (`SyncSection` in `data_store.rs`) and pinned in its
+  tests. A record keyed by several columns uses their JSON array as its id, for example
+  `["greenhouse","acme"]` for a discovered company. Status-history events, which have no portable
+  id of their own, are keyed by `[applicationId, at, fromStatus, toStatus, source]`.
 - `rev` — the writer's sync-run time in milliseconds since the Unix epoch, taken once per sync run
   and shared by every envelope in that run. It orders writes; it is not a server sequence number.
 - `deviceId` — the writing device. Used only for tie-breaking.
 - `deleted` — `true` for a tombstone. A tombstone's `payload` is `null`.
 - `schemaVersion` — the schema version of the writing store at the time of export.
-- `payload` — the record exactly as it appears in that section of the export bundle
-  (`DataStore::export`'s JSON shape). Never contains secrets: the bundle excludes keychain
-  credentials by design (`data_store.rs`).
+- `payload` — the record as it appears in that section of the export bundle
+  (`DataStore::export`'s JSON shape), with two exceptions. A `documents` record carries no
+  embedding (`vector`, `vectorSpace`) and no `indexed` flag, because both describe one device's
+  search index; the receiving device re-embeds a document whose text changed. `pipelineRuns`,
+  an object of two arrays in the bundle, syncs each run (`["run", id]`) and each event
+  (`["event", runId, seq]`) as its own record. Never contains secrets: the bundle excludes
+  keychain credentials by design (`data_store.rs`).
 
 ## Client behaviour (normative for AI Job Hunter, informative for servers)
 
@@ -145,6 +152,10 @@ For each pulled envelope the client compares it with what it last applied or wro
 written with the current run's `rev` and this device's `deviceId`, so the comparison below decides
 between it and the incoming change:
 
+- **A record this device never synced takes the server's copy.** With no baseline entry for
+  `(store, recordId)`, the incoming envelope is applied as is. This is what lets a fresh install,
+  whose settings sections hold only defaults, receive the other device's settings instead of
+  overwriting them. Records that exist only locally are still pushed afterwards.
 - **Last sync wins.** The envelope with the greater `rev` wins. If `rev` is equal, the greater
   `deviceId` (byte-wise comparison) wins. A losing envelope is ignored.
 - **Never downgrade a record's schema.** The client records the `schemaVersion` each record was

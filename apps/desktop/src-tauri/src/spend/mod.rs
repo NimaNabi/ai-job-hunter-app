@@ -410,6 +410,31 @@ pub fn zero_row_reason(hist: &ProviderTotals) -> &'static str {
     }
 }
 
+/// Write one spend row. Shared by the backup import and the per-record sync
+/// upsert (`sync_section`).
+fn insert_conn(conn: &Connection, row: &SpendRow) -> AppResult<()> {
+    conn.execute(
+        "INSERT INTO ai_spend
+             (id, created_at, provider, model, input_tokens, output_tokens, thinking_tokens,
+              est_cost_usd, run_id)
+             VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9)",
+        params![
+            row.id,
+            ts_to_db(row.created_at),
+            row.provider,
+            row.model,
+            row.input_tokens,
+            row.output_tokens,
+            row.thinking_tokens,
+            row.est_cost_usd,
+            row.run_id,
+        ],
+    )?;
+    Ok(())
+}
+
+mod sync_section;
+
 impl DataStore for SpendStore {
     fn key(&self) -> &'static str {
         "spend"
@@ -430,23 +455,7 @@ impl DataStore for SpendStore {
         let tx = guard.transaction()?;
         tx.execute("DELETE FROM ai_spend", [])?;
         for row in &rows {
-            tx.execute(
-                "INSERT INTO ai_spend
-                 (id, created_at, provider, model, input_tokens, output_tokens, thinking_tokens,
-                  est_cost_usd, run_id)
-                 VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9)",
-                params![
-                    row.id,
-                    ts_to_db(row.created_at),
-                    row.provider,
-                    row.model,
-                    row.input_tokens,
-                    row.output_tokens,
-                    row.thinking_tokens,
-                    row.est_cost_usd,
-                    row.run_id,
-                ],
-            )?;
+            insert_conn(&tx, row)?;
         }
         tx.commit()?;
         Ok(rows.len())

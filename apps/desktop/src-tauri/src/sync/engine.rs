@@ -31,6 +31,8 @@ pub struct SyncReport {
 }
 
 type Key = (String, String);
+/// Each record's current hash.
+type Hashes = BTreeMap<Key, String>;
 
 /// Run one sync for `scope`. `run_rev` is this run's time in ms.
 pub fn run(
@@ -129,7 +131,7 @@ struct Ctx<'a> {
     scope: &'a str,
     run_rev: u64,
     device_id: &'a str,
-    current: BTreeMap<Key, String>,
+    current: Hashes,
     baseline: BTreeMap<Key, BaselineEntry>,
     applied: BTreeSet<Key>,
 }
@@ -226,6 +228,14 @@ fn outgoing(
             });
         }
     }
+    // Push in section order (the bundle's), so a record that another section
+    // refers to — an application, before its status history — goes first.
+    let rank: BTreeMap<&str, usize> = sections
+        .iter()
+        .enumerate()
+        .map(|(i, s)| (s.section(), i))
+        .collect();
+    out.sort_by_key(|e| rank.get(e.store.as_str()).copied().unwrap_or(usize::MAX));
     Ok(out)
 }
 
@@ -274,7 +284,7 @@ fn current_records(
     Ok(out)
 }
 
-fn current_hashes(sections: &[&dyn SyncSection]) -> AppResult<BTreeMap<Key, String>> {
+fn current_hashes(sections: &[&dyn SyncSection]) -> AppResult<Hashes> {
     Ok(current_records(sections)?
         .into_iter()
         .map(|(k, (_, p))| (k, record_hash(&p)))

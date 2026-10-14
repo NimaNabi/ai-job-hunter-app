@@ -22,6 +22,7 @@ mod quality_report;
 mod reads;
 mod record;
 mod rows;
+mod sync_section;
 #[cfg(test)]
 mod tests;
 mod writes;

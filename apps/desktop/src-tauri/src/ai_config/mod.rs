@@ -446,5 +446,7 @@ impl DataStore for AiConfigStore {
     }
 }
 
+mod sync_section;
+
 #[cfg(test)]
 mod tests;

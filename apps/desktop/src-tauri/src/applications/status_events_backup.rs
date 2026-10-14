@@ -47,6 +47,14 @@ pub(crate) struct StatusEventRecord {
 pub struct ApplicationStatusEvents<'a>(pub &'a ApplicationStore);
 
 impl ApplicationStatusEvents<'_> {
+    /// The section as it goes into the bundle, or the read error. The bundle
+    /// builder uses this so a failed read OMITS the section: an empty array
+    /// would restore as "replace the history with nothing", whereas a bundle
+    /// without the section keeps the seeded events (see this module's doc).
+    pub fn try_export(&self) -> AppResult<serde_json::Value> {
+        Ok(serde_json::json!(self.records()?))
+    }
+
     fn records(&self) -> AppResult<Vec<StatusEventRecord>> {
         let conn = self.0.conn.lock();
         let mut stmt = conn.prepare(
@@ -64,7 +72,9 @@ impl ApplicationStatusEvents<'_> {
                 confirmed: row.get::<_, i64>(6)? != 0,
             })
         })?;
-        Ok(rows.filter_map(Result::ok).collect())
+        // Fail the whole read rather than skip a row: a backup missing events
+        // would restore as if they never happened.
+        Ok(rows.collect::<Result<Vec<_>, _>>()?)
     }
 }
 
@@ -73,8 +83,15 @@ impl DataStore for ApplicationStatusEvents<'_> {
         "applicationStatusEvents"
     }
 
+    /// Prefer [`ApplicationStatusEvents::try_export`]: this trait method has no
+    /// error channel, so a failed read is logged and exported as `null`,
+    /// which `data_import`'s shape pre-pass rejects instead of restoring an
+    /// empty history.
     fn export(&self) -> serde_json::Value {
-        serde_json::json!(self.records().unwrap_or_default())
+        self.try_export().unwrap_or_else(|e| {
+            log::warn!("[applications] status history export failed: {}", e.code());
+            serde_json::Value::Null
+        })
     }
 
     /// REPLACE semantics, like every other section: every row in

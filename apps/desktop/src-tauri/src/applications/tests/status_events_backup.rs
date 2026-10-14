@@ -102,3 +102,34 @@ fn a_malformed_section_is_rejected_before_anything_is_cleared() {
 
     assert_eq!(store.events(&id).len(), before, "history must be untouched");
 }
+
+#[test]
+fn a_provisional_email_write_survives_the_round_trip() {
+    let (_dir, store) = open_store();
+    let id = track(&store, "Acme", "Analyst");
+    let mut events = ApplicationStatusEvents(&store).try_export().unwrap();
+    events.as_array_mut().unwrap().push(serde_json::json!({
+        "applicationId": id,
+        "fromStatus": "applied",
+        "toStatus": "rejected",
+        "at": 2,
+        "note": "",
+        "source": "email",
+        "confirmed": false,
+    }));
+
+    let (_dir2, store2) = open_store();
+    store2.import(&store.export()).unwrap();
+    ApplicationStatusEvents(&store2).import(&events).unwrap();
+    let restored = ApplicationStatusEvents(&store2).try_export().unwrap();
+
+    let email: Vec<_> = restored
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|e| e["source"] == "email")
+        .collect();
+    assert_eq!(email.len(), 1);
+    assert_eq!(email[0]["confirmed"], false);
+    assert_eq!(email[0]["toStatus"], "rejected");
+}

@@ -125,8 +125,16 @@ pub(crate) fn build_bundle(app: &AppHandle) -> Value {
         stores.insert(s.key().to_string(), s.export());
         // Status history as its own section (#1402) — see
         // `applications::status_events_backup` for why it is not nested.
+        // A failed read omits the section rather than exporting an empty one,
+        // so a restore of this bundle keeps the seeded events instead of
+        // wiping the history.
         let events = ApplicationStatusEvents(s.inner());
-        stores.insert(events.key().to_string(), events.export());
+        match events.try_export() {
+            Ok(section) => {
+                stores.insert(events.key().to_string(), section);
+            }
+            Err(e) => log::warn!("[data] status history left out of the backup: {}", e.code()),
+        }
     }
     if let Some(s) = app.try_state::<JobPreferencesStore>() {
         stores.insert(s.key().to_string(), s.export());

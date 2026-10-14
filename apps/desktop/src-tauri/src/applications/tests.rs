@@ -40,5 +40,6 @@ mod legacy_backfill;
 mod recipient_salary_columns;
 mod reminder_marker;
 mod status_event_review;
+mod status_events_backup;
 mod support;
 mod transitions;

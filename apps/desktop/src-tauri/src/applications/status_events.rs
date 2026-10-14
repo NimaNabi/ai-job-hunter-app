@@ -60,13 +60,11 @@ pub struct StatusEvent {
     /// `from_status`/`to_status` above, which are already raw strings at
     /// this storage layer for the same reason.
     ///
-    /// `StatusEvent` is not part of [`crate::data_store::DataStore::export`]/
-    /// [`crate::data_store::DataStore::import`] (only `Application` is —
-    /// status history is audit-only and excluded from the portable bundle,
-    /// see `ApplicationStore`'s `impl DataStore` in `super`), so this
-    /// field's default has no backup-compat obligation; it exists purely so
-    /// an in-process construction/round-trip (e.g. a test) can't silently
-    /// produce an empty-string source instead of a real one.
+    /// Status history travels in the bundle as its own section
+    /// (`super::status_events_backup`), which carries `source` explicitly;
+    /// this default exists so an in-process construction/round-trip (e.g. a
+    /// test) can't silently produce an empty-string source instead of a real
+    /// one.
     #[serde(default = "default_event_source")]
     pub source: String,
     /// Whether a human has reviewed this transition. Every pre-v2 row (and

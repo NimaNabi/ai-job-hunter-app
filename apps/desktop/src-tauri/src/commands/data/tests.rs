@@ -205,3 +205,28 @@ fn every_validated_section_is_routed_on_import() {
         );
     }
 }
+
+/// ORDER PIN. `applicationStatusEvents` must be restored AFTER `applications`:
+/// the applications import seeds one synthetic event per application, and the
+/// status-history section replaces them. Swapping the two would let the seeds
+/// overwrite the real history on every restore.
+///
+/// Needles are assembled at runtime for the same reason as the routing pin.
+#[test]
+fn status_history_is_restored_after_applications() {
+    let importer = region(
+        &format!("pub async fn data_{}(", "import"),
+        &format!("#[cfg({})]", "test"),
+    );
+    let call = format!("{}_into(", "import");
+    let apps = importer
+        .find(&format!("{call}\"applications\","))
+        .expect("applications routed in data_import");
+    let events = importer
+        .find(&format!("{call}\"applicationStatusEvents\","))
+        .expect("applicationStatusEvents routed in data_import");
+    assert!(
+        apps < events,
+        "applicationStatusEvents must be restored after applications"
+    );
+}

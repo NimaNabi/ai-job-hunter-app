@@ -10,7 +10,7 @@ use tauri::{AppHandle, Manager};
 
 use crate::ai_config::AiConfigStore;
 use crate::ai_generations::AiGenerationStore;
-use crate::applications::ApplicationStore;
+use crate::applications::{ApplicationStatusEvents, ApplicationStore};
 use crate::autopilot::AutopilotStore;
 use crate::contact_profile::ContactProfileStore;
 use crate::data_store::DataStore;
@@ -57,6 +57,7 @@ const ARRAY_SECTIONS: &[&str] = &[
     "documents",
     "aiGenerations",
     "applications",
+    "applicationStatusEvents",
     "referrals",
     "autopilots",
     "interactions",
@@ -122,6 +123,18 @@ pub(crate) fn build_bundle(app: &AppHandle) -> Value {
     }
     if let Some(s) = app.try_state::<ApplicationStore>() {
         stores.insert(s.key().to_string(), s.export());
+        // Status history as its own section (#1402) — see
+        // `applications::status_events_backup` for why it is not nested.
+        // A failed read omits the section rather than exporting an empty one,
+        // so a restore of this bundle keeps the seeded events instead of
+        // wiping the history.
+        let events = ApplicationStatusEvents(s.inner());
+        match events.try_export() {
+            Ok(section) => {
+                stores.insert(events.key().to_string(), section);
+            }
+            Err(e) => log::warn!("[data] status history left out of the backup: {}", e.code()),
+        }
     }
     if let Some(s) = app.try_state::<JobPreferencesStore>() {
         stores.insert(s.key().to_string(), s.export());
@@ -294,6 +307,11 @@ pub async fn data_import(app: AppHandle) -> Value {
     }
     if let Some(s) = app.try_state::<ApplicationStore>() {
         import_into("applications", s.inner());
+        // AFTER "applications": that import seeds one synthetic event per
+        // application, and this section (when the bundle has it) replaces them
+        // with the real history. Older bundles skip this and keep the seeds.
+        let events = ApplicationStatusEvents(s.inner());
+        import_into("applicationStatusEvents", &events);
         // Restore-specific link pass (own doc on `ApplicationStore::
         // relink_legacy_generations_after_restore`): a bundle that replaced
         // `aiGenerations` but carries NO `"applications"` section is

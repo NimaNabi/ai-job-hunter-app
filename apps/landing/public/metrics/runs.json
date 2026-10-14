@@ -2,14 +2,66 @@
   "total_count": 2500,
   "workflow_runs": [
     {
-      "id": 38384037070,
+      "id": 38536767223,
       "name": "📸 Mission Control Snapshot",
       "path": ".github/workflows/metrics-snapshot.yml",
       "head_branch": "main",
       "status": "in_progress",
       "conclusion": null,
+      "created_at": "2026-10-14T08:40:20Z",
+      "updated_at": "2026-10-14T08:40:24Z",
+      "run_started_at": "2026-10-14T08:40:20Z",
+      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/38536767223",
+      "event": "schedule"
+    },
+    {
+      "id": 38393112836,
+      "name": "🌐 Deploy Landing Page",
+      "path": ".github/workflows/pages.yml",
+      "head_branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-13T11:51:24Z",
+      "updated_at": "2026-10-13T11:52:26Z",
+      "run_started_at": "2026-10-13T11:51:24Z",
+      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/38393112836",
+      "event": "workflow_dispatch"
+    },
+    {
+      "id": 38393040519,
+      "name": "📈 Repo Charts",
+      "path": ".github/workflows/repo-charts.yml",
+      "head_branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-13T11:50:46Z",
+      "updated_at": "2026-10-13T11:51:27Z",
+      "run_started_at": "2026-10-13T11:50:46Z",
+      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/38393040519",
+      "event": "schedule"
+    },
+    {
+      "id": 38384087710,
+      "name": "🌐 Deploy Landing Page",
+      "path": ".github/workflows/pages.yml",
+      "head_branch": "main",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-13T10:32:42Z",
+      "updated_at": "2026-10-13T10:34:06Z",
+      "run_started_at": "2026-10-13T10:32:42Z",
+      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/38384087710",
+      "event": "workflow_dispatch"
+    },
+    {
+      "id": 38384037070,
+      "name": "📸 Mission Control Snapshot",
+      "path": ".github/workflows/metrics-snapshot.yml",
+      "head_branch": "main",
+      "status": "completed",
+      "conclusion": "success",
       "created_at": "2026-10-13T10:32:16Z",
-      "updated_at": "2026-10-13T10:32:20Z",
+      "updated_at": "2026-10-13T10:32:47Z",
       "run_started_at": "2026-10-13T10:32:16Z",
       "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/38384037070",
       "event": "schedule"
@@ -77,32 +129,6 @@
       "updated_at": "2026-10-12T10:45:53Z",
       "run_started_at": "2026-10-12T10:45:21Z",
       "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/38238306383",
-      "event": "schedule"
-    },
-    {
-      "id": 38133456485,
-      "name": "🌐 Deploy Landing Page",
-      "path": ".github/workflows/pages.yml",
-      "head_branch": "main",
-      "status": "completed",
-      "conclusion": "success",
-      "created_at": "2026-10-11T10:51:35Z",
-      "updated_at": "2026-10-11T10:52:42Z",
-      "run_started_at": "2026-10-11T10:51:35Z",
-      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/38133456485",
-      "event": "workflow_dispatch"
-    },
-    {
-      "id": 38133414105,
-      "name": "📈 Repo Charts",
-      "path": ".github/workflows/repo-charts.yml",
-      "head_branch": "main",
-      "status": "completed",
-      "conclusion": "success",
-      "created_at": "2026-10-11T10:50:54Z",
-      "updated_at": "2026-10-11T10:51:39Z",
-      "run_started_at": "2026-10-11T10:50:54Z",
-      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/38133414105",
       "event": "schedule"
     },
     {
@@ -624,32 +650,6 @@
       "run_started_at": "2026-09-30T06:06:55Z",
       "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36676603041",
       "event": "push"
-    },
-    {
-      "id": 36676602913,
-      "name": "🔎 Quality",
-      "path": ".github/workflows/quality.yml",
-      "head_branch": "main",
-      "status": "completed",
-      "conclusion": "success",
-      "created_at": "2026-09-30T06:06:55Z",
-      "updated_at": "2026-09-30T06:29:20Z",
-      "run_started_at": "2026-09-30T06:06:55Z",
-      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36676602913",
-      "event": "push"
-    },
-    {
-      "id": 36634878425,
-      "name": "📈 Repo Charts",
-      "path": ".github/workflows/repo-charts.yml",
-      "head_branch": "main",
-      "status": "completed",
-      "conclusion": "success",
-      "created_at": "2026-09-29T21:40:53Z",
-      "updated_at": "2026-09-29T21:41:27Z",
-      "run_started_at": "2026-09-29T21:40:53Z",
-      "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/actions/runs/36634878425",
-      "event": "workflow_dispatch"
     }
   ]
 }

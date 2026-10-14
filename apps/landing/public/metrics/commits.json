@@ -1,5 +1,17 @@
 [
   {
+    "sha": "f89afc6b07cf217dd74180ecb1704fb10ae5ec64",
+    "commit": {
+      "message": "chore: update mission-control snapshot data [skip ci]",
+      "author": {
+        "date": "2026-10-13T10:32:38Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
     "sha": "1b2a0b4dd94c76330de1bd542f812b5d72ba6b25",
     "commit": {
       "message": "chore: update mission-control snapshot data [skip ci]",
@@ -1185,18 +1197,6 @@
     },
     "author": {
       "login": "github"
-    }
-  },
-  {
-    "sha": "89af8b5c6e1e682c16b67ed89598430b5deef136",
-    "commit": {
-      "message": "refactor(autopilot): split the autopilot family under 300 code lines (#1315)",
-      "author": {
-        "date": "2026-10-04T16:37:07Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
     }
   }
 ]

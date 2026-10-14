@@ -77,6 +77,7 @@ pub mod salary_research;
 pub mod scraping;
 mod shell;
 pub mod spend;
+pub mod sync;
 #[cfg(test)]
 mod tests;
 pub mod theme;

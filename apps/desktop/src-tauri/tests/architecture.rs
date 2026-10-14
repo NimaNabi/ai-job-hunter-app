@@ -125,6 +125,9 @@ const L2: &[&str] = &[
     // `mark_next_action_notified`) and stays Tauri-free, while this module
     // spawns from setup and pushes the notification.
     "reminder_scheduler",
+    // Optional self-hosted sync (ADR-051): orchestrates the per-record
+    // `SyncSection` impls of L1 and L2 stores, so it sits above them.
+    "sync",
 ];
 const L3: &[&str] = &[
     "commands",
@@ -485,6 +488,10 @@ const R3_ALLOW: &[&str] = &[
     // SAME `ApplicationStore` connection — persistence stays entirely inside
     // the `applications` domain store, see applications::status_events_backup.
     "applications/status_events_backup.rs",
+    // The sync engine's own machine-local bookkeeping store (`sync_state.db`):
+    // device id, cursors, baselines and held envelopes. Not a user-data store;
+    // see sync::state.
+    "sync/state.rs",
     "documents/mod.rs",
     // Same store, split only to stay under R8's LOC cap (the derived caches and
     // the schema moved out of `documents/mod.rs`): `caches.rs` (posting_vectors +

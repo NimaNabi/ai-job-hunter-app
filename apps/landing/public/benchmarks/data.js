@@ -1,50 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791490686158,
+  "lastUpdate": 1792013250784,
   "repoUrl": "https://github.com/saeedkolivand/ai-job-hunter-app",
   "entries": {
     "Export render": [
-      {
-        "commit": {
-          "author": {
-            "email": "51081940+saeedkolivand@users.noreply.github.com",
-            "name": "Saeed Kolivand",
-            "username": "saeedkolivand"
-          },
-          "committer": {
-            "email": "noreply@github.com",
-            "name": "GitHub",
-            "username": "web-flow"
-          },
-          "distinct": true,
-          "id": "36ddb9e28aaa4d233f1a9ebceb0cb6cd53c3ab8f",
-          "message": "fix(scraping): wire the freehire params their spec never documented (#1035)\n\n* feat(scraping): add per-request user-agent override to fetch_text\n\nFetchOptions gains user_agent: Option<String>. None (every existing\ncall site) is byte-identical to today: fetch_text still writes\nDEFAULT_UA. A board that wants to identify itself now has a real\noverride instead of the only prior option (putting user-agent in\nopts.headers), which does not work: header() on RequestBuilder\nappends rather than replaces, so a header entry would have ridden\nalongside DEFAULT_UA as a second header line instead of overriding it.\n\nRegression test proves the override REPLACES, not appends, by\ninspecting the actual request wiremock received (not just a header()\nmatcher, which only proves the override value is present, not that\nthe default is absent). Mutation-checked by execution: reverted the\nfetch_text line to the old unconditional DEFAULT_UA write, confirmed\nthe test goes red with the wrong value on the wire, restored.\n\n* fix(scraping): wire freehire date filter and adopt issue #1026 spec fixes\n\nfreehire's own maintainer audited their published spec after PR #1008\nand disclosed (issue #1026) that it had documented 17 of ~35 real\nquery parameters. Live-verified against the production API before\nwriting any of this down (spot-checked posted_within_days, reality,\nmeta.ignored_params, and the rate-limit headers against\nhttps://freehire.me directly, 2026-08-18) rather than taken purely on\nthe maintainer's word.\n\n- The real bug: date_filter reaches the wire. fetch_freehire took\n  _date_filter: Option<&str> — accepted and thrown away, because the\n  old spec had no date parameter. Maps our 9-token date_filter\n  vocabulary onto posted_within_days (whole days, live-verified),\n  reusing the SAME 3-day sub-day floor already established for\n  adzuna_max_days_old/jsearch_date_posted rather than inventing a new\n  number. None (no filter) omits the parameter entirely, since\n  freehire's own \"omit\" semantics is genuinely unfiltered.\n\n- Identifying User-Agent (freehire_user_agent, built on the prior\n  commit's FetchOptions::user_agent): \"ai-job-hunter/<crate version>\n  (+https://github.com/saeedkolivand/ai-job-hunter-app)\". Carries only\n  the app name, the real crate version (env!(\"CARGO_PKG_VERSION\")),\n  and the public repo URL — no user data, no machine id, no locale.\n  Not enforced or validated by freehire; buys advance notice before a\n  field/limit changes instead of a 429 being the first sign.\n\n- Rate limits: no new limiter code. The maintainer's disclosed budgets\n  (600 req/min ordinary, 300 req/min for the agent search endpoint\n  this module calls) are already handled by fetch_text's existing\n  429/503 backoff, which already honors Retry-After — confirmed by\n  reading scraping/http/mod.rs before writing anything, per the task\n  brief. This tier's own traffic (one request per aggregator search,\n  reached only after every keyed tier has failed or come back empty)\n  sits nowhere near either ceiling.\n\n- meta.ignored_params guard: freehire ignores an unknown parameter\n  rather than rejecting it, so a typo returns the whole catalogue\n  looking exactly like a legitimate broad result (live-verified: a\n  country=gb typo returns 200 with\n  meta.ignored_params:[{\"param\":\"country\",\"did_you_mean\":\"countries\"}]\n  and the FULL unfiltered set). fetch_freehire now checks\n  resp.meta.ignored_params and returns Err — not the unfiltered\n  data — when any of this module's own params are ever reported\n  ignored, so a future upstream rename degrades this tier to\n  Ok(empty) (the existing silent-degradation boundary) instead of\n  shipping an unfiltered result set dressed as a filtered one.\n\n- reality=fresh sent unconditionally, no user-facing toggle. Every\n  other quality improvement this aggregator applies (sort_by=date on\n  Adzuna/JSearch, dedupe_by_url everywhere) is likewise always-on with\n  no settings knob anywhere in this board, so a bespoke toggle for\n  just this one facet on just this one last-resort tier would be the\n  odd one out. Live-verified to cut the unfiltered catalogue roughly\n  in half (1,477,440 -> 662,112), which matters for a tier whose whole\n  point is \"enough to be useful without pulling a page nobody reads.\"\n\n- Module doc rewritten to describe the API as it is now (documented\n  rate limits + headers exist), not as a narration of the change.\n\nExplicitly NOT adding cities: confirmed real, but geography (regions/\ncountries/cities) is a single OR-group on this API — countries=gb is\n89,211 results, countries=gb&cities=London is 89,617 (WIDER, not\nnarrower, live-verified) — so adding it needs a location-UI decision\nthis change doesn't make. Left as a follow-up.\n\nEvery new guard mutation-checked by execution (deleted the feature,\nran, confirmed red, restored): the posted_within_days floor, the\nidentifying-UA wiring, the ignored_params guard, and reality=fresh\nbeing unconditional.",
-          "timestamp": "2026-08-18T17:12:14+02:00",
-          "tree_id": "e0cf0c592cf2a2214124399df837b9d7ba15ae91",
-          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/36ddb9e28aaa4d233f1a9ebceb0cb6cd53c3ab8f"
-        },
-        "date": 1787067370660,
-        "tool": "cargo",
-        "benches": [
-          {
-            "name": "pdf/classic",
-            "value": 2207223,
-            "range": "± 49797",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "pdf/atelier_two_column",
-            "value": 2667990,
-            "range": "± 44828",
-            "unit": "ns/iter"
-          },
-          {
-            "name": "docx_classic",
-            "value": 316618,
-            "range": "± 10350",
-            "unit": "ns/iter"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -4193,6 +4151,48 @@ window.BENCHMARK_DATA = {
             "name": "docx_classic",
             "value": 315224,
             "range": "± 29532",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "125562577+NimaNabi@users.noreply.github.com",
+            "name": "Nima Mirzanabikhani",
+            "username": "NimaNabi"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "1e0d11f47023d9dd2075b5ecb797938e7cecc493",
+          "message": "fix(backup): keep application status history across backup and restore (#1419)\n\n* fix(backup): keep application status history across backup and restore\n\nThe export bundle carried applications but not their status_events, and\nrestoring replaced the whole history with one synthetic \"imported\" event\nper application. That dropped provisional email-derived writes and the\nemail_reject rows email tracking relies on (ADR 0013 records the gap),\nand it is the first step of the self-hosted sync plan on #1402, which\nneeds status history as separate records.\n\n- new `applicationStatusEvents` bundle section (ApplicationStatusEvents,\n  applications/status_events_backup.rs): one record per event with\n  source and confirmed, no device-local rowid\n- restored after \"applications\", replacing the seeded events; events for\n  an unknown application are skipped; a bundle without the section\n  restores exactly as before\n- tests for the round trip, the old-bundle path, orphan events and a\n  malformed section; ADR 0013 and the stale comments updated\n\nRefs #1402\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* style(backup): apply rustfmt to the status-history section\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* test(arch): allow the status-history backup section under R3\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* test(egress): declare the docx namespace uris and the linkedin url builder\n\n#1407 and #1388 added literals the egress inventory flags but that never\nreach the network: the OOXML, Dublin Core and XML Schema namespace URIs\nin a generated DOCX's core properties, and the scheme classify.rs puts\non a LinkedIn slug from an imported CV. Declared with notes saying so,\nwhich brings `cargo test --test egress` back to green on main.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix(backup): keep the status-history import on the routing form the pin scans\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix(backup): never write an empty status history on a failed read\n\nAddresses the review on #1419:\n- a status_events row that fails to map now fails the read instead of\n  being skipped\n- build_bundle omits applicationStatusEvents when the read fails (logged\n  by error code), so a restore keeps the seeded events instead of\n  replacing the history with nothing; the trait export returns null,\n  which the restore's shape pre-pass rejects\n- tests: an order pin that status history is restored after\n  applications, and a round trip of a provisional email-sourced event\n- ADR 0013 points at ApplicationStore::import instead of restating the\n  seeded values\n\nRefs #1402\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+          "timestamp": "2026-10-14T23:03:45+02:00",
+          "tree_id": "e142e7952891be9a1e797611295179926faee250",
+          "url": "https://github.com/saeedkolivand/ai-job-hunter-app/commit/1e0d11f47023d9dd2075b5ecb797938e7cecc493"
+        },
+        "date": 1792013250616,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "pdf/classic",
+            "value": 2216555,
+            "range": "± 27992",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "pdf/atelier_two_column",
+            "value": 2680723,
+            "range": "± 23074",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "docx_classic",
+            "value": 255940,
+            "range": "± 4095",
             "unit": "ns/iter"
           }
         ]

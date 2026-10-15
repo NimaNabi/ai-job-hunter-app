@@ -152,7 +152,7 @@ impl PipelineRunStore {
     /// INDEX via `PRAGMA user_version`, so this list is APPEND-ONLY. Editing or
     /// reordering an existing entry silently skips it on every already-migrated
     /// install.
-    const MIGRATIONS: &'static [Migration] = &[Migration {
+    pub(super) const MIGRATIONS: &'static [Migration] = &[Migration {
         name: "create_pipeline_runs",
         up: |conn| conn.execute_batch(CREATE_PIPELINE_RUNS_SQL),
     }];

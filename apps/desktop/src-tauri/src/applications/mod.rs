@@ -42,6 +42,8 @@ mod reminders;
 mod rows;
 mod status_events;
 mod status_events_backup;
+mod status_events_sync;
+mod sync_section;
 #[cfg(test)]
 mod tests;
 mod writes;

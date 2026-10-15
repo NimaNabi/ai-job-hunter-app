@@ -162,6 +162,26 @@ impl DedupStore {
     }
 }
 
+/// Write one verdict row, re-canonicalized (`key_a < key_b`; a self-pair is
+/// skipped). Shared by the backup import and the per-record sync upsert
+/// (`sync_section`).
+fn insert_conn(conn: &Connection, row: &TombstoneRow) -> AppResult<()> {
+    // Re-canonicalize on import so a hand-edited/legacy bundle can never
+    // violate the `key_a < key_b` invariant; skip self-pairs.
+    if row.key_a == row.key_b {
+        return Ok(());
+    }
+    let (key_a, key_b) = DedupStore::pair(&row.key_a, &row.key_b);
+    conn.execute(
+        "INSERT OR IGNORE INTO dedup_tombstones (key_a, key_b, created_at)
+             VALUES (?1, ?2, ?3)",
+        params![key_a, key_b, ts_to_db(row.created_at)],
+    )?;
+    Ok(())
+}
+
+mod sync_section;
+
 impl DataStore for DedupStore {
     fn key(&self) -> &'static str {
         "dedupTombstones"
@@ -186,17 +206,7 @@ impl DataStore for DedupStore {
         let tx = guard.transaction()?;
         tx.execute("DELETE FROM dedup_tombstones", [])?;
         for row in &rows {
-            // Re-canonicalize on import so a hand-edited/legacy bundle can never
-            // violate the `key_a < key_b` invariant; skip self-pairs.
-            if row.key_a == row.key_b {
-                continue;
-            }
-            let (key_a, key_b) = Self::pair(&row.key_a, &row.key_b);
-            tx.execute(
-                "INSERT OR IGNORE INTO dedup_tombstones (key_a, key_b, created_at)
-                 VALUES (?1, ?2, ?3)",
-                params![key_a, key_b, ts_to_db(row.created_at)],
-            )?;
+            insert_conn(&tx, row)?;
         }
         tx.commit()?;
         Ok(rows.len())

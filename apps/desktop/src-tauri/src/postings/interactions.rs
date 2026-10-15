@@ -326,5 +326,8 @@ fn file_name_label(path: &std::path::Path) -> &str {
         .unwrap_or("<interactions-file>")
 }
 
+mod sync_section;
+pub use sync_section::InteractionsSection;
+
 #[cfg(test)]
 mod tests;

@@ -13,7 +13,9 @@ use crate::commands::ai_provider::EmbeddingVector;
 
 mod interactions;
 
-pub use self::interactions::{attach_interactions, InteractionRecord, InteractionStore};
+pub use self::interactions::{
+    attach_interactions, InteractionRecord, InteractionStore, InteractionsSection,
+};
 
 // ── PostingsCache ─────────────────────────────────────────────────────────────
 

@@ -81,6 +81,8 @@ impl ContactProfileStore {
     }
 }
 
+mod sync_section;
+
 impl DataStore for ContactProfileStore {
     fn key(&self) -> &'static str {
         "contactProfile"

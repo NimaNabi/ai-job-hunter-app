@@ -441,5 +441,7 @@ impl DataStore for JobPreferencesStore {
     }
 }
 
+mod sync_section;
+
 #[cfg(test)]
 mod tests;

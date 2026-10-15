@@ -18,6 +18,7 @@ mod model;
 mod persist;
 mod relax;
 mod runs;
+mod sync_section;
 
 pub(crate) use merge::found_job_cluster_inputs;
 pub(crate) use model::derive_run_status;

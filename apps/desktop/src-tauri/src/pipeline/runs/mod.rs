@@ -65,6 +65,7 @@ mod import_export;
 mod maintenance;
 mod model;
 mod store;
+mod sync_section;
 
 pub use model::{
     clamp_artifact, clamp_metrics, RunEventRow, RunRow, ARTIFACT_CAP_BYTES, IMPORT_ID_CAP_BYTES,

@@ -207,6 +207,37 @@ pub(crate) fn make_referral_id() -> String {
     format!("ref-{}-{}", now_ms(), &Uuid::new_v4().to_string()[..8])
 }
 
+/// Write one referral row (insert, or replace by id). Shared by the backup
+/// import and the per-record sync upsert (`sync_section`).
+fn insert_conn(conn: &Connection, rec: &ReferralContact) -> AppResult<()> {
+    conn.execute(
+        "INSERT OR REPLACE INTO referrals
+             (id, job_url, company_name, person_name, person_role, linkedin_url,
+              email_draft, message_draft, invite_note_draft, channel, status, notes,
+              created_at, updated_at)
+             VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14)",
+        params![
+            rec.id,
+            rec.job_url,
+            rec.company_name,
+            rec.person_name,
+            rec.person_role,
+            rec.linkedin_url,
+            rec.email_draft,
+            rec.message_draft,
+            rec.invite_note_draft,
+            rec.channel,
+            rec.status,
+            rec.notes,
+            ts_to_db(rec.created_at),
+            ts_to_db(rec.updated_at),
+        ],
+    )?;
+    Ok(())
+}
+
+mod sync_section;
+
 impl DataStore for ReferralStore {
     fn key(&self) -> &'static str {
         "referrals"
@@ -233,29 +264,7 @@ impl DataStore for ReferralStore {
         let tx = guard.transaction()?;
         tx.execute("DELETE FROM referrals", [])?;
         for rec in &records {
-            tx.execute(
-                "INSERT INTO referrals
-                 (id, job_url, company_name, person_name, person_role, linkedin_url,
-                  email_draft, message_draft, invite_note_draft, channel, status, notes,
-                  created_at, updated_at)
-                 VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14)",
-                params![
-                    rec.id,
-                    rec.job_url,
-                    rec.company_name,
-                    rec.person_name,
-                    rec.person_role,
-                    rec.linkedin_url,
-                    rec.email_draft,
-                    rec.message_draft,
-                    rec.invite_note_draft,
-                    rec.channel,
-                    rec.status,
-                    rec.notes,
-                    ts_to_db(rec.created_at),
-                    ts_to_db(rec.updated_at),
-                ],
-            )?;
+            insert_conn(&tx, rec)?;
         }
         tx.commit()?;
         Ok(records.len())

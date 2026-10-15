@@ -227,6 +227,41 @@ impl DiscoveredCompanyStore {
     }
 }
 
+/// Write one company row, clamped (a row without an ATS kind or slug is
+/// skipped). Shared by the backup import and the per-record sync upsert
+/// (`sync_section`).
+fn insert_conn(conn: &Connection, row: &DiscoveredRow) -> AppResult<()> {
+    let ats = clamp_field(&row.ats_kind);
+    let slug = clamp_field(&row.slug);
+    if ats.is_empty() || slug.is_empty() {
+        return Ok(());
+    }
+    let display = row
+        .display_name
+        .as_deref()
+        .map(clamp_field)
+        .filter(|s| !s.is_empty());
+    conn.execute(
+            "INSERT OR IGNORE INTO discovered_companies
+                (ats_kind, slug, display_name, first_seen_at, last_seen_at, seen_count, source, starred)
+             VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)",
+            params![
+                ats,
+                slug,
+                display,
+                ts_to_db(row.first_seen_at),
+                ts_to_db(row.last_seen_at),
+                // Plain count cast (not a timestamp) — saturate at i64::MAX.
+                i64::try_from(row.seen_count).unwrap_or(i64::MAX),
+                clamp_field(&row.source),
+                row.starred as i64,
+            ],
+        )?;
+    Ok(())
+}
+
+mod sync_section;
+
 impl DataStore for DiscoveredCompanyStore {
     fn key(&self) -> &'static str {
         "discoveredCompanies"
@@ -251,32 +286,7 @@ impl DataStore for DiscoveredCompanyStore {
         let tx = guard.transaction()?;
         tx.execute("DELETE FROM discovered_companies", [])?;
         for row in &rows {
-            let ats = clamp_field(&row.ats_kind);
-            let slug = clamp_field(&row.slug);
-            if ats.is_empty() || slug.is_empty() {
-                continue;
-            }
-            let display = row
-                .display_name
-                .as_deref()
-                .map(clamp_field)
-                .filter(|s| !s.is_empty());
-            tx.execute(
-                "INSERT OR IGNORE INTO discovered_companies
-                    (ats_kind, slug, display_name, first_seen_at, last_seen_at, seen_count, source, starred)
-                 VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)",
-                params![
-                    ats,
-                    slug,
-                    display,
-                    ts_to_db(row.first_seen_at),
-                    ts_to_db(row.last_seen_at),
-                    // Plain count cast (not a timestamp) — saturate at i64::MAX.
-                    i64::try_from(row.seen_count).unwrap_or(i64::MAX),
-                    clamp_field(&row.source),
-                    row.starred as i64,
-                ],
-            )?;
+            insert_conn(&tx, row)?;
         }
         tx.commit()?;
         Ok(rows.len())

@@ -196,12 +196,12 @@ pub const MANAGE_RESETTABLE_LABELS: &[&str] = &[
     "interactions",
     "spend",
     "email_watch",
+    "sync_state",
     "cache",
     "dedup_tombstones",
     "discovered_companies",
     "pipeline_runs",
     "board_health",
-    "sync_state",
 ];
 
 /// Registry of factory-reset actions, populated as stores are managed and

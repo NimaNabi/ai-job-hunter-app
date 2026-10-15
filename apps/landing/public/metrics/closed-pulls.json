@@ -1,5 +1,19 @@
 [
   {
+    "number": 1419,
+    "title": "fix(backup): keep application status history across backup and restore",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1419",
+    "draft": false,
+    "created_at": "2026-10-14T19:53:57Z",
+    "updated_at": "2026-10-14T21:03:46Z",
+    "merged_at": "2026-10-14T21:03:46Z",
+    "closed_at": "2026-10-14T21:03:46Z",
+    "requested_reviewers": [],
+    "user": {
+      "login": "NimaNabi"
+    }
+  },
+  {
     "number": 1418,
     "title": "docs(sync): add the self-hosted sync adr and v1 protocol, amend the egress boundary adr",
     "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1418",
@@ -680,20 +694,6 @@
     "updated_at": "2026-10-06T20:42:27Z",
     "merged_at": "2026-10-04T11:02:31Z",
     "closed_at": "2026-10-04T11:02:31Z",
-    "requested_reviewers": [],
-    "user": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "number": 1312,
-    "title": "refactor(email-watch): split email_watch/ and extraction/ under 300 code lines",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/pull/1312",
-    "draft": false,
-    "created_at": "2026-10-04T11:40:56Z",
-    "updated_at": "2026-10-06T20:42:24Z",
-    "merged_at": "2026-10-04T12:33:03Z",
-    "closed_at": "2026-10-04T12:33:03Z",
     "requested_reviewers": [],
     "user": {
       "login": "saeedkolivand"

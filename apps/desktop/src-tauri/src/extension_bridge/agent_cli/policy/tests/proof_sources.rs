@@ -68,7 +68,7 @@ fn every_proof_source_read_command_is_a_read_row() {
     // anywhere on this surface, so flipping the bit is permanent, same as
     // `notifications_remove`/`notifications_clear_all` whose ProofSource
     // shapes they now reuse [+2]; see each row's own comment).
-    assert_eq!(checked, 35, "expected exactly 35 Irreversible rows");
+    assert_eq!(checked, 38, "expected exactly 38 Irreversible rows");
 }
 
 /// Mutation-style guard: an `Irreversible` row whose `ProofSource`

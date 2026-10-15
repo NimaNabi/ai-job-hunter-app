@@ -135,6 +135,10 @@ pub(crate) fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Erro
     // `reminder_scheduler` for the dedupe/cap rules.
     reminder_scheduler::start(handle.clone());
 
+    // Start the optional self-hosted sync loop (ADR-051). Off by default:
+    // each tick is a no-op until the user saves a server and a token.
+    crate::sync_scheduler::start(handle.clone());
+
     // Start the browser-extension WS bridge (loopback only). Fire-and-
     // forget on the tokio runtime; a bind failure logs + disables the
     // bridge and never blocks boot. `BridgeState` was managed above.

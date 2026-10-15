@@ -46,6 +46,7 @@ import { RESUME_CHANNELS, type ResumeContract } from './resume.js';
 import { RESUME_PIPELINE_CHANNELS, type ResumePipelineContract } from './resumePipeline.js';
 import { SCRAPE_CHANNELS, type ScrapeContract } from './scrape.js';
 import { SUPPORT_CHANNELS, type SupportContract } from './support.js';
+import { SYNC_CHANNELS, type SyncContract } from './sync.js';
 import { SYSTEM_CHANNELS, type SystemContract } from './system.js';
 import { UPDATER_CHANNELS, type UpdaterContract } from './updater.js';
 
@@ -63,6 +64,7 @@ export interface IpcContract {
   github: GitHubContract;
   extensionBridge: ExtensionBridgeContract;
   emailWatch: EmailWatchContract;
+  sync: SyncContract;
   scrape: ScrapeContract;
   match: MatchContract;
   geocode: GeocodeContract;
@@ -100,6 +102,7 @@ export const IPC_CHANNELS = {
   github: GITHUB_CHANNELS,
   extensionBridge: EXTENSION_BRIDGE_CHANNELS,
   emailWatch: EMAIL_WATCH_CHANNELS,
+  sync: SYNC_CHANNELS,
   scrape: SCRAPE_CHANNELS,
   match: MATCH_CHANNELS,
   geocode: GEOCODE_CHANNELS,
@@ -298,6 +301,13 @@ export {
   type ScrapeContract,
 } from './scrape.js';
 export { SUPPORT_CHANNELS, type SupportContract } from './support.js';
+export {
+  SYNC_CHANNELS,
+  type SyncConfigureRequest,
+  type SyncContract,
+  type SyncRunReport,
+  type SyncStatus,
+} from './sync.js';
 export { SYSTEM_CHANNELS, type SystemContract } from './system.js';
 export {
   type ChangelogRelease,

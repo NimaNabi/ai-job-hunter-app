@@ -44,6 +44,7 @@ import { resume } from './namespaces/resume/index.js';
 import { resumePipeline } from './namespaces/resumePipeline/index.js';
 import { scrape } from './namespaces/scrape/index.js';
 import { support } from './namespaces/support/index.js';
+import { sync } from './namespaces/sync/index.js';
 import { system } from './namespaces/system/index.js';
 import { updater } from './namespaces/updater/index.js';
 
@@ -62,6 +63,7 @@ export function createTauriInvokeClient(): AppClient {
     github: github as AppClient['github'],
     extensionBridge: extensionBridge as AppClient['extensionBridge'],
     emailWatch: emailWatch as AppClient['emailWatch'],
+    sync: sync as AppClient['sync'],
     scrape: scrape as AppClient['scrape'],
     match: match as AppClient['match'],
     geocode: geocode as AppClient['geocode'],

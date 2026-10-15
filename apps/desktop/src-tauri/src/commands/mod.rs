@@ -34,5 +34,6 @@ pub mod resume;
 pub mod resume_pipeline;
 pub mod scrape;
 pub mod support;
+pub mod sync;
 pub mod system;
 pub mod translation;

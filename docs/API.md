@@ -66,6 +66,7 @@ service hook, query key — see `AGENTS.md` rule 14.
 | [`resumePipeline`](#resumepipeline)   | 6       | The staged résumé pipeline — one fixed stage sequence; there is no depth choice.                                                       |
 | [`scrape`](#scrape)                   | 11      |                                                                                                                                        |
 | [`support`](#support)                 | 1       |                                                                                                                                        |
+| [`sync`](#sync)                       | 4       |                                                                                                                                        |
 | [`system`](#system)                   | 17      |                                                                                                                                        |
 | [`updater`](#updater)                 | 5       |                                                                                                                                        |
 
@@ -4341,6 +4342,108 @@ Build and save a redacted diagnostics zip to the caller-supplied path
 | Key                 | Channel                     |
 | ------------------- | --------------------------- |
 | `exportDiagnostics` | `support:exportDiagnostics` |
+
+---
+
+## `sync`
+
+Contract: `SyncContract` in `packages/shared/src/ipc/contracts/sync.ts`
+
+### Methods — `sync`
+
+- [`sync.status`](#syncstatus)
+- [`sync.configure`](#syncconfigure)
+- [`sync.disable`](#syncdisable)
+- [`sync.syncNow`](#syncsyncnow)
+
+#### `sync.status`
+
+```ts
+status(): Promise<SyncStatus>;
+```
+
+#### `sync.configure`
+
+```ts
+configure(req: SyncConfigureRequest): Promise<SyncStatus>;
+```
+
+Checks the server, saves the URL and the token (OS keychain), turns sync on and
+runs once. Rejects, saving nothing, when the server is unreachable, speaks
+another protocol version, or rejects the token.
+
+#### `sync.disable`
+
+```ts
+disable(): Promise<SyncStatus>;
+```
+
+Turns sync off and removes the token. Local data is untouched.
+
+#### `sync.syncNow`
+
+```ts
+syncNow(): Promise<SyncStatus>;
+```
+
+Runs one sync now. Rejects when sync is off or a run is in progress.
+
+### Channels — `sync`
+
+`SYNC_CHANNELS` in `packages/shared/src/ipc/contracts/sync.ts`:
+
+| Key         | Channel          |
+| ----------- | ---------------- |
+| `status`    | `sync:status`    |
+| `configure` | `sync:configure` |
+| `disable`   | `sync:disable`   |
+| `syncNow`   | `sync:syncNow`   |
+
+### Types — `sync`
+
+Declared in `packages/shared/src/ipc/contracts/sync.ts`.
+
+```ts
+/**
+ * Optional self-hosted sync (ADR-051, protocol in `docs/knowledge/sync-protocol.md`).
+ *
+ * Off by default. The app is a client only: the user runs their own server and gives
+ * the app its URL and a token. `configure` checks the server's `/health`, stores the
+ * token in the OS keychain, turns sync on and runs once. The backend then syncs
+ * shortly after launch, every 15 minutes, and on `syncNow`. The token is write-only:
+ * sent once to `configure`, never returned or logged.
+ */
+
+/** Counts from one sync run. */
+export interface SyncRunReport {
+  /** Changes downloaded from the server. */
+  pulled: number;
+  /** Downloaded changes written to this device. */
+  applied: number;
+  /** Changes from a newer app version, kept until this app is updated. */
+  held: number;
+  /** Local changes uploaded. */
+  pushed: number;
+}
+
+export interface SyncStatus {
+  enabled: boolean;
+  serverUrl?: string;
+  /** The server URL is `http://`: traffic is unencrypted unless the link itself
+   *  is private (a trusted LAN, Tailscale). The UI must warn. */
+  insecure: boolean;
+  /** Epoch ms of the last successful run. */
+  lastSyncAt?: number;
+  /** The last run's error, cleared by a successful run. */
+  lastError?: string;
+  lastReport?: SyncRunReport;
+}
+
+export interface SyncConfigureRequest {
+  serverUrl: string;
+  token: string;
+}
+```
 
 ---
 

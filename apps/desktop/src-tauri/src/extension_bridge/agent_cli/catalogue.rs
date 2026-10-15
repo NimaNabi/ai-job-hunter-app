@@ -4,7 +4,7 @@
 // Generator: packages/shared/scripts/gen-agent-catalogue.ts. Run `pnpm gen:agent-catalogue`.
 // CI runs `pnpm gen:agent-catalogue:check` to catch drift.
 //
-// 162 commands catalogued across 30 file(s), one per command-name prefix (catalogue/<prefix>.rs),
+// 166 commands catalogued across 31 file(s), one per command-name prefix (catalogue/<prefix>.rs),
 // 1 uncatalogued (see UNCATALOGUED below).
 //
 // Sharded rather than one big const array — this crate's own R8 hard LOC cap
@@ -47,6 +47,7 @@ mod referrals;
 mod resume;
 mod scrape;
 mod support;
+mod sync;
 mod system;
 mod updater;
 
@@ -80,7 +81,7 @@ pub(crate) struct CatalogueEntry {
 /// The full catalogue, assembled from every shard's own `ENTRIES` at first access — see this
 /// file's own header comment for why a `LazyLock<Vec<_>>` and not a plain `const` slice.
 pub(crate) static CATALOGUE: LazyLock<Vec<CatalogueEntry>> = LazyLock::new(|| {
-    let mut entries = Vec::with_capacity(162);
+    let mut entries = Vec::with_capacity(166);
     entries.extend_from_slice(ai::ENTRIES);
     entries.extend_from_slice(applications::ENTRIES);
     entries.extend_from_slice(autopilot::ENTRIES);
@@ -109,6 +110,7 @@ pub(crate) static CATALOGUE: LazyLock<Vec<CatalogueEntry>> = LazyLock::new(|| {
     entries.extend_from_slice(resume::ENTRIES);
     entries.extend_from_slice(scrape::ENTRIES);
     entries.extend_from_slice(support::ENTRIES);
+    entries.extend_from_slice(sync::ENTRIES);
     entries.extend_from_slice(system::ENTRIES);
     entries.extend_from_slice(updater::ENTRIES);
     entries

@@ -25,6 +25,7 @@ use crate::pipeline::runs::PipelineRunStore;
 use crate::postings::{InteractionStore, PostingsCache};
 use crate::referrals::ReferralStore;
 use crate::spend::SpendStore;
+use crate::sync::state::SyncStateStore;
 
 // ── Full-reset registry ───────────────────────────────────────────────────────
 //
@@ -162,6 +163,16 @@ impl Resettable for EmailWatchStore {
     }
 }
 
+impl Resettable for SyncStateStore {
+    fn reset(&self) {
+        // Sync settings, cursors, baselines and held envelopes. The token is
+        // in the keychain and goes with "credentials". The device id stays.
+        if let Err(e) = SyncStateStore::reset(self) {
+            log::warn!("[sync] factory reset of sync state failed: {}", e.code());
+        }
+    }
+}
+
 /// A type-erased factory-reset action: resolve a store from app state and wipe it.
 type ResetAction = Box<dyn Fn(&AppHandle) + Send + Sync>;
 
@@ -190,6 +201,7 @@ pub const MANAGE_RESETTABLE_LABELS: &[&str] = &[
     "discovered_companies",
     "pipeline_runs",
     "board_health",
+    "sync_state",
 ];
 
 /// Registry of factory-reset actions, populated as stores are managed and

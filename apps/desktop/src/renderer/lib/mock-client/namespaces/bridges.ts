@@ -1,9 +1,9 @@
-import type { EmailWatchConnectRequest } from '@ajh/shared';
+import type { EmailWatchConnectRequest, SyncConfigureRequest } from '@ajh/shared';
 
 import type { AppClient } from '../../app-client';
 import { unsub } from './helpers';
 
-export const bridgeNamespaces = (): Pick<AppClient, 'extensionBridge' | 'emailWatch'> => ({
+export const bridgeNamespaces = (): Pick<AppClient, 'extensionBridge' | 'emailWatch' | 'sync'> => ({
   extensionBridge: {
     status: async () => ({
       port: 47615,
@@ -44,5 +44,17 @@ export const bridgeNamespaces = (): Pick<AppClient, 'extensionBridge' | 'emailWa
       autoWriteEnabled,
     }),
     checkNow: async () => ({ connected: false, enabled: false, autoWriteEnabled: false }),
+  },
+  // Optional self-hosted sync: off in the mock; `configure` echoes an enabled,
+  // never-synced status without any network.
+  sync: {
+    status: async () => ({ enabled: false, insecure: false }),
+    configure: async ({ serverUrl }: SyncConfigureRequest) => ({
+      enabled: true,
+      serverUrl,
+      insecure: serverUrl.startsWith('http://'),
+    }),
+    disable: async () => ({ enabled: false, insecure: false }),
+    syncNow: async () => ({ enabled: false, insecure: false }),
   },
 });

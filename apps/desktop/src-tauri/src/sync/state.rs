@@ -2,7 +2,9 @@
 //! design: it is NOT a `DataStore`, never enters the export bundle and never
 //! syncs (ADR-051).
 //!
-//! - `meta`: this install's random device id.
+//! - `meta`: this install's random device id, and the sync settings
+//!   (`settings.rs`): server URL, on/off and the last run's outcome. The
+//!   token is not here; it lives in the OS keychain.
 //! - `scopes`: one row per (server URL, token) scope with its saved cursor;
 //!   no row means that scope has never synced (a first sync).
 //! - `baseline`: per scope, the last known state of each record — its hash
@@ -95,6 +97,43 @@ impl SyncStateStore {
             params![id],
         )?;
         Ok(id)
+    }
+
+    /// A machine-local setting (`meta` table), `None` when unset.
+    pub fn meta(&self, key: &str) -> AppResult<Option<String>> {
+        let conn = self.conn.lock();
+        Ok(conn
+            .query_row("SELECT value FROM meta WHERE key = ?1", params![key], |r| {
+                r.get(0)
+            })
+            .optional()?)
+    }
+
+    /// Set (`Some`) or clear (`None`) a machine-local setting.
+    pub fn set_meta(&self, key: &str, value: Option<&str>) -> AppResult<()> {
+        let conn = self.conn.lock();
+        match value {
+            Some(v) => conn.execute(
+                "INSERT INTO meta (key, value) VALUES (?1, ?2)
+                 ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+                params![key, v],
+            )?,
+            None => conn.execute("DELETE FROM meta WHERE key = ?1", params![key])?,
+        };
+        Ok(())
+    }
+
+    /// Forget every scope's cursor, baseline and held envelopes, and every
+    /// setting except the device id (factory reset).
+    pub fn reset(&self) -> AppResult<()> {
+        let mut guard = self.conn.lock();
+        let tx = guard.transaction()?;
+        tx.execute("DELETE FROM scopes", [])?;
+        tx.execute("DELETE FROM baseline", [])?;
+        tx.execute("DELETE FROM held", [])?;
+        tx.execute("DELETE FROM meta WHERE key <> 'device_id'", [])?;
+        tx.commit()?;
+        Ok(())
     }
 
     /// The saved cursor, `None` before the first page was acknowledged.

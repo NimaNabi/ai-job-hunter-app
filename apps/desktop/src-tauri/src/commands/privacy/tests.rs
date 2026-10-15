@@ -254,6 +254,7 @@ fn reset_registry_expected_labels_match_lib_rs_setup() {
     reg.register::<DiscoveredCompanyStore>("discovered_companies");
     reg.register::<PipelineRunStore>("pipeline_runs");
     reg.register::<std::sync::Arc<crate::scraping::BoardHealthStore>>("board_health");
+    reg.register::<crate::sync::state::SyncStateStore>("sync_state");
 
     let labels = reg.labels();
     for label in expected {

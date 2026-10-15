@@ -1,8 +1,8 @@
 # Self-hosted sync protocol (v1)
 
-Status: specification. The client that speaks it is not implemented yet; see
-[ADR-051](decision-records/adr-051-optional-self-hosted-multi-device-sync.md) for the decision and
-the delivery plan. AI Job Hunter does not ship or operate a server: this page is the contract a
+Status: the client speaks it (`apps/desktop/src-tauri/src/sync/`); the Settings card is still to
+come. See [ADR-051](decision-records/adr-051-optional-self-hosted-multi-device-sync.md) for the
+decision and the delivery plan. AI Job Hunter does not ship or operate a server: this page is the contract a
 user-run server implements.
 
 Keywords **MUST**, **MUST NOT**, **SHOULD** and **MAY** are used in the RFC 2119 sense.

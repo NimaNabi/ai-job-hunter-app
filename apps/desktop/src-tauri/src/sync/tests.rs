@@ -16,7 +16,9 @@ use crate::data_store::{SyncRecord, SyncSection};
 use crate::error::{AppError, AppResult};
 
 mod engine_cases;
+mod http_transport;
 mod rules_cases;
+mod settings_cases;
 mod stores;
 
 /// An in-memory section: `id -> payload`.

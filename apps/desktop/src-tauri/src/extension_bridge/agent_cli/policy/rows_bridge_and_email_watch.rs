@@ -120,6 +120,40 @@ pub(super) const BRIDGE_AND_EMAIL_WATCH: &[PolicyEntry] = &[
         path: "commands::email_watch::email_watch_check_now",
         effect: Effect::Reversible,
     },
+    // commands/sync.rs — optional self-hosted sync (ADR-051, ADR 0005 class 9).
+    PolicyEntry {
+        path: "commands::sync::sync_status",
+        effect: Effect::Read,
+    },
+    // Writes the sync token into the OS keychain AND uploads the user's
+    // tracked-application data to the server it names (the first run starts
+    // at once). An upload cannot be called back. Like `email_watch_connect`,
+    // a first configure has nothing to compare against; the strongest
+    // available signal is the current `enabled` flag — WEAK, flagged.
+    PolicyEntry {
+        path: "commands::sync::sync_configure",
+        effect: Effect::Irreversible(ProofSource::Scalar {
+            read_command: "sync_status",
+            path: &["enabled"],
+        }),
+    },
+    // Removes the keychain token. Proof is the configured server URL, read
+    // via `sync_status` — requires having read it first.
+    PolicyEntry {
+        path: "commands::sync::sync_disable",
+        effect: Effect::Irreversible(ProofSource::Scalar {
+            read_command: "sync_status",
+            path: &["serverUrl"],
+        }),
+    },
+    // Uploads local changes to the configured server: not reversible.
+    PolicyEntry {
+        path: "commands::sync::sync_now",
+        effect: Effect::Irreversible(ProofSource::Scalar {
+            read_command: "sync_status",
+            path: &["serverUrl"],
+        }),
+    },
     // export/commands/mod.rs
     // Verified: renders and returns bytes only — no filesystem write.
     PolicyEntry {

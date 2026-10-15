@@ -49,7 +49,7 @@ No runtime behavior changes: every current call already complies. The fix is to 
 - **A new egress endpoint now has a written test to pass:** does it send personal data (prohibited) or a public identifier/typed query (opt-in, default OFF, CSP-scoped)? This is the reference for future review. The machine-readable inventory lives in `apps/desktop/src-tauri/tests/egress.rs`.
 - **The opt-in enrichment pattern (Clearbit) is now the sanctioned template** for feature-driven egress: default OFF, minimal CSP, public identifier only.
 - **No behavior changes ship from this ADR.** If a future decision adds a hard offline mode, it supersedes option 2 here.
-- **Amendment (ADR-051): class 9, self-hosted sync.** Recorded as a specification only; the runtime client, its entry in `apps/desktop/src-tauri/tests/egress.rs` and the README/SECURITY wording land with the PR that ships the egress.
+- **Amendment (ADR-051): class 9, self-hosted sync.** Recorded as a specification first; the runtime client, its entry in `apps/desktop/src-tauri/tests/egress.rs` (`UNEXTRACTABLE`, since the host is user-typed) and the README/SECURITY wording landed with the PR that ships the egress (PR 2b of #1402).
 
 ## References
 
@@ -62,7 +62,7 @@ No runtime behavior changes: every current call already complies. The fix is to 
   - Class 6 (Optional enrichment): `apps/desktop/src/renderer/services/use-company-logo/use-company-logo.ts` (Clearbit), `apps/desktop/src-tauri/tauri.conf.json` (CSP enforcement).
   - Class 7 (Email-confirmation watching): `apps/desktop/src-tauri/src/email_watch/` (IMAP).
   - Class 8 (Crash reporting): Sentry integration in `apps/desktop/src-tauri/src/crash_reporting/mod.rs` (the `DSN` const and the event filter) and `crash_reporting/transport.rs`, wired from `lib.rs` via `crash_reporting::init` and `tauri_plugin_sentry::init`.
-  - Class 9 (Self-hosted sync): specified in `docs/knowledge/sync-protocol.md`; no egress site exists yet (see ADR-051 for the delivery plan).
+  - Class 9 (Self-hosted sync): `apps/desktop/src-tauri/src/sync/http.rs` (the only request site, through `net::http::shared()`), started by `apps/desktop/src-tauri/src/sync_scheduler.rs` and `commands/sync.rs`; wire contract in `docs/knowledge/sync-protocol.md`.
   - Profile import: `apps/desktop/src-tauri/src/profile_import/github.rs` (GitHub).
 - Opt-in setting: `apps/desktop/src/renderer/store/preferences-schema/preferences-schema.ts` (company-logo preference, default OFF).
 - Machine-readable inventory: `apps/desktop/src-tauri/tests/egress.rs` (EGRESS const).

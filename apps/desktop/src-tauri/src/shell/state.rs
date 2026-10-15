@@ -154,6 +154,16 @@ pub(super) fn manage_user_stores(app: &App, registry: &mut ResetRegistry, data_d
         "email watch store",
         email_watch::EmailWatchStore::open(data_dir),
     );
+    // Optional self-hosted sync (ADR-051): device id, settings, cursors and
+    // baselines. Machine-local, NOT in backups; the token is in the keychain.
+    // The scheduler is started separately (`sync_scheduler::start`).
+    manage_opened(
+        app,
+        registry,
+        "sync_state",
+        "sync state store",
+        crate::sync::state::SyncStateStore::open(data_dir),
+    );
 }
 
 /// The process-local state: nothing here is user data, so none of it is registered

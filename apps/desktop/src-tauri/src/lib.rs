@@ -78,6 +78,7 @@ pub mod scraping;
 mod shell;
 pub mod spend;
 pub mod sync;
+pub mod sync_scheduler;
 #[cfg(test)]
 mod tests;
 pub mod theme;

@@ -18,7 +18,7 @@ use crate::referrals::ReferralStore;
 use crate::spend::SpendStore;
 
 /// One install: a data dir with every bundle store opened in it.
-struct RealDevice {
+pub(super) struct RealDevice {
     _dir: TempDir,
     state: SyncStateStore,
     documents: DocumentStore,
@@ -27,7 +27,7 @@ struct RealDevice {
     prefs: JobPreferencesStore,
     contact: ContactProfileStore,
     ai_config: AiConfigStore,
-    referrals: ReferralStore,
+    pub(super) referrals: ReferralStore,
     autopilots: AutopilotStore,
     interactions: Mutex<InteractionStore>,
     spend: SpendStore,
@@ -37,7 +37,7 @@ struct RealDevice {
 }
 
 impl RealDevice {
-    fn new() -> Self {
+    pub(super) fn new() -> Self {
         let dir = TempDir::new().unwrap();
         let p = dir.path().to_path_buf();
         Self {
@@ -82,13 +82,18 @@ impl RealDevice {
         f(&sections)
     }
 
+    /// One run against any transport (the in-memory server or real HTTP).
+    pub(super) fn sync_via(&self, transport: &dyn Transport, rev: u64) -> AppResult<SyncReport> {
+        self.with_sections(|s| run(s, &self.state, transport, "scope-a", rev))
+    }
+
     fn sync(&self, server: &FakeServer, rev: u64) -> SyncReport {
         self.with_sections(|s| run(s, &self.state, server, "scope-a", rev))
             .unwrap()
     }
 
     /// Every section's records, for comparing two devices.
-    fn records(&self) -> BTreeMap<(String, String), Value> {
+    pub(super) fn records(&self) -> BTreeMap<(String, String), Value> {
         self.with_sections(|sections| {
             let mut out = BTreeMap::new();
             for s in sections {
@@ -100,13 +105,13 @@ impl RealDevice {
         })
     }
 
-    fn count(&self, section: &str) -> usize {
+    pub(super) fn count(&self, section: &str) -> usize {
         self.records().keys().filter(|(s, _)| s == section).count()
     }
 
     /// One record in every array section, written through each store's own
     /// backup import (the bundle shape is the sync payload shape).
-    fn seed(&self) {
+    pub(super) fn seed(&self) {
         let import = |s: &dyn DataStore, v: Value| {
             s.import(&v).unwrap();
         };

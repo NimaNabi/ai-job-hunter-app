@@ -191,8 +191,8 @@ const EGRESS: &[Egress] = &[
 /// meaningless. A third, explicitly-unchecked list says the true thing:
 /// documented, not verified.
 struct UnextractableEgress {
-    /// Third-party name — every row here is a real SDK talking to a named
-    /// vendor, so unlike [`Egress::public_name`] this is never `None`.
+    /// The destination's public name — a named vendor, or the user's own
+    /// server — so unlike [`Egress::public_name`] this is never `None`.
     public_name: &'static str,
     /// What it is, why no literal exists to extract, and where the real
     /// answer lives (repo-relative paths, so a reader can go verify by hand
@@ -216,6 +216,11 @@ const UNEXTRACTABLE: &[UnextractableEgress] = &[
                consent (Settings::transmits, crash_reporting/mod.rs) and the wire-gate transport \
                that re-checks consent and drops unredactable envelopes per-send \
                (crash_reporting/transport.rs).",
+    },
+    // ── Self-hosted sync (ADR-0005 class 9, ADR-051) — opt-in, default OFF.
+    UnextractableEgress {
+        public_name: "self-hosted sync",
+        note: "The user's OWN sync server: its URL is typed by the user and kept in the                machine-local sync_state.db (sync/settings.rs), so no host literal exists in                source. Requests are built as `format!(\"{}{path}\", base)` in sync/http.rs, the                only request site, through net::http::shared(). Sends tracked-application                records (the export bundle's sections) with a bearer token from the OS                keychain; nothing runs until the user saves a URL + token (commands/sync.rs                sync_configure). Wire contract: docs/knowledge/sync-protocol.md.",
     },
 ];
 

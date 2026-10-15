@@ -69,8 +69,10 @@ pub fn run(
             .get(env.store.as_str())
             .is_some_and(|s| env.schema_version <= s.schema_version());
         if understood {
-            state.release(scope, &env.store, &env.record_id)?;
+            // Released only once applied: the cursor is already past it, so a
+            // failed apply must leave it held for the next run.
             ctx.handle(&env, &mut report)?;
+            state.release(scope, &env.store, &env.record_id)?;
         }
     }
 
@@ -86,6 +88,13 @@ pub fn run(
             report.pulled += 1;
             ctx.handle(env, &mut report)?;
         }
+        if page.has_more && cursor.as_deref() == Some(page.cursor.as_str()) {
+            // A page that promises more but does not move the cursor would
+            // loop forever on a buggy or hostile server.
+            return Err(AppError::Validation(
+                "sync server returned more pages without advancing the cursor".into(),
+            ));
+        }
         state.set_cursor(scope, &page.cursor)?;
         cursor = Some(page.cursor);
         if !page.has_more {
@@ -98,10 +107,9 @@ pub fn run(
     // exports so an applied record is not echoed back as a local change.
     let current = current_records(sections)?;
     for key in &applied {
-        if let (Some((_, payload)), Some(mut entry)) = (
-            current.get(key),
-            baseline_map(state, scope)?.get(key).cloned(),
-        ) {
+        if let (Some((_, payload)), Some(mut entry)) =
+            (current.get(key), ctx.baseline.get(key).cloned())
+        {
             entry.hash = record_hash(payload);
             state.put_baseline(scope, &key.0, &key.1, &entry)?;
         }
@@ -111,6 +119,15 @@ pub fn run(
     let outgoing = outgoing(sections, state, scope, &device_id, run_rev, &current)?;
     if !outgoing.is_empty() {
         report.pushed = transport.push(&device_id, &outgoing)?;
+        // Record nothing as synced unless the server stored the whole batch;
+        // the next run then computes and sends the same changes again.
+        if report.pushed != outgoing.len() {
+            return Err(AppError::Validation(format!(
+                "sync server stored {} of {} changes",
+                report.pushed,
+                outgoing.len()
+            )));
+        }
         for env in &outgoing {
             let hash = if env.deleted {
                 String::new()

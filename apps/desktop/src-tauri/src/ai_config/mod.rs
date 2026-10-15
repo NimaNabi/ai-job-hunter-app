@@ -438,11 +438,17 @@ impl DataStore for AiConfigStore {
             return Ok(0);
         }
         let snapshot = AiConfigSnapshot::from_untrusted(data)?;
-        let conn = self.conn.lock();
-        Self::clear_conn(&conn)?;
+        // Clear + apply in ONE transaction: a failed write leaves the old
+        // config intact instead of half-cleared. The optional self-hosted sync
+        // applies this section through this same path (`sync_section`).
+        let mut guard = self.conn.lock();
+        let tx = guard.transaction()?;
+        Self::clear_conn(&tx)?;
         // REPLACE semantics from an untrusted bundle → apply leniently (scrub, so a
         // tampered base_url can never be restored as a live egress endpoint).
-        Self::apply_snapshot_conn(&conn, &snapshot)
+        let written = Self::apply_snapshot_conn(&tx, &snapshot)?;
+        tx.commit()?;
+        Ok(written)
     }
 }
 

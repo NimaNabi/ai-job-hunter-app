@@ -23,6 +23,8 @@ mod stores;
 pub(super) struct FakeSection {
     name: &'static str,
     schema: Cell<u32>,
+    /// Make every `upsert_record` fail, like a store write error.
+    pub(super) fail_writes: Cell<bool>,
     records: Mutex<BTreeMap<String, Value>>,
 }
 
@@ -31,6 +33,7 @@ impl FakeSection {
         Self {
             name,
             schema: Cell::new(1),
+            fail_writes: Cell::new(false),
             records: Mutex::new(BTreeMap::new()),
         }
     }
@@ -70,6 +73,9 @@ impl SyncSection for FakeSection {
             .collect())
     }
     fn upsert_record(&self, id: &str, payload: &Value) -> AppResult<()> {
+        if self.fail_writes.get() {
+            return Err(AppError::Validation("store write failed".into()));
+        }
         self.put(id, payload.clone());
         Ok(())
     }
@@ -88,6 +94,10 @@ pub(super) struct FakeServer {
     /// Fail the pull that would start at this log offset.
     pub(super) fail_pull_at: Cell<Option<usize>>,
     pub(super) corrupt_next_page: Cell<bool>,
+    /// Store only this many envelopes of the next push.
+    pub(super) store_at_most: Cell<Option<usize>>,
+    /// Answer every pull with `hasMore` and the same cursor.
+    pub(super) stuck_cursor: Cell<bool>,
 }
 
 impl FakeServer {
@@ -107,6 +117,13 @@ impl Transport for FakeServer {
     }
     fn pull(&self, since: Option<&str>) -> AppResult<Page> {
         let from: usize = since.map_or(0, |c| c.parse().unwrap_or(0));
+        if self.stuck_cursor.get() {
+            return Ok(Page {
+                changes: Vec::new(),
+                cursor: since.unwrap_or("0").to_string(),
+                has_more: true,
+            });
+        }
         if self.fail_pull_at.get() == Some(from) {
             return Err(AppError::Validation("network down".into()));
         }
@@ -128,8 +145,12 @@ impl Transport for FakeServer {
         if self.fail_push.get() {
             return Err(AppError::Validation("push failed".into()));
         }
-        self.log.borrow_mut().extend_from_slice(changes);
-        Ok(changes.len())
+        let n = self
+            .store_at_most
+            .take()
+            .map_or(changes.len(), |m| m.min(changes.len()));
+        self.log.borrow_mut().extend_from_slice(&changes[..n]);
+        Ok(n)
     }
 }
 

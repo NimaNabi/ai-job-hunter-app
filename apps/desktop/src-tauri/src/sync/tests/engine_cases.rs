@@ -234,3 +234,49 @@ fn a_synced_device_with_no_changes_pushes_nothing() {
     a.sync(&server, 30).unwrap();
     assert_eq!(server.len(), n);
 }
+
+#[test]
+fn a_held_change_whose_apply_fails_stays_held() {
+    let server = FakeServer::new();
+    let (a, b) = (Device::new(), Device::new());
+    a.items.put("1", v("v0"));
+    a.sync(&server, 10).unwrap();
+    b.sync(&server, 20).unwrap();
+    a.items.set_schema(2);
+    a.items.put("1", v("new shape"));
+    a.sync(&server, 30).unwrap();
+    b.sync(&server, 40).unwrap(); // held
+
+    b.items.set_schema(2);
+    b.items.fail_writes.set(true);
+    assert!(b.sync(&server, 50).is_err());
+    assert_eq!(b.state.held("scope-a").unwrap().len(), 1, "still held");
+
+    b.items.fail_writes.set(false);
+    b.sync(&server, 60).unwrap();
+    assert_eq!(b.items.get("1"), Some(v("new shape")));
+    assert!(b.state.held("scope-a").unwrap().is_empty());
+}
+
+#[test]
+fn a_partly_stored_push_marks_nothing_as_synced() {
+    let server = FakeServer::new();
+    let a = Device::new();
+    a.items.put("1", v("x"));
+    a.items.put("2", v("y"));
+    server.store_at_most.set(Some(1));
+    assert!(a.sync(&server, 10).is_err());
+    a.sync(&server, 20).unwrap();
+
+    let b = Device::new();
+    b.sync(&server, 30).unwrap();
+    assert_eq!(b.items.snapshot(), a.items.snapshot());
+}
+
+#[test]
+fn a_server_that_never_advances_the_cursor_is_rejected() {
+    let server = FakeServer::new();
+    server.stuck_cursor.set(true);
+    let a = Device::new();
+    assert!(a.sync(&server, 10).is_err());
+}

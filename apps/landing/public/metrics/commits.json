@@ -1,5 +1,41 @@
 [
   {
+    "sha": "d3f9387190a9a29b1d495e95f30c147a5ee1f492",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-14T21:27:30Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "1e0d11f47023d9dd2075b5ecb797938e7cecc493",
+    "commit": {
+      "message": "fix(backup): keep application status history across backup and restore (#1419)",
+      "author": {
+        "date": "2026-10-14T21:03:45Z"
+      }
+    },
+    "author": {
+      "login": "NimaNabi"
+    }
+  },
+  {
+    "sha": "af4062df91c2eefbe1ba5e7e14d17fbf6ebf3b2e",
+    "commit": {
+      "message": "chore: update mission-control snapshot data [skip ci]",
+      "author": {
+        "date": "2026-10-14T08:40:41Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
     "sha": "f89afc6b07cf217dd74180ecb1704fb10ae5ec64",
     "commit": {
       "message": "chore: update mission-control snapshot data [skip ci]",
@@ -1161,42 +1197,6 @@
     },
     "author": {
       "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "ee5d83d3a66ebc06edcc8d8297a5787cb9276de3",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-10-04T17:36:45Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "2eb3b06ff5fad3983913ac427e7b69f7e12c9fc1",
-    "commit": {
-      "message": "refactor(commands): split match_resume, ai, applications, scrape and lib.rs under 300 code lines (#1316)",
-      "author": {
-        "date": "2026-10-04T17:23:07Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "9e742efdbf8edb3b6aad47c281bb1f5dd90e6d48",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-10-04T16:57:59Z"
-      }
-    },
-    "author": {
-      "login": "github"
     }
   }
 ]

@@ -145,6 +145,23 @@ export const DATA_ENTRIES: SearchEntry[] = [
     anchor: 'privacy-data',
   },
   {
+    id: 'privacy-sync',
+    section: 'privacy',
+    titleKey: 'settings.privacy.sync.title',
+    keywords: [
+      'sync',
+      'devices',
+      'mac',
+      'windows',
+      'laptop',
+      'server',
+      'self-hosted',
+      'token',
+      'multi-device',
+    ],
+    anchor: 'privacy-sync',
+  },
+  {
     id: 'privacy-crash-reporting',
     section: 'privacy',
     titleKey: 'settings.privacy.crashReportingTitle',

@@ -15,6 +15,7 @@ import {
 } from '@/services';
 import { useFetchCompanyLogos, usePreferencesStore } from '@/store/preferences-store';
 
+import { SyncSection } from '../SyncSection';
 import { ActionCard, type ActionCardProps } from './ActionCard';
 
 type ConfirmAction = 'signOut' | 'clearInteractions' | 'resetApp';
@@ -269,6 +270,10 @@ export function PrivacySettingsTab() {
             ))}
           </div>
         </SettingsSection>
+      </div>
+
+      <div data-settings-anchor="privacy-sync">
+        <SyncSection />
       </div>
 
       {/* ── Danger Zone ─────────────────────────────────────────────── */}

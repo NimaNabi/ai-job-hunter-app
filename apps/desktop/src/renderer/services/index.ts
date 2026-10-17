@@ -46,6 +46,7 @@ export * from './use-resume-validation';
 export * from './use-scrape-progress';
 export * from './use-scraping-settings';
 export * from './use-support';
+export * from './use-sync';
 export * from './use-system';
 export * from './use-system-resources';
 export * from './use-window-controls';

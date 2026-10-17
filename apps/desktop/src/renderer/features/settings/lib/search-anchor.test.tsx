@@ -163,6 +163,9 @@ vi.mock('@/features/settings/components/extension/ExtensionBridgeSection', () =>
 vi.mock('@/features/settings/components/accounts/EmailWatchSection', () => ({
   EmailWatchSection: () => <div data-settings-anchor="accounts-email-watch" />,
 }));
+vi.mock('@/features/settings/components/privacy/SyncSection', () => ({
+  SyncSection: () => <div />,
+}));
 
 // PerformancePreferences — calls t(`${base}.details`, { returnObjects: true }) which the
 // stub returns as a string (not array), causing details.map to throw.
@@ -232,8 +235,8 @@ function assertAnchor(container: HTMLElement, anchor: string) {
 // ── manifest integrity ────────────────────────────────────────────────────────
 
 describe('SEARCH_INDEX — manifest integrity', () => {
-  it('has exactly 34 entries', () => {
-    expect(SEARCH_INDEX).toHaveLength(34);
+  it('has exactly 35 entries', () => {
+    expect(SEARCH_INDEX).toHaveLength(35);
   });
 
   // A bare count survives the wrong deletion (or a duplicate masking a real

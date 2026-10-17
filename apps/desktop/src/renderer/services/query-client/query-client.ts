@@ -149,6 +149,9 @@ export const keys = {
   emailWatch: {
     status: ['emailWatch', 'status'] as const,
   },
+  sync: {
+    status: ['sync', 'status'] as const,
+  },
   notifications: { all: ['notifications'] as const },
   boards: {
     catalog: ['boards', 'catalog'] as const,

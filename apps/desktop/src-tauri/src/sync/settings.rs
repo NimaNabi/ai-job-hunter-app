@@ -14,19 +14,24 @@ const LAST_SYNC_AT: &str = "last_sync_at";
 const LAST_ERROR: &str = "last_error";
 const LAST_REPORT: &str = "last_report";
 
-/// What the Settings card shows. Never carries the token.
+/// What the Settings card shows. Never carries the token. An unset field is
+/// left out (the TS contract declares it optional), never sent as `null`.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SyncStatus {
     pub enabled: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub server_url: Option<String>,
     /// The URL is `http://`: traffic is unencrypted unless the link itself is
     /// private (protocol "Authentication and transport").
     pub insecure: bool,
     /// Epoch ms of the last successful run.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub last_sync_at: Option<u64>,
     /// The last run's error, cleared by a successful run.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub last_error: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub last_report: Option<ReportView>,
 }
 
@@ -76,16 +81,21 @@ pub fn normalize_server_url(raw: &str) -> AppResult<String> {
             "put the token in the token field, not in the URL".into(),
         ));
     }
-    Ok(trimmed.to_string())
+    // The parsed form, so the scheme and host are lowercase (`HTTP://` is
+    // stored, and flagged insecure, as `http://`).
+    Ok(url.as_str().trim_end_matches('/').to_string())
+}
+
+/// The stored URL is plain `http://`.
+fn is_insecure(server_url: &str) -> bool {
+    reqwest::Url::parse(server_url).is_ok_and(|u| u.scheme() == "http")
 }
 
 pub fn status(state: &SyncStateStore) -> AppResult<SyncStatus> {
     let server_url = state.meta(SERVER_URL)?;
     Ok(SyncStatus {
         enabled: state.meta(ENABLED)?.as_deref() == Some("1"),
-        insecure: server_url
-            .as_deref()
-            .is_some_and(|u| u.starts_with("http://")),
+        insecure: server_url.as_deref().is_some_and(is_insecure),
         server_url,
         last_sync_at: state.meta(LAST_SYNC_AT)?.and_then(|v| v.parse().ok()),
         last_error: state.meta(LAST_ERROR)?,
@@ -102,10 +112,17 @@ pub fn enable(state: &SyncStateStore, server_url: &str) -> AppResult<()> {
     state.set_meta(ENABLED, Some("1"))
 }
 
-/// Put back an earlier URL and on/off state (a configure whose first run was
-/// rejected must not lose a setup that worked).
-pub fn restore(state: &SyncStateStore, server_url: Option<&str>, enabled: bool) -> AppResult<()> {
+/// Put back an earlier URL, on/off state and last error (a configure whose
+/// first run was rejected must not leave the setup that worked showing the
+/// rejected attempt's error).
+pub fn restore(
+    state: &SyncStateStore,
+    server_url: Option<&str>,
+    enabled: bool,
+    last_error: Option<&str>,
+) -> AppResult<()> {
     state.set_meta(SERVER_URL, server_url)?;
+    state.set_meta(LAST_ERROR, last_error)?;
     state.set_meta(ENABLED, enabled.then_some("1"))
 }
 

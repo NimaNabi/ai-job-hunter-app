@@ -77,7 +77,9 @@ fn policy_table_row_count_is_pinned() {
     // 167 + 1 (round 5, `B1-r1-ACLI-R5-1`): `updater::updater_status`, the
     // read-only counterpart added when `updater_check` was reverted from
     // `Read` back to `Reversible`.
-    assert_eq!(POLICY.len(), 168);
+    // 168 + 4 (ADR-051, PR 2b): the `commands::sync` status/configure/
+    // disable/now rows.
+    assert_eq!(POLICY.len(), 172);
 }
 
 /// ADR-038 §1's core invariant: the policy table and `generate_handler!`
@@ -212,5 +214,5 @@ fn extraction_finds_known_paths_at_each_end_of_the_list() {
         "extraction must find the LAST registered command"
     );
     assert!(found.contains(&"commands::privacy::privacy_reset_app"));
-    assert_eq!(found.len(), 168);
+    assert_eq!(found.len(), 172);
 }

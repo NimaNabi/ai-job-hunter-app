@@ -38,7 +38,7 @@ fn extension_may_dispatch_matches_every_policy_rows_declared_effect() {
             entry.effect
         );
     }
-    assert_eq!(checked, 168);
+    assert_eq!(checked, 172);
 }
 
 #[test]

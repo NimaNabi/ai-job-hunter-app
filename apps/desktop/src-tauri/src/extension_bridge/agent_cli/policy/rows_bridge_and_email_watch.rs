@@ -120,6 +120,45 @@ pub(super) const BRIDGE_AND_EMAIL_WATCH: &[PolicyEntry] = &[
         path: "commands::email_watch::email_watch_check_now",
         effect: Effect::Reversible,
     },
+    // commands/sync.rs — optional self-hosted sync (ADR-051, ADR 0005 class 9).
+    PolicyEntry {
+        path: "commands::sync::sync_status",
+        effect: Effect::Read,
+    },
+    // NotExposed, not `Irreversible`: the caller supplies BOTH the server URL
+    // and the token, and the first run uploads every bundle section to that
+    // server at once. ADR 0005 class 9 allows sync only to "an endpoint the
+    // user explicitly configures"; a prompt-injected agent naming its own
+    // server would turn this into an exfiltration path. No proof reachable
+    // from this table can bind the ceremony to the user's intent either —
+    // `sync_status.enabled` is a caller-readable boolean, `false` on every
+    // fresh install. A ceremony that can never fail is worse than an honest
+    // refusal; configuring sync stays a Settings UI action.
+    PolicyEntry {
+        path: "commands::sync::sync_configure",
+        effect: Effect::NotExposed(
+            "uploads every bundle section to a caller-chosen server; ADR 0005 class 9 limits \
+             sync to an endpoint the user configures in Settings, and no reachable proof can \
+             bind the call to that intent",
+        ),
+    },
+    // Removes the keychain token. Proof is the configured server URL, read
+    // via `sync_status` — requires having read it first.
+    PolicyEntry {
+        path: "commands::sync::sync_disable",
+        effect: Effect::Irreversible(ProofSource::Scalar {
+            read_command: "sync_status",
+            path: &["serverUrl"],
+        }),
+    },
+    // Uploads local changes to the configured server: not reversible.
+    PolicyEntry {
+        path: "commands::sync::sync_now",
+        effect: Effect::Irreversible(ProofSource::Scalar {
+            read_command: "sync_status",
+            path: &["serverUrl"],
+        }),
+    },
     // export/commands/mod.rs
     // Verified: renders and returns bytes only — no filesystem write.
     PolicyEntry {

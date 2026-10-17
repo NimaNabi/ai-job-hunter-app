@@ -128,6 +128,10 @@ const L2: &[&str] = &[
     // Optional self-hosted sync (ADR-051): orchestrates the per-record
     // `SyncSection` impls of L1 and L2 stores, so it sits above them.
     "sync",
+    // Its background loop — same split as `email_watch_scheduler`: `sync`
+    // stays Tauri-free, and this module resolves the stores from app state
+    // and spawns from setup.
+    "sync_scheduler",
 ];
 const L3: &[&str] = &[
     "commands",
@@ -369,6 +373,10 @@ const R2_ALLOW: &[&str] = &[
     // background loop. Its decision logic (`should_notify`/`due_follow_ups`) is
     // pure and AppHandle-free.
     "reminder_scheduler.rs",
+    // Self-hosted sync loop (L2, ADR-051) — same shape and reason as the
+    // schedulers above: `tauri::AppHandle` + `async_runtime::spawn`, plus
+    // resolving every bundle store from app state for one run.
+    "sync_scheduler.rs",
     "cover_letter/research/mod.rs",
     // The `tauri::async_runtime::spawn_blocking` async variants of the hot match
     // path, split out of documents/mod.rs (R8 LOC cap) — the entry moved with them.

@@ -227,5 +227,5 @@ fn every_irreversible_proof_agrees_with_what_a_caller_reads_through_fencing() {
     // Reversible → Irreversible (issue #1164) [+2] — see each row's
     // own comment in `policy.rs`) — kept in sync by hand, not derived
     // from it, same "pair a loop with a literal" discipline both files use.
-    assert_eq!(checked, 35, "expected exactly 35 Irreversible rows");
+    assert_eq!(checked, 37, "expected exactly 37 Irreversible rows");
 }

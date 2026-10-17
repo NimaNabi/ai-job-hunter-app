@@ -41,6 +41,7 @@ describe('IPC_CHANNELS', () => {
         'resumePipeline',
         'scrape',
         'support',
+        'sync',
         'system',
         'updater',
       ].sort()

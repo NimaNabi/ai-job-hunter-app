@@ -204,6 +204,11 @@ pub(crate) fn invoke_handler() -> impl Fn(tauri::ipc::Invoke) -> bool + Send + S
         commands::email_watch::email_watch_set_enabled,
         commands::email_watch::email_watch_set_auto_write_enabled,
         commands::email_watch::email_watch_check_now,
+        // optional self-hosted sync (ADR-051)
+        commands::sync::sync_status,
+        commands::sync::sync_configure,
+        commands::sync::sync_disable,
+        commands::sync::sync_now,
         // export
         export::commands::documents_export_document,
         export::commands::documents_export_and_save,

@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.158.0](https://github.com/saeedkolivand/ai-job-hunter-app/compare/v0.157.1...v0.158.0) (2026-10-17)
+
+### ✨ Features
+
+* **settings:** self-hosted sync card under privacy (PR 3) ([#1431](https://github.com/saeedkolivand/ai-job-hunter-app/issues/1431)) (@NimaNabi) ([709612b](https://github.com/saeedkolivand/ai-job-hunter-app/commit/709612b00c56a6f9d19840905b14e45adce48b71))
+* **sync:** http transport, background runs and sync commands (PR 2b) ([#1430](https://github.com/saeedkolivand/ai-job-hunter-app/issues/1430)) (@NimaNabi) ([c719c0d](https://github.com/saeedkolivand/ai-job-hunter-app/commit/c719c0d53e4bc2ef6ea211492951a1fa06cf2b46))
+* **sync:** local sync engine and per-record sync for every store (PR 2a) ([#1427](https://github.com/saeedkolivand/ai-job-hunter-app/issues/1427)) (@NimaNabi) ([0b30168](https://github.com/saeedkolivand/ai-job-hunter-app/commit/0b3016893509554e5dd254db2e774da2ac2b826c))
+
+### 🐛 Bug Fixes
+
+* **backup:** keep application status history across backup and restore ([#1419](https://github.com/saeedkolivand/ai-job-hunter-app/issues/1419)) (@NimaNabi) ([1e0d11f](https://github.com/saeedkolivand/ai-job-hunter-app/commit/1e0d11f47023d9dd2075b5ecb797938e7cecc493)), closes [#1402](https://github.com/saeedkolivand/ai-job-hunter-app/issues/1402) [#1402](https://github.com/saeedkolivand/ai-job-hunter-app/issues/1402) [#1407](https://github.com/saeedkolivand/ai-job-hunter-app/issues/1407) [#1388](https://github.com/saeedkolivand/ai-job-hunter-app/issues/1388)
+
+### 📚 Documentation
+
+* **sync:** add the self-hosted sync adr and v1 protocol, amend the egress boundary adr ([#1418](https://github.com/saeedkolivand/ai-job-hunter-app/issues/1418)) (@NimaNabi) ([c668bf4](https://github.com/saeedkolivand/ai-job-hunter-app/commit/c668bf4d4a390f651a6b82e17276f0fd27073fa8)), closes [#1402](https://github.com/saeedkolivand/ai-job-hunter-app/issues/1402) [#1414](https://github.com/saeedkolivand/ai-job-hunter-app/issues/1414)
+
 ## [0.157.1](https://github.com/saeedkolivand/ai-job-hunter-app/compare/v0.157.0...v0.157.1) (2026-10-09)
 
 ### 🐛 Bug Fixes

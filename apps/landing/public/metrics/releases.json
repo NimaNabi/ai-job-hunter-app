@@ -15,7 +15,7 @@
       },
       {
         "name": "latest.json",
-        "download_count": 95
+        "download_count": 138
       },
       {
         "name": "linux-AI-Job-Hunter-0.157.1-1.x86_64.rpm",
@@ -35,7 +35,7 @@
       },
       {
         "name": "macos-AI-Job-Hunter-apple-silicon.app.tar.gz",
-        "download_count": 2
+        "download_count": 3
       },
       {
         "name": "macos-AI-Job-Hunter-apple-silicon.app.tar.gz.sig",
@@ -55,11 +55,11 @@
       },
       {
         "name": "macos-AI-Job-Hunter_0.157.1_x64-intel.dmg",
-        "download_count": 3
+        "download_count": 4
       },
       {
         "name": "windows-AI-Job-Hunter_0.157.1_x64-setup.exe",
-        "download_count": 10
+        "download_count": 15
       },
       {
         "name": "windows-AI-Job-Hunter_0.157.1_x64-setup.exe.sig",
@@ -67,7 +67,7 @@
       },
       {
         "name": "windows-AI-Job-Hunter_0.157.1_x64_en-US.msi",
-        "download_count": 2
+        "download_count": 5
       }
     ]
   },
@@ -86,11 +86,11 @@
     "assets": [
       {
         "name": "ai-job-hunter-extension-chrome-0.156.0.zip",
-        "download_count": 7
+        "download_count": 8
       },
       {
         "name": "ai-job-hunter-extension-firefox-0.156.0.zip",
-        "download_count": 7
+        "download_count": 8
       },
       {
         "name": "latest.json",
@@ -130,7 +130,7 @@
       },
       {
         "name": "macos-AI-Job-Hunter_0.156.0_aarch64-apple-silicon.dmg",
-        "download_count": 11
+        "download_count": 13
       },
       {
         "name": "macos-AI-Job-Hunter_0.156.0_x64-intel.dmg",
@@ -138,7 +138,7 @@
       },
       {
         "name": "windows-AI-Job-Hunter_0.156.0_x64-setup.exe",
-        "download_count": 11
+        "download_count": 12
       },
       {
         "name": "windows-AI-Job-Hunter_0.156.0_x64-setup.exe.sig",
@@ -162,7 +162,7 @@
       },
       {
         "name": "ai-job-hunter-extension-firefox-0.155.1.zip",
-        "download_count": 4
+        "download_count": 5
       },
       {
         "name": "latest.json",

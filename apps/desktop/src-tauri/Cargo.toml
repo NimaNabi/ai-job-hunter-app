@@ -218,7 +218,9 @@ tokio-util = "0.7"
 # is added to the tree.
 tokio-tungstenite = { version = "0.30", default-features = false, features = ["handshake"] }
 
-chromiumoxide = { version = "0.9", features = ["fetcher", "zip8"] }
+# No `fetcher` feature: the app drives the user's installed Chrome/Edge and never
+# downloads a browser, and the fetcher pulled an old `zip` (RUSTSEC-2026-0367..0369).
+chromiumoxide = "0.9"
 
 futures = "0.3"
 # Charset decoding for the streamed fetch_text body (mirrors reqwest's internal .text() path).

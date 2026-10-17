@@ -16,6 +16,10 @@ fn a_server_url_must_be_http_or_https_without_credentials() {
     assert!(normalize_server_url("ftp://sync.example.org").is_err());
     assert!(normalize_server_url("sync.example.org").is_err());
     assert!(normalize_server_url("https://user:pass@sync.example.org").is_err());
+    assert_eq!(
+        normalize_server_url("HTTP://Sync.Example.org:8787").unwrap(),
+        "http://sync.example.org:8787"
+    );
     assert!(normalize_server_url("https://sync.example.org/?x=1").is_err());
     assert!(normalize_server_url("https://sync.example.org/#a").is_err());
     assert_eq!(
@@ -68,3 +72,20 @@ fn a_reset_forgets_everything_but_the_device_id() {
     assert!(state.cursor("scope").unwrap().is_none());
     assert!(!settings::status(&state).unwrap().enabled);
 }
+
+#[test]
+fn an_unset_status_field_is_left_out_not_null() {
+    let json = serde_json::to_value(SyncStatusAlias::default()).unwrap();
+    assert_eq!(json, json!({ "enabled": false, "insecure": false }));
+}
+
+#[test]
+fn an_upper_case_http_url_is_flagged_insecure() {
+    let dir = TempDir::new().unwrap();
+    let state = SyncStateStore::open(dir.path()).unwrap();
+    let url = normalize_server_url("HTTP://192.168.1.20:8787").unwrap();
+    settings::enable(&state, &url).unwrap();
+    assert!(settings::status(&state).unwrap().insecure);
+}
+
+use crate::sync::settings::SyncStatus as SyncStatusAlias;

@@ -1019,7 +1019,10 @@
         "disable": "Turn off sync",
         "disabling": "Turning off…",
         "disableFailed": "Couldn't turn off sync.",
-        "disclosure": "Sync sends your tracked applications, documents and settings to the server you enter here, and to no one else. The token stays in your OS keychain. Your server can read what it stores, so run it yourself or on a host you trust. Passwords and API keys never sync."
+        "disclosure": "Sync sends everything in an app backup — applications and their history, résumés and other documents, AI generations, your contact profile, job preferences, AI provider settings, referrals, autopilots and usage records — to the server you enter here, and to no one else. Passwords, API keys and the sync token never sync; the token stays in your OS keychain. Whoever runs that server can read what it stores, so use your own server or one you trust.",
+        "loading": "Checking sync status…",
+        "loadFailed": "Couldn't read the sync status.",
+        "retry": "Retry"
       }
     },
     "location": {

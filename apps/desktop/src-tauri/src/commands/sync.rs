@@ -73,7 +73,12 @@ pub async fn sync_configure(
                 Some(t) => credentials(&app).lock().set(TOKEN_SLOT, "sync", &t)?,
                 None => credentials(&app).lock().remove(TOKEN_SLOT)?,
             }
-            settings::restore(&state, before.server_url.as_deref(), before.enabled)?;
+            settings::restore(
+                &state,
+                before.server_url.as_deref(),
+                before.enabled,
+                before.last_error.as_deref(),
+            )?;
             Err(AppError::Config(TOKEN_REJECTED.into()))
         }
         _ => settings::status(&state),

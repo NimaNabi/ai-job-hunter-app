@@ -25,7 +25,7 @@ pub(super) const ENTRIES: &[CatalogueEntry] = &[
     },
     CatalogueEntry {
         command: "sync_status",
-        description: "",
+        description: "Current settings and the last run's outcome (never the token).",
         args: &[],
     },
 ];

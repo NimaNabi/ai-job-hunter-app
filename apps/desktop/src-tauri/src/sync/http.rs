@@ -101,8 +101,12 @@ fn check_status(status: StatusCode) -> AppResult<()> {
 }
 
 fn parse<T: serde::de::DeserializeOwned>(body: serde_json::Value) -> AppResult<T> {
-    serde_json::from_value(body)
-        .map_err(|e| AppError::Parse(format!("malformed sync server response: {e}")))
+    // serde's message can quote the offending value, i.e. server-supplied
+    // text; keep it out of `last_error` (shown on the card and to agents).
+    serde_json::from_value(body).map_err(|e| {
+        log::warn!("[sync] malformed server response ({:?})", e.classify());
+        AppError::Parse("malformed sync server response".into())
+    })
 }
 
 #[derive(Deserialize)]

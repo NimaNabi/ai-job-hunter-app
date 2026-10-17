@@ -40,6 +40,8 @@ export interface SyncConfigureRequest {
 }
 
 export interface SyncContract {
+  /** Current settings and the last run's outcome (never the token). Read this first:
+   *  `disable` and `syncNow` confirm against its `serverUrl`. */
   status(): Promise<SyncStatus>;
   /** Checks the server and the token, then saves the URL and the token (OS keychain),
    *  turns sync on and runs once. Rejects, saving nothing, when the server is

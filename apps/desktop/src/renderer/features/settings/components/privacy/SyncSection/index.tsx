@@ -8,7 +8,7 @@ import { useConfigureSync, useDisableSync, useSyncNow, useSyncStatus } from '@/s
 
 function Spinner() {
   return (
-    <span className="h-3 w-3 animate-spin rounded-full border-[1.5px] border-current border-t-transparent" />
+    <span className="h-3 w-3 motion-safe:animate-spin rounded-full border-[1.5px] border-current border-t-transparent" />
   );
 }
 
@@ -23,7 +23,8 @@ export function SyncSection() {
   const { t } = useTranslation();
   const notify = useNotification();
 
-  const { data: status } = useSyncStatus();
+  const statusQuery = useSyncStatus();
+  const status = statusQuery.data;
   const configure = useConfigureSync();
   const disable = useDisableSync();
   const syncNow = useSyncNow();
@@ -61,6 +62,28 @@ export function SyncSection() {
 
   const report = status?.lastReport;
 
+  // Until the first status arrives, say nothing about on/off: showing "off"
+  // (and the form) while sync is in fact on would invite re-configuring it.
+  if (!status) {
+    return (
+      <SettingsSection icon={RefreshCw} label={t('settings.privacy.sync.title')}>
+        {statusQuery.isError ? (
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-xs text-red-400/80">{t('settings.privacy.sync.loadFailed')}</p>
+            <Button variant="glass" onClick={() => void statusQuery.refetch()}>
+              {t('settings.privacy.sync.retry')}
+            </Button>
+          </div>
+        ) : (
+          <p className="flex items-center gap-2 text-xs text-foreground/55">
+            <Spinner />
+            {t('settings.privacy.sync.loading')}
+          </p>
+        )}
+      </SettingsSection>
+    );
+  }
+
   return (
     <SettingsSection icon={RefreshCw} label={t('settings.privacy.sync.title')}>
       <div className="space-y-4">
@@ -70,7 +93,7 @@ export function SyncSection() {
           <span className="text-xs text-foreground/55">
             {t('settings.privacy.sync.statusLabel')}
           </span>
-          {status?.enabled ? (
+          {status.enabled ? (
             <span className="flex items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-medium text-emerald-400">
               <Check size={9} strokeWidth={2.5} />
               {t('settings.privacy.sync.on')}
@@ -83,7 +106,7 @@ export function SyncSection() {
           )}
         </div>
 
-        {status?.enabled ? (
+        {status.enabled ? (
           <>
             <div className="flex items-center justify-between gap-3">
               <span className="text-xs text-foreground/55">
@@ -162,7 +185,10 @@ export function SyncSection() {
                 type="url"
                 autoComplete="off"
                 value={serverUrl}
-                onChange={(e) => setServerUrl(e.target.value)}
+                onChange={(e) => {
+                  setServerUrl(e.target.value);
+                  configure.reset();
+                }}
                 placeholder={t('settings.privacy.sync.serverUrlPlaceholder')}
                 className="w-full text-sm"
               />
@@ -177,7 +203,10 @@ export function SyncSection() {
                 type="password"
                 autoComplete="off"
                 value={token}
-                onChange={(e) => setToken(e.target.value)}
+                onChange={(e) => {
+                  setToken(e.target.value);
+                  configure.reset();
+                }}
                 placeholder={t('settings.privacy.sync.tokenPlaceholder')}
                 className="w-full text-sm"
               />

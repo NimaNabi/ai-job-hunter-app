@@ -1,7 +1,7 @@
 # Self-hosted sync protocol (v1)
 
-Status: the client speaks it (`apps/desktop/src-tauri/src/sync/`); the Settings card is still to
-come. See [ADR-051](decision-records/adr-051-optional-self-hosted-multi-device-sync.md) for the
+Status: implemented — client in `apps/desktop/src-tauri/src/sync/`, Settings card in
+`apps/desktop/src/renderer/features/settings/components/privacy/SyncSection/`. See [ADR-051](decision-records/adr-051-optional-self-hosted-multi-device-sync.md) for the
 decision and the delivery plan. AI Job Hunter does not ship or operate a server: this page is the contract a
 user-run server implements.
 

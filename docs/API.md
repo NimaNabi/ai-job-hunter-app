@@ -4362,6 +4362,9 @@ Contract: `SyncContract` in `packages/shared/src/ipc/contracts/sync.ts`
 status(): Promise<SyncStatus>;
 ```
 
+Current settings and the last run's outcome (never the token). Read this first:
+`disable` and `syncNow` confirm against its `serverUrl`.
+
 #### `sync.configure`
 
 ```ts

@@ -95,3 +95,25 @@ describe('SyncSection — on', () => {
     await waitFor(() => expect(screen.getByLabelText('Server URL')).toBeInTheDocument());
   });
 });
+
+describe('SyncSection — status not known yet', () => {
+  it('offers a retry instead of showing "off" when the status cannot be read', async () => {
+    renderSection({ 'sync.status': vi.fn().mockRejectedValue(new Error('nope')) });
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Retry' })).toBeInTheDocument());
+    expect(screen.queryByLabelText('Server URL')).not.toBeInTheDocument();
+    expect(screen.queryByText('Off')).not.toBeInTheDocument();
+  });
+
+  it('clears a failed-connect message once the user edits a field', async () => {
+    renderSection({ 'sync.configure': vi.fn().mockRejectedValue(new Error('x')) });
+    await waitFor(() => screen.getByLabelText('Server URL'));
+    await userEvent.type(screen.getByLabelText('Server URL'), 'https://sync.example.org');
+    await userEvent.type(screen.getByLabelText('Sync token'), 't');
+    await userEvent.click(screen.getByRole('button', { name: 'Turn on sync' }));
+    await waitFor(() => screen.getByText(/Couldn't turn on sync/));
+    await userEvent.type(screen.getByLabelText('Sync token'), '2');
+    await waitFor(() =>
+      expect(screen.queryByText(/Couldn't turn on sync/)).not.toBeInTheDocument()
+    );
+  });
+});

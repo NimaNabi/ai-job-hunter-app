@@ -15,7 +15,7 @@
       },
       {
         "name": "latest.json",
-        "download_count": 119
+        "download_count": 138
       },
       {
         "name": "linux-AI-Job-Hunter-0.157.1-1.x86_64.rpm",
@@ -55,11 +55,11 @@
       },
       {
         "name": "macos-AI-Job-Hunter_0.157.1_x64-intel.dmg",
-        "download_count": 3
+        "download_count": 4
       },
       {
         "name": "windows-AI-Job-Hunter_0.157.1_x64-setup.exe",
-        "download_count": 13
+        "download_count": 15
       },
       {
         "name": "windows-AI-Job-Hunter_0.157.1_x64-setup.exe.sig",
@@ -67,7 +67,7 @@
       },
       {
         "name": "windows-AI-Job-Hunter_0.157.1_x64_en-US.msi",
-        "download_count": 3
+        "download_count": 5
       }
     ]
   },
@@ -90,7 +90,7 @@
       },
       {
         "name": "ai-job-hunter-extension-firefox-0.156.0.zip",
-        "download_count": 7
+        "download_count": 8
       },
       {
         "name": "latest.json",
@@ -162,7 +162,7 @@
       },
       {
         "name": "ai-job-hunter-extension-firefox-0.155.1.zip",
-        "download_count": 4
+        "download_count": 5
       },
       {
         "name": "latest.json",

@@ -104,8 +104,15 @@ pub async fn run_now(app: &AppHandle) -> AppResult<SyncStatus> {
         (true, Some(url)) => url,
         _ => return Err(AppError::Validation("sync is off".into())),
     };
-    let token = crate::credentials::read_credential(TOKEN_SLOT)?
-        .ok_or_else(|| AppError::Config("no sync token is saved".into()))?;
+    let Some(token) = crate::credentials::read_credential(TOKEN_SLOT)? else {
+        // The keychain lost the token (cleared outside the app, or a reset
+        // that wiped credentials but not sync_state). Say so on the card and
+        // stop retrying every 15 minutes.
+        let message = "no sync token is saved; turn sync on again";
+        settings::record_failure(&state, message)?;
+        settings::disable(&state)?;
+        return Err(AppError::Config(message.into()));
+    };
     let _guard = RunningGuard::acquire()?;
 
     let runtime = tokio::runtime::Handle::current();
@@ -170,7 +177,6 @@ fn with_sections<R>(
 
     let events = ApplicationStatusEvents(applications.inner());
     let interactions = InteractionsSection(interactions.inner());
-    let autopilots = autopilots.lock();
     let sections: [&dyn SyncSection; 14] = [
         documents.inner(),
         generations.inner(),
@@ -180,7 +186,8 @@ fn with_sections<R>(
         contact.inner(),
         ai_config.inner(),
         referrals.inner(),
-        &*autopilots,
+        // Locked per call, never across a run's network I/O.
+        autopilots.inner().as_ref(),
         &interactions,
         spend.inner(),
         dedup.inner(),

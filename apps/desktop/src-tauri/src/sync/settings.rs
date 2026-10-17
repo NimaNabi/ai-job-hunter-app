@@ -50,8 +50,8 @@ impl From<&SyncReport> for ReportView {
     }
 }
 
-/// Check a user-typed server URL: `http(s)://host[...]`, no credentials in
-/// it. Returns it without a trailing slash.
+/// Check a user-typed server URL: `http(s)://host[/path]`, with no
+/// credentials, query or fragment in it. Returns it without a trailing slash.
 pub fn normalize_server_url(raw: &str) -> AppResult<String> {
     let trimmed = raw.trim().trim_end_matches('/');
     let url = reqwest::Url::parse(trimmed)
@@ -63,6 +63,13 @@ pub fn normalize_server_url(raw: &str) -> AppResult<String> {
     }
     if url.host_str().is_none_or(str::is_empty) {
         return Err(AppError::Validation("sync server URL has no host".into()));
+    }
+    if url.query().is_some() || url.fragment().is_some() {
+        // Endpoint paths are appended to the base URL, so `?x=1` or `#a`
+        // would end up in front of `/health` and `/changes`.
+        return Err(AppError::Validation(
+            "sync server URL must not contain ? or #".into(),
+        ));
     }
     if !url.username().is_empty() || url.password().is_some() {
         return Err(AppError::Validation(
@@ -93,6 +100,13 @@ pub fn enable(state: &SyncStateStore, server_url: &str) -> AppResult<()> {
     state.set_meta(SERVER_URL, Some(server_url))?;
     state.set_meta(LAST_ERROR, None)?;
     state.set_meta(ENABLED, Some("1"))
+}
+
+/// Put back an earlier URL and on/off state (a configure whose first run was
+/// rejected must not lose a setup that worked).
+pub fn restore(state: &SyncStateStore, server_url: Option<&str>, enabled: bool) -> AppResult<()> {
+    state.set_meta(SERVER_URL, server_url)?;
+    state.set_meta(ENABLED, enabled.then_some("1"))
 }
 
 /// Turn sync off. The URL stays so the card can offer it again; the baseline

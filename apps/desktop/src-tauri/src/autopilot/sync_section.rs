@@ -5,6 +5,7 @@
 //! Known limit: an autopilot is one whole record, so if both devices run the
 //! same autopilot between syncs, the later sync's found-jobs list wins.
 
+use parking_lot::Mutex;
 use serde_json::Value;
 
 use super::{strip_board_health, Autopilot, AutopilotStore};
@@ -40,5 +41,30 @@ impl SyncSection for AutopilotStore {
     fn delete_record(&self, id: &str) -> AppResult<()> {
         self.remove(id);
         Ok(())
+    }
+}
+
+/// The managed store as the scheduler sees it (`Arc<Mutex<AutopilotStore>>`):
+/// each call takes the lock for that call only, so a sync run that waits on
+/// the network never blocks autopilot commands or the autopilot scheduler.
+impl SyncSection for Mutex<AutopilotStore> {
+    fn section(&self) -> &'static str {
+        self.lock().section()
+    }
+
+    fn schema_version(&self) -> u32 {
+        self.lock().schema_version()
+    }
+
+    fn sync_records(&self) -> AppResult<Vec<SyncRecord>> {
+        self.lock().sync_records()
+    }
+
+    fn upsert_record(&self, id: &str, payload: &Value) -> AppResult<()> {
+        self.lock().upsert_record(id, payload)
+    }
+
+    fn delete_record(&self, id: &str) -> AppResult<()> {
+        self.lock().delete_record(id)
     }
 }

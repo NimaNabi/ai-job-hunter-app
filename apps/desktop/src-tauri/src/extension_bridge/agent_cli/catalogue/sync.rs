@@ -7,7 +7,7 @@ use super::{CatalogueArg, CatalogueEntry};
 pub(super) const ENTRIES: &[CatalogueEntry] = &[
     CatalogueEntry {
         command: "sync_configure",
-        description: "Checks the server, saves the URL and the token (OS keychain), turns sync on and runs once.",
+        description: "Checks the server and the token, then saves the URL and the token (OS keychain), turns sync on and runs once.",
         args: &[
             CatalogueArg { name: "serverUrl", required: true, fields: None },
             CatalogueArg { name: "token", required: true, fields: None },

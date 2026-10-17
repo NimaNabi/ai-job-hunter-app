@@ -125,17 +125,22 @@ pub(super) const BRIDGE_AND_EMAIL_WATCH: &[PolicyEntry] = &[
         path: "commands::sync::sync_status",
         effect: Effect::Read,
     },
-    // Writes the sync token into the OS keychain AND uploads the user's
-    // tracked-application data to the server it names (the first run starts
-    // at once). An upload cannot be called back. Like `email_watch_connect`,
-    // a first configure has nothing to compare against; the strongest
-    // available signal is the current `enabled` flag — WEAK, flagged.
+    // NotExposed, not `Irreversible`: the caller supplies BOTH the server URL
+    // and the token, and the first run uploads every bundle section to that
+    // server at once. ADR 0005 class 9 allows sync only to "an endpoint the
+    // user explicitly configures"; a prompt-injected agent naming its own
+    // server would turn this into an exfiltration path. No proof reachable
+    // from this table can bind the ceremony to the user's intent either —
+    // `sync_status.enabled` is a caller-readable boolean, `false` on every
+    // fresh install. A ceremony that can never fail is worse than an honest
+    // refusal; configuring sync stays a Settings UI action.
     PolicyEntry {
         path: "commands::sync::sync_configure",
-        effect: Effect::Irreversible(ProofSource::Scalar {
-            read_command: "sync_status",
-            path: &["enabled"],
-        }),
+        effect: Effect::NotExposed(
+            "uploads every bundle section to a caller-chosen server; ADR 0005 class 9 limits \
+             sync to an endpoint the user configures in Settings, and no reachable proof can \
+             bind the call to that intent",
+        ),
     },
     // Removes the keychain token. Proof is the configured server URL, read
     // via `sync_status` — requires having read it first.

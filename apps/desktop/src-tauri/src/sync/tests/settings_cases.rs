@@ -16,6 +16,12 @@ fn a_server_url_must_be_http_or_https_without_credentials() {
     assert!(normalize_server_url("ftp://sync.example.org").is_err());
     assert!(normalize_server_url("sync.example.org").is_err());
     assert!(normalize_server_url("https://user:pass@sync.example.org").is_err());
+    assert!(normalize_server_url("https://sync.example.org/?x=1").is_err());
+    assert!(normalize_server_url("https://sync.example.org/#a").is_err());
+    assert_eq!(
+        normalize_server_url("https://example.org/ajh-sync/").unwrap(),
+        "https://example.org/ajh-sync"
+    );
 }
 
 #[test]

@@ -2,8 +2,9 @@
  * Optional self-hosted sync (ADR-051, protocol in `docs/knowledge/sync-protocol.md`).
  *
  * Off by default. The app is a client only: the user runs their own server and gives
- * the app its URL and a token. `configure` checks the server's `/health`, stores the
- * token in the OS keychain, turns sync on and runs once. The backend then syncs
+ * the app its URL and a token. `configure` checks the server and the token, stores the
+ * token in the OS keychain, turns sync on and runs once. It is a Settings UI action
+ * only: the agent CLI and MCP tools cannot call it (ADR 0005 class 9). The backend then syncs
  * shortly after launch, every 15 minutes, and on `syncNow`. The token is write-only:
  * sent once to `configure`, never returned or logged.
  */
@@ -40,9 +41,10 @@ export interface SyncConfigureRequest {
 
 export interface SyncContract {
   status(): Promise<SyncStatus>;
-  /** Checks the server, saves the URL and the token (OS keychain), turns sync on and
-   *  runs once. Rejects, saving nothing, when the server is unreachable, speaks
-   *  another protocol version, or rejects the token. */
+  /** Checks the server and the token, then saves the URL and the token (OS keychain),
+   *  turns sync on and runs once. Rejects, saving nothing, when the server is
+   *  unreachable, speaks another protocol version, or rejects the token. If the first
+   *  run is still rejected, the previous settings are put back. */
   configure(req: SyncConfigureRequest): Promise<SyncStatus>;
   /** Turns sync off and removes the token. Local data is untouched. */
   disable(): Promise<SyncStatus>;

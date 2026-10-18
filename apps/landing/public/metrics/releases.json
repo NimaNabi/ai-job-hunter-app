@@ -1,5 +1,77 @@
 [
   {
+    "tag_name": "v0.158.0",
+    "name": "v0.158.0",
+    "published_at": "2026-10-17T17:52:05Z",
+    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/releases/tag/v0.158.0",
+    "assets": [
+      {
+        "name": "ai-job-hunter-extension-chrome-0.158.0.zip",
+        "download_count": 1
+      },
+      {
+        "name": "ai-job-hunter-extension-firefox-0.158.0.zip",
+        "download_count": 1
+      },
+      {
+        "name": "latest.json",
+        "download_count": 14
+      },
+      {
+        "name": "linux-AI-Job-Hunter-0.158.0-1.x86_64.rpm",
+        "download_count": 2
+      },
+      {
+        "name": "linux-AI-Job-Hunter_0.158.0_amd64.AppImage",
+        "download_count": 2
+      },
+      {
+        "name": "linux-AI-Job-Hunter_0.158.0_amd64.AppImage.sig",
+        "download_count": 1
+      },
+      {
+        "name": "linux-AI-Job-Hunter_0.158.0_amd64.deb",
+        "download_count": 2
+      },
+      {
+        "name": "macos-AI-Job-Hunter-apple-silicon.app.tar.gz",
+        "download_count": 2
+      },
+      {
+        "name": "macos-AI-Job-Hunter-apple-silicon.app.tar.gz.sig",
+        "download_count": 1
+      },
+      {
+        "name": "macos-AI-Job-Hunter-intel.app.tar.gz",
+        "download_count": 1
+      },
+      {
+        "name": "macos-AI-Job-Hunter-intel.app.tar.gz.sig",
+        "download_count": 1
+      },
+      {
+        "name": "macos-AI-Job-Hunter_0.158.0_aarch64-apple-silicon.dmg",
+        "download_count": 1
+      },
+      {
+        "name": "macos-AI-Job-Hunter_0.158.0_x64-intel.dmg",
+        "download_count": 1
+      },
+      {
+        "name": "windows-AI-Job-Hunter_0.158.0_x64-setup.exe",
+        "download_count": 4
+      },
+      {
+        "name": "windows-AI-Job-Hunter_0.158.0_x64-setup.exe.sig",
+        "download_count": 1
+      },
+      {
+        "name": "windows-AI-Job-Hunter_0.158.0_x64_en-US.msi",
+        "download_count": 2
+      }
+    ]
+  },
+  {
     "tag_name": "v0.157.1",
     "name": "v0.157.1",
     "published_at": "2026-10-09T03:45:22Z",
@@ -15,7 +87,7 @@
       },
       {
         "name": "latest.json",
-        "download_count": 138
+        "download_count": 145
       },
       {
         "name": "linux-AI-Job-Hunter-0.157.1-1.x86_64.rpm",
@@ -31,11 +103,11 @@
       },
       {
         "name": "linux-AI-Job-Hunter_0.157.1_amd64.deb",
-        "download_count": 3
+        "download_count": 4
       },
       {
         "name": "macos-AI-Job-Hunter-apple-silicon.app.tar.gz",
-        "download_count": 3
+        "download_count": 4
       },
       {
         "name": "macos-AI-Job-Hunter-apple-silicon.app.tar.gz.sig",
@@ -102,7 +174,7 @@
       },
       {
         "name": "linux-AI-Job-Hunter_0.156.0_amd64.AppImage",
-        "download_count": 13
+        "download_count": 14
       },
       {
         "name": "linux-AI-Job-Hunter_0.156.0_amd64.AppImage.sig",
@@ -110,7 +182,7 @@
       },
       {
         "name": "linux-AI-Job-Hunter_0.156.0_amd64.deb",
-        "download_count": 6
+        "download_count": 7
       },
       {
         "name": "macos-AI-Job-Hunter-apple-silicon.app.tar.gz",
@@ -158,7 +230,7 @@
     "assets": [
       {
         "name": "ai-job-hunter-extension-chrome-0.155.1.zip",
-        "download_count": 3
+        "download_count": 4
       },
       {
         "name": "ai-job-hunter-extension-firefox-0.155.1.zip",
@@ -338,7 +410,7 @@
       },
       {
         "name": "macos-AI-Job-Hunter-intel.app.tar.gz",
-        "download_count": 1
+        "download_count": 2
       },
       {
         "name": "macos-AI-Job-Hunter-intel.app.tar.gz.sig",
@@ -354,7 +426,7 @@
       },
       {
         "name": "windows-AI-Job-Hunter_0.154.0_x64-setup.exe",
-        "download_count": 10
+        "download_count": 11
       },
       {
         "name": "windows-AI-Job-Hunter_0.154.0_x64-setup.exe.sig",
@@ -1872,78 +1944,6 @@
       },
       {
         "name": "windows-AI-Job-Hunter_0.141.0_x64_en-US.msi",
-        "download_count": 1
-      }
-    ]
-  },
-  {
-    "tag_name": "v0.140.0",
-    "name": "v0.140.0",
-    "published_at": "2026-08-21T17:52:41Z",
-    "html_url": "https://github.com/saeedkolivand/ai-job-hunter-app/releases/tag/v0.140.0",
-    "assets": [
-      {
-        "name": "ai-job-hunter-extension-chrome-0.140.0.zip",
-        "download_count": 1
-      },
-      {
-        "name": "ai-job-hunter-extension-firefox-0.140.0.zip",
-        "download_count": 1
-      },
-      {
-        "name": "latest.json",
-        "download_count": 1
-      },
-      {
-        "name": "linux-AI-Job-Hunter-0.140.0-1.x86_64.rpm",
-        "download_count": 1
-      },
-      {
-        "name": "linux-AI-Job-Hunter_0.140.0_amd64.AppImage",
-        "download_count": 3
-      },
-      {
-        "name": "linux-AI-Job-Hunter_0.140.0_amd64.AppImage.sig",
-        "download_count": 1
-      },
-      {
-        "name": "linux-AI-Job-Hunter_0.140.0_amd64.deb",
-        "download_count": 3
-      },
-      {
-        "name": "macos-AI-Job-Hunter-apple-silicon.app.tar.gz",
-        "download_count": 1
-      },
-      {
-        "name": "macos-AI-Job-Hunter-apple-silicon.app.tar.gz.sig",
-        "download_count": 1
-      },
-      {
-        "name": "macos-AI-Job-Hunter-intel.app.tar.gz",
-        "download_count": 1
-      },
-      {
-        "name": "macos-AI-Job-Hunter-intel.app.tar.gz.sig",
-        "download_count": 1
-      },
-      {
-        "name": "macos-AI-Job-Hunter_0.140.0_aarch64-apple-silicon.dmg",
-        "download_count": 1
-      },
-      {
-        "name": "macos-AI-Job-Hunter_0.140.0_x64-intel.dmg",
-        "download_count": 1
-      },
-      {
-        "name": "windows-AI-Job-Hunter_0.140.0_x64-setup.exe",
-        "download_count": 2
-      },
-      {
-        "name": "windows-AI-Job-Hunter_0.140.0_x64-setup.exe.sig",
-        "download_count": 1
-      },
-      {
-        "name": "windows-AI-Job-Hunter_0.140.0_x64_en-US.msi",
         "download_count": 1
       }
     ]

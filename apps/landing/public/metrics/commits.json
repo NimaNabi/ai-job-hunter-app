@@ -1,5 +1,125 @@
 [
   {
+    "sha": "70dac8eafba9c586f1a713617a84e3bf6f4e0d00",
+    "commit": {
+      "message": "chore: sync landing download version to v0.158.0",
+      "author": {
+        "date": "2026-10-17T18:41:58Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "sha": "a1e26875f5efd5d3e613d64bfb0599dc2e46ce33",
+    "commit": {
+      "message": "chore: sync homebrew cask to v0.158.0 [skip ci]",
+      "author": {
+        "date": "2026-10-17T18:41:29Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
+    "sha": "8fbb9a466517a0e49b1fd56d465f1ba286fc5580",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-17T17:54:10Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "d0e4b14f7de39753ea20d1bb931e4f0b8944d97f",
+    "commit": {
+      "message": "chore(release): 0.158.0 [skip ci]",
+      "author": {
+        "date": "2026-10-17T17:52:02Z"
+      }
+    },
+    "author": {
+      "login": "semantic-release-bot"
+    }
+  },
+  {
+    "sha": "cbd80960197a01d2b9a13c0ed32bfd8e5eee7680",
+    "commit": {
+      "message": "chore(deps): clear the zip <9 advisories (rustsec-2026-0367..0369) (#1432)",
+      "author": {
+        "date": "2026-10-17T17:35:49Z"
+      }
+    },
+    "author": {
+      "login": "NimaNabi"
+    }
+  },
+  {
+    "sha": "c6d1859f60ad3c758c84826fb663a30b71f83326",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-17T13:31:56Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "709612b00c56a6f9d19840905b14e45adce48b71",
+    "commit": {
+      "message": "feat(settings): self-hosted sync card under privacy (PR 3) (#1431)",
+      "author": {
+        "date": "2026-10-17T13:18:54Z"
+      }
+    },
+    "author": {
+      "login": "NimaNabi"
+    }
+  },
+  {
+    "sha": "f05c2fb1609e6bbd270e637d511914dfd1b01cb7",
+    "commit": {
+      "message": "chore: update export benchmark data [skip ci]",
+      "author": {
+        "date": "2026-10-17T12:27:10Z"
+      }
+    },
+    "author": {
+      "login": "github"
+    }
+  },
+  {
+    "sha": "c719c0d53e4bc2ef6ea211492951a1fa06cf2b46",
+    "commit": {
+      "message": "feat(sync): http transport, background runs and sync commands (PR 2b) (#1430)",
+      "author": {
+        "date": "2026-10-17T12:08:14Z"
+      }
+    },
+    "author": {
+      "login": "NimaNabi"
+    }
+  },
+  {
+    "sha": "38120412879852b59436fd208b33aaaf085c6c94",
+    "commit": {
+      "message": "chore: update mission-control snapshot data [skip ci]",
+      "author": {
+        "date": "2026-10-17T07:45:35Z"
+      }
+    },
+    "author": {
+      "login": "github-actions[bot]"
+    }
+  },
+  {
     "sha": "6f43f4206b163fc3b38288632fafd7737f6f2c43",
     "commit": {
       "message": "chore: update mission-control snapshot data [skip ci]",
@@ -1077,126 +1197,6 @@
     },
     "author": {
       "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "85482e8cef810cac0b8b611deb9b40e5faa2d11d",
-    "commit": {
-      "message": "refactor(extension): split the bridge client into per-concern modules under 300 lines (#1329)",
-      "author": {
-        "date": "2026-10-06T05:28:54Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "a02adc5edc8868b42689c6917bd5027a5bc9b289",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-10-05T17:24:42Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "03f6a47ea2b0de0a4cadca873ef8518a235a7895",
-    "commit": {
-      "message": "build(deps): move to tauri-plugin-sentry 0.7 and sentry's minidump integration (#1327)",
-      "author": {
-        "date": "2026-10-05T16:59:57Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "a5090a08eb41f8250231bf897b9b8adb0ead8ef7",
-    "commit": {
-      "message": "ci: harden the ts size guard after review (#1326)",
-      "author": {
-        "date": "2026-10-05T16:51:34Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "24503e20ed2913da46e5929a9f0c4757c0c15545",
-    "commit": {
-      "message": "ci: cap ts and tsx files at 300 code lines with a ratchet baseline (#1325)",
-      "author": {
-        "date": "2026-10-05T16:15:45Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "59709e24c7f1d515a38e3c36777df708ca8dc377",
-    "commit": {
-      "message": "chore: update export benchmark data [skip ci]",
-      "author": {
-        "date": "2026-10-05T15:23:58Z"
-      }
-    },
-    "author": {
-      "login": "github"
-    }
-  },
-  {
-    "sha": "1102f91dcd2024e7741feb8a13c5c3015bf1a476",
-    "commit": {
-      "message": "fix: unbreak the build and ship an appimage any user can start (#1324)",
-      "author": {
-        "date": "2026-10-05T15:10:17Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "b93121fe2b41b8291ae877ea4d2a97db0cb2a548",
-    "commit": {
-      "message": "docs: sync file and module pointers after the #1280 split (#1322)",
-      "author": {
-        "date": "2026-10-05T14:56:55Z"
-      }
-    },
-    "author": {
-      "login": "saeedkolivand"
-    }
-  },
-  {
-    "sha": "369b1be6fa1812367d5c3a9f1be6ef4fcdd4c252",
-    "commit": {
-      "message": "chore: bump tauri-plugin-sentry in /apps/desktop/src-tauri (#1301)",
-      "author": {
-        "date": "2026-10-05T14:42:29Z"
-      }
-    },
-    "author": {
-      "login": "dependabot[bot]"
-    }
-  },
-  {
-    "sha": "a7fd5ed2733815daa4138735f571dcaa49973b61",
-    "commit": {
-      "message": "chore: bump the javascript group across 1 directory with 42 updates (#1321)",
-      "author": {
-        "date": "2026-10-05T11:56:39Z"
-      }
-    },
-    "author": {
-      "login": "dependabot[bot]"
     }
   }
 ]

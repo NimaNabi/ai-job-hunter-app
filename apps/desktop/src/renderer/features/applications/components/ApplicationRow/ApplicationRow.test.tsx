@@ -90,6 +90,24 @@ const renderRow = (
   props: Partial<React.ComponentProps<typeof ApplicationRow>> = {}
 ) => render(<ApplicationRow application={makeApp(overrides)} {...props} />);
 
+describe('no-reply lifecycle boundary', () => {
+  it.each(['saved', 'accepted', 'rejected', 'withdrawn'] as const)(
+    'does not label an old %s pursuit as waiting for a reply',
+    (status) => {
+      renderRow({ status, updatedAt: Date.now() - 40 * 86_400_000 });
+      expect(screen.queryByText('applications.row.noReply')).not.toBeInTheDocument();
+    }
+  );
+
+  it.each(['applied', 'screening', 'interviewing', 'offer', 'ghosted'] as const)(
+    'preserves the age badge for an old active %s pursuit',
+    (status) => {
+      renderRow({ status, updatedAt: Date.now() - 40 * 86_400_000 });
+      expect(screen.getByText('applications.row.noReply')).toBeInTheDocument();
+    }
+  );
+});
+
 /** Opens the stage Dropdown and picks `option` (the i18n key fragment). */
 async function changeStage(currentStatus: string, option: string) {
   const stage = (status: string) => ({

@@ -1,4 +1,4 @@
-import { Building2, Calendar, Check, ChevronDown, Wand2 } from 'lucide-react';
+import { Building2, Calendar, ChevronDown, Link, Wand2 } from 'lucide-react';
 
 import type { AiGenerationRecord } from '@ajh/shared/ipc';
 import { useTranslation } from '@ajh/translations';
@@ -59,10 +59,9 @@ export function GenerationCardTitle({ gen, expanded, onToggle }: GenerationCardT
               {t(`jobs.boards.${gen.board}`, { defaultValue: gen.board })}
             </span>
           )}
-          {/* A linked job means this generation was an application. */}
           {gen.jobUrl && (
-            <span className="flex items-center gap-1 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2 py-0.5 text-[9px] uppercase tracking-wider text-emerald-300">
-              <Check size={9} /> {t('resumes.generated.applied')}
+            <span className="flex items-center gap-1 rounded-full border border-[var(--border-clear)] bg-muted px-2 py-0.5 text-[9px] uppercase tracking-wider text-foreground/55">
+              <Link size={9} /> {t('resumes.generated.linkedJob')}
             </span>
           )}
         </span>

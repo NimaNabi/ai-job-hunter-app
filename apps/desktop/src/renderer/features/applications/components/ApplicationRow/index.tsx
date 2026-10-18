@@ -66,7 +66,10 @@ export function ApplicationRow({
     if (highlighted) rowRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, [highlighted]);
 
-  const stale = isStale(application.updatedAt);
+  const stage = APPLICATION_STAGES.find((s) => s.id === application.status);
+  const stale = Boolean(
+    stage && !stage.preApply && !stage.terminal && isStale(application.updatedAt)
+  );
   const nextState = nextActionLabel(application.nextActionAt);
   const days = staleDays(application.updatedAt);
 
@@ -75,7 +78,7 @@ export function ApplicationRow({
   // in `title` so the relative label stays scannable without losing precision.
   // `appliedAt` is a one-way audit stamp (a demotion back to `saved` keeps it),
   // so only a stage past apply may show it.
-  const preApply = APPLICATION_STAGES.find((s) => s.id === application.status)?.preApply ?? false;
+  const preApply = stage?.preApply ?? false;
   const appliedAt = preApply ? null : application.appliedAt;
   const stampAt = appliedAt ?? application.updatedAt;
   const stampLabel = appliedAt
